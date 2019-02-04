@@ -1,0 +1,6 @@
+module Pods_Fosdem {
+  umbrella header "Pods-Fosdem-umbrella.h"
+
+  export *
+  module * { export * }
+}
