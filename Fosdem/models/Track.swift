@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyXMLParser
 
 @objc(Track)
 public class Track: NSManagedObject {
@@ -21,9 +22,12 @@ public class Track: NSManagedObject {
         return NSFetchRequest<Track>(entityName: "Track")
     }
 
-    static func build(_ element: String) -> Track {
+    static func build(_ element: XML.Element) -> NSManagedObject? {
+        guard let name = element.text else {
+                return nil
+        }
         let req: NSFetchRequest<Track> = Track.fetchRequest()
-        req.predicate = NSComparisonPredicate(format: "name==%@", element)
+        req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Track
         if let exTrack = try? req.execute().first,
             let track = exTrack {
@@ -32,7 +36,7 @@ public class Track: NSManagedObject {
             item = Track(context: Track.context)
         }
 
-        item.name = element
+        item.name = name
         return item
     }
 }

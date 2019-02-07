@@ -25,7 +25,7 @@ public class Conference: NSManagedObject {
         return NSFetchRequest<Conference>(entityName: "Conference")
     }
 
-    static func build(_ element: XML.Element) -> Conference {
+    static func build(_ element: XML.Element) -> NSManagedObject {
         guard let name = XmlFinder.getChildString(element, element: "title") else {
             return Conference(context: Conference.context)
         }

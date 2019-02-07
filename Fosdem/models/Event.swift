@@ -11,7 +11,7 @@ import CoreData
 import SwiftyXMLParser
 
 @objc(Event)
-public class Event: NSManagedObject {
+public class Event: NSManagedObject, ManagedObjectProtocol {
     static let elementName = "event"
     static var context: NSManagedObjectContext!
 
@@ -34,7 +34,7 @@ public class Event: NSManagedObject {
         return NSFetchRequest<Event>(entityName: "Event")
     }
 
-    static func build(_ element: XML.Element, conference: Conference?) -> Event {
+    static func build(_ element: XML.Element) -> NSManagedObject? {
         guard let id = element.attributes["id"] else {
             return Event(context: Event.context)
         }
@@ -53,13 +53,12 @@ public class Event: NSManagedObject {
         item.subtitle = XmlFinder.getChildString(element, element: "subtitle")
         item.slug = XmlFinder.getChildString(element, element: "slug")
         item.desc = XmlFinder.getChildString(element, element: "description")
-        item.conference = conference
 
-        if let room = XmlFinder.getChildString(element, element: "room") {
-            item.room = Room.build(room)
+        if let room = XmlFinder.getChildElement(element, element: "room") {
+            item.room = Room.build(room) as? Room
         }
-        if let track = XmlFinder.getChildString(element, element: "track") {
-            item.track = Track.build(track)
+        if let track = XmlFinder.getChildElement(element, element: "track") {
+            item.track = Track.build(track) as? Track
         }
 
         if let dateString = element.parentElement?.parentElement?.attributes["date"],
@@ -74,14 +73,18 @@ public class Event: NSManagedObject {
         }
 
         if let people = XmlFinder.getChildElement(element, element: "persons") {
-            people.childElements.forEach { person in
-                item.authors?.insert(Person.build(person.attributes["id"] ?? "id", name: person.text ?? "UNKNOWN AUTHOR"))
+            people.childElements.forEach { element in
+                if let person = Person.build(element) as? Person {
+                    item.authors?.insert(person)
+                }
             }
         }
 
         if let links = XmlFinder.getChildElement(element, element: "links") {
-            links.childElements.forEach { link in
-                item.links?.insert(Link.build(name: link.text ?? "UNKNOWN LINK", url: link.attributes["href"] ?? "href"))
+            links.childElements.forEach { element in
+                if let link = Link.build(element) as? Link {
+                    item.links?.insert(link)
+                }
             }
         }
 

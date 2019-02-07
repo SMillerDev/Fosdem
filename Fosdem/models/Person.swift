@@ -8,9 +8,10 @@
 
 import Foundation
 import CoreData
+import SwiftyXMLParser
 
 @objc(Person)
-public class Person: NSManagedObject {
+public class Person: NSManagedObject, ManagedObjectProtocol {
     static let elementName = "person"
     static var context: NSManagedObjectContext!
 
@@ -22,7 +23,11 @@ public class Person: NSManagedObject {
         return NSFetchRequest<Person>(entityName: "Person")
     }
 
-    static func build(_ id: String, name: String) -> Person {
+    static func build(_ element: XML.Element) -> NSManagedObject? {
+        guard let id = element.attributes["id"],
+            let name = element.text else {
+                return nil
+        }
         let req: NSFetchRequest<Person> = Person.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "id==%@", id)
         let item: Person

@@ -25,7 +25,9 @@
 		14D277282205D07500740042 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D277262205D07500740042 /* LaunchScreen.storyboard */; };
 		14D277332205D07500740042 /* FosdemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D277322205D07500740042 /* FosdemTests.swift */; };
 		14D2773E2205D07500740042 /* FosdemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2773D2205D07500740042 /* FosdemUITests.swift */; };
-		14D2774C2205D19D00740042 /* RemoteScheduleSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2774B2205D19D00740042 /* RemoteScheduleSource.swift */; };
+		14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */; };
+		14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */; };
+		14DA2290220C735600CBE015 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA228F220C735600CBE015 /* DataImporter.swift */; };
 		85A90172796196DFE9B714C9 /* libPods-FosdemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D978E3FFA3FEEEAA46A29B9 /* libPods-FosdemTests.a */; };
 		B8496C68499EF930C4CCEA6B /* libPods-Fosdem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5701DF45690A6D5B23878EF /* libPods-Fosdem.a */; };
 /* End PBXBuildFile section */
@@ -74,7 +76,9 @@
 		14D277392205D07500740042 /* FosdemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FosdemUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D2773D2205D07500740042 /* FosdemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FosdemUITests.swift; sourceTree = "<group>"; };
 		14D2773F2205D07500740042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14D2774B2205D19D00740042 /* RemoteScheduleSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteScheduleSource.swift; sourceTree = "<group>"; };
+		14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteScheduleFetcher.swift; sourceTree = "<group>"; };
+		14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectProtocol.swift; sourceTree = "<group>"; };
+		14DA228F220C735600CBE015 /* DataImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
 		27AB433F1610EA8AB9792A31 /* Pods-FosdemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FosdemUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FosdemUITests/Pods-FosdemUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6C378AE3A5202F71AECAA221 /* Pods-FosdemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FosdemTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FosdemTests/Pods-FosdemTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C11FEE5C67B2A340C02C5AF /* Pods-Fosdem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fosdem.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fosdem/Pods-Fosdem.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,8 +118,9 @@
 		146A86602205DC41008A61AD /* Import */ = {
 			isa = PBXGroup;
 			children = (
-				14D2774B2205D19D00740042 /* RemoteScheduleSource.swift */,
+				14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */,
 				146A8676220601DD008A61AD /* XmlFinder.swift */,
+				14DA228F220C735600CBE015 /* DataImporter.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				146A866C2205EFE9008A61AD /* Event.swift */,
 				146A86672205EFE8008A61AD /* Room.swift */,
 				146A86682205EFE8008A61AD /* Person.swift */,
+				14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -430,13 +436,15 @@
 				146A8677220601DD008A61AD /* XmlFinder.swift in Sources */,
 				14D2771C2205D07200740042 /* Fosdem.xcdatamodeld in Sources */,
 				14D2771E2205D07200740042 /* MasterViewController.swift in Sources */,
+				14DA2290220C735600CBE015 /* DataImporter.swift in Sources */,
 				146A867E22089497008A61AD /* Link.swift in Sources */,
 				14D277202205D07200740042 /* DetailViewController.swift in Sources */,
 				146A86732205EFE9008A61AD /* Conference.swift in Sources */,
 				146A866F2205EFE9008A61AD /* Room.swift in Sources */,
 				146A86742205EFE9008A61AD /* Event.swift in Sources */,
+				14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */,
 				146A86702205EFE9008A61AD /* Person.swift in Sources */,
-				14D2774C2205D19D00740042 /* RemoteScheduleSource.swift in Sources */,
+				14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */,
 				146A867B220745B9008A61AD /* RoomLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

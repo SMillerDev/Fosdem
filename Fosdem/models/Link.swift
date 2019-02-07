@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyXMLParser
 
 @objc(Link)
 public class Link: NSManagedObject {
@@ -22,7 +23,11 @@ public class Link: NSManagedObject {
         return NSFetchRequest<Link>(entityName: "Link")
     }
 
-    static func build(name: String, url: String) -> Link {
+    static func build(_ element: XML.Element) -> NSManagedObject? {
+        guard let name = element.text,
+              let url = element.attributes["href"] else {
+            return nil
+        }
         let req: NSFetchRequest<Link> = Link.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Link

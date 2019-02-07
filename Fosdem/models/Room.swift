@@ -8,11 +8,15 @@
 
 import Foundation
 import CoreData
+import SwiftyXMLParser
 
 @objc(Room)
-public class Room: NSManagedObject {
+public class Room: NSManagedObject, ManagedObjectProtocol {
     static let elementName = "room"
     static var context: NSManagedObjectContext!
+
+    @NSManaged public var name: String?
+    @NSManaged public var events: Set<Event>?
 
     var shortName: String {
         get { return String(describing: name?.split(separator: " ").first ?? "UNKNOWN") }
@@ -28,16 +32,16 @@ public class Room: NSManagedObject {
         }
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var events: Set<Event>?
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Room> {
         return NSFetchRequest<Room>(entityName: "Room")
     }
 
-    static func build(_ element: String) -> Room {
+    static func build(_ element: XML.Element) -> NSManagedObject? {
         let req: NSFetchRequest<Room> = Room.fetchRequest()
-        req.predicate = NSComparisonPredicate(format: "name==%@", element)
+        guard let name = element.text else {
+            return nil
+        }
+        req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Room
         if let exRoom = try? req.execute().first,
             let room = exRoom {
@@ -46,7 +50,7 @@ public class Room: NSManagedObject {
             item = Room(context: Room.context)
         }
 
-        item.name = element
+        item.name = name
         return item
     }
 }

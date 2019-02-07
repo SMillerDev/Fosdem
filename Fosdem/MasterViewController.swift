@@ -18,7 +18,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Fosdem \(MasterViewController.year)"
-        RemoteScheduleSource.getScheduleForYear(MasterViewController.year)
+        RemoteScheduleFetcher.fetchScheduleForYear(MasterViewController.year)
         refreshControl?.addTarget(self, action: #selector(refresh), for: .allEvents)
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -31,6 +31,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     @objc func refresh(){
         refreshControl?.beginRefreshing()
+        RemoteScheduleFetcher.fetchScheduleForYear(MasterViewController.year)
         tableView.reloadData()
         refreshControl?.endRefreshing()
     }
