@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,95 +35,141 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Subtitle" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw" userLabel="subtitle">
-                                <rect key="frame" x="16" y="136" width="67" height="24"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="WdH-iE-t1Y">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlb-7z-DFt">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
+                                        <subviews>
+                                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" text="Or what is systemd-resolved and how it is integrated on Ubuntu" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw" userLabel="Subtitle Label">
+                                                <rect key="frame" x="16" y="56" width="382" height="24"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Devroom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5e-Ak-RuN" userLabel="Type Label">
+                                                <rect key="frame" x="16" y="88" width="70" height="20"/>
+                                                <edgeInsets key="layoutMargins" top="16" left="32" bottom="16" right="32"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Communications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRa-TG-F83" userLabel="Track Label">
+                                                <rect key="frame" x="16" y="116" width="129" height="20"/>
+                                                <edgeInsets key="layoutMargins" top="16" left="32" bottom="16" right="32"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Janson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6i-bK-3OA" customClass="RoomLabel" customModule="Fosdem" customModuleProvider="target">
+                                                <rect key="frame" x="311" y="0.0" width="103" height="48"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="2gw-JS-i48"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="8Zh-YB-lJh"/>
+                                                </constraints>
+                                                <edgeInsets key="layoutMargins" top="16" left="32" bottom="16" right="32"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Author Something" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1OS-Kj-MR4" userLabel="Author Label">
+                                                <rect key="frame" x="16" y="0.0" width="234" height="48"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEF-rg-M6S">
+                                                <rect key="frame" x="16" y="152" width="382" height="147"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="mOT-NW-r2u"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">This talk will be a talk running through Homebrew's major changes since 1.0.0 and some of the trials and tribulations since then such as maintainers leaving, the lead maintainer position being abolished, becoming more focused and enabling the community to do more for themselves.</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <real key="NSStrokeWidth" value="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8g4-VW-w0m">
+                                                <rect key="frame" x="16" y="315" width="382" height="407"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="7hs-xO-hAS"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="1OS-Kj-MR4" firstAttribute="height" secondItem="q6i-bK-3OA" secondAttribute="height" id="1ZG-Sf-dEe"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yRa-TG-F83" secondAttribute="trailing" constant="20" symbolic="YES" id="3iq-x3-SZF"/>
+                                            <constraint firstItem="b5e-Ak-RuN" firstAttribute="leading" secondItem="xlb-7z-DFt" secondAttribute="leading" constant="16" id="4os-Tb-7FR"/>
+                                            <constraint firstItem="EEF-rg-M6S" firstAttribute="leading" secondItem="xlb-7z-DFt" secondAttribute="leading" constant="16" id="50o-T3-5Tq"/>
+                                            <constraint firstAttribute="bottom" secondItem="8g4-VW-w0m" secondAttribute="bottom" id="6gV-aI-efJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="8g4-VW-w0m" secondAttribute="trailing" constant="16" id="9Ji-Iy-aHf"/>
+                                            <constraint firstItem="q6i-bK-3OA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1OS-Kj-MR4" secondAttribute="trailing" constant="8" id="C7c-ZQ-xZF"/>
+                                            <constraint firstAttribute="trailing" secondItem="EEF-rg-M6S" secondAttribute="trailing" constant="16" id="G3e-mE-LBH"/>
+                                            <constraint firstItem="yRa-TG-F83" firstAttribute="leading" secondItem="xlb-7z-DFt" secondAttribute="leading" constant="16" id="HGn-BZ-EvW"/>
+                                            <constraint firstItem="q6i-bK-3OA" firstAttribute="top" secondItem="xlb-7z-DFt" secondAttribute="top" id="JWG-Nx-7id"/>
+                                            <constraint firstItem="yRa-TG-F83" firstAttribute="top" secondItem="b5e-Ak-RuN" secondAttribute="bottom" constant="8" id="P33-EH-VE8"/>
+                                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="xlb-7z-DFt" secondAttribute="leading" constant="16" id="T28-sr-M0r"/>
+                                            <constraint firstItem="8g4-VW-w0m" firstAttribute="top" secondItem="EEF-rg-M6S" secondAttribute="bottom" constant="16" id="UnB-Ac-4r6"/>
+                                            <constraint firstItem="b5e-Ak-RuN" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="8" id="VUe-rc-jF7"/>
+                                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="16" id="Wkf-K2-HY4"/>
+                                            <constraint firstItem="EEF-rg-M6S" firstAttribute="top" secondItem="yRa-TG-F83" secondAttribute="bottom" constant="16" id="Xvn-8d-D3L"/>
+                                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="1OS-Kj-MR4" secondAttribute="bottom" constant="8" id="ZWC-ka-9Fy"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b5e-Ak-RuN" secondAttribute="trailing" constant="20" symbolic="YES" id="bBz-4V-Gb8"/>
+                                            <constraint firstItem="1OS-Kj-MR4" firstAttribute="leading" secondItem="xlb-7z-DFt" secondAttribute="leading" constant="16" id="jWB-Ti-JTs"/>
+                                            <constraint firstItem="1OS-Kj-MR4" firstAttribute="top" secondItem="xlb-7z-DFt" secondAttribute="top" id="m54-gB-fYd"/>
+                                            <constraint firstItem="8g4-VW-w0m" firstAttribute="leading" secondItem="xlb-7z-DFt" secondAttribute="leading" constant="16" id="tVo-XO-UiZ"/>
+                                            <constraint firstItem="0XM-y9-sOw" firstAttribute="width" relation="lessThanOrEqual" secondItem="xlb-7z-DFt" secondAttribute="width" constant="-32" id="uP8-TW-NU2"/>
+                                            <constraint firstAttribute="trailing" secondItem="q6i-bK-3OA" secondAttribute="trailing" id="xCg-gm-fIC"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="Ljh-PJ-Gmn"/>
+                                    <constraint firstItem="xlb-7z-DFt" firstAttribute="leading" secondItem="WdH-iE-t1Y" secondAttribute="leading" id="M2j-zF-c8a"/>
+                                    <constraint firstAttribute="bottom" secondItem="xlb-7z-DFt" secondAttribute="bottom" priority="250" id="Q53-yj-r3j"/>
+                                    <constraint firstAttribute="trailing" secondItem="xlb-7z-DFt" secondAttribute="trailing" id="VE3-Mk-sqd"/>
+                                    <constraint firstItem="xlb-7z-DFt" firstAttribute="centerX" secondItem="WdH-iE-t1Y" secondAttribute="centerX" id="Yjh-tH-X0J"/>
+                                    <constraint firstItem="xlb-7z-DFt" firstAttribute="top" secondItem="WdH-iE-t1Y" secondAttribute="top" id="dk5-hZ-6Zm"/>
+                                    <constraint firstItem="xlb-7z-DFt" firstAttribute="centerY" secondItem="WdH-iE-t1Y" secondAttribute="centerY" priority="250" id="qNP-5d-vtF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Janson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6i-bK-3OA" customClass="RoomLabel" customModule="Fosdem" customModuleProvider="target">
-                                <rect key="frame" x="310.66666666666669" y="88" width="103.33333333333331" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="SmM-Uc-Qhh"/>
-                                    <constraint firstAttribute="height" constant="40" id="T3a-Fu-DO7"/>
-                                </constraints>
-                                <edgeInsets key="layoutMargins" top="16" left="32" bottom="16" right="32"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Author Something" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1OS-Kj-MR4" userLabel="title">
-                                <rect key="frame" x="16" y="88" width="294.66666666666669" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEF-rg-M6S">
-                                <rect key="frame" x="16" y="168" width="382" height="147"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="smJ-p8-J9x"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">This talk will be a talk running through Homebrew's major changes since 1.0.0 and some of the trials and tribulations since then such as maintainers leaving, the lead maintainer position being abolished, becoming more focused and enabling the community to do more for themselves.</string>
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" minimumLineHeight="14" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <real key="NSStrokeWidth" value="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8g4-VW-w0m">
-                                <rect key="frame" x="20" y="323" width="374" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="zgj-AQ-ReP"/>
-                                </constraints>
-                            </stackView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="q6i-bK-3OA" firstAttribute="leading" secondItem="1OS-Kj-MR4" secondAttribute="trailing" id="0ky-gm-m4h"/>
-                            <constraint firstItem="EEF-rg-M6S" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="8" id="11J-aC-tSl"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="EEF-rg-M6S" secondAttribute="trailing" constant="16" id="7z8-Qr-773"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0XM-y9-sOw" secondAttribute="trailing" symbolic="YES" id="EOV-in-BVB"/>
-                            <constraint firstItem="8g4-VW-w0m" firstAttribute="top" secondItem="EEF-rg-M6S" secondAttribute="bottom" constant="8" id="M79-We-Fif"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="q6i-bK-3OA" secondAttribute="trailing" id="PZ7-dC-rMT"/>
-                            <constraint firstItem="1OS-Kj-MR4" firstAttribute="height" secondItem="q6i-bK-3OA" secondAttribute="height" id="bGZ-u0-TCd"/>
-                            <constraint firstItem="1OS-Kj-MR4" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="16" id="clo-fk-CKg"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="16" id="e6o-0J-Hbr"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="8g4-VW-w0m" secondAttribute="trailing" constant="20" id="ftq-nf-FpC"/>
-                            <constraint firstItem="1OS-Kj-MR4" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="gDO-H5-McE"/>
-                            <constraint firstItem="EEF-rg-M6S" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="16" id="h1G-7x-Whe"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="1OS-Kj-MR4" secondAttribute="bottom" constant="8" id="iEh-7V-07K"/>
-                            <constraint firstItem="8g4-VW-w0m" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="v7R-ht-0jO"/>
-                            <constraint firstItem="q6i-bK-3OA" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="xXX-CE-zTt"/>
+                            <constraint firstItem="WdH-iE-t1Y" firstAttribute="height" secondItem="VUw-jc-0yf" secondAttribute="height" id="5ti-U5-aZA"/>
+                            <constraint firstItem="WdH-iE-t1Y" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" id="Oiy-ZZ-fe2"/>
+                            <constraint firstAttribute="trailing" secondItem="WdH-iE-t1Y" secondAttribute="trailing" id="TA5-I5-PdW"/>
+                            <constraint firstItem="WdH-iE-t1Y" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="Wox-B1-zG3"/>
+                            <constraint firstItem="WdH-iE-t1Y" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="f10-cc-FZK"/>
+                            <constraint firstItem="WdH-iE-t1Y" firstAttribute="bottom" secondItem="VUw-jc-0yf" secondAttribute="bottom" id="sHN-V1-ATx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Homebrew 2.0" id="mOI-FS-AaM">
+                    <navigationItem key="navigationItem" title="How and why (not) to use the 127.0.0.53 nameserver, systemd-resolved and resolvctl" id="mOI-FS-AaM">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Qkk-jh-Bg2"/>
                     </navigationItem>
                     <connections>
@@ -131,6 +178,8 @@
                         <outlet property="roomLabel" destination="q6i-bK-3OA" id="zOq-xF-k5h"/>
                         <outlet property="subtitleLabel" destination="0XM-y9-sOw" id="yAh-V7-132"/>
                         <outlet property="titleLabel" destination="1OS-Kj-MR4" id="9gP-5A-O0G"/>
+                        <outlet property="trackLabel" destination="b5e-Ak-RuN" id="q9N-cq-tVR"/>
+                        <outlet property="typeLabel" destination="b5e-Ak-RuN" id="itA-Ab-6En"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -159,23 +208,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="f3b-SQ-Xnp">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <scopeButtonTitles>
-                                <string>all</string>
-                                <string>author</string>
-                                <string>title</string>
-                                <string>track</string>
-                            </scopeButtonTitles>
-                            <connections>
-                                <outlet property="delegate" destination="7bK-jq-Zjz" id="6AM-Ss-Zha"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Arm-wq-HPj" detailTextLabel="E3Z-VU-YNm" style="IBUITableViewCellStyleSubtitle" id="WCw-Qf-5nD">
-                                <rect key="frame" x="0.0" y="111.33333333333334" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
@@ -214,20 +249,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="aqQ-ix-B1k" id="5Ie-oV-7Bm"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="aqQ-ix-B1k">
-                    <connections>
-                        <outlet property="delegate" destination="7bK-jq-Zjz" id="afv-bD-hhq"/>
-                        <outlet property="searchBar" destination="f3b-SQ-Xnp" id="lHi-u1-zSR"/>
-                        <outlet property="searchContentsController" destination="7bK-jq-Zjz" id="PhM-GW-XcL"/>
-                        <outlet property="searchResultsDataSource" destination="7bK-jq-Zjz" id="TvC-td-OIb"/>
-                        <outlet property="searchResultsDelegate" destination="7bK-jq-Zjz" id="PRu-Q0-BvZ"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
@@ -235,8 +258,8 @@
         <scene sceneID="r7l-gg-dq7">
             <objects>
                 <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" largeTitles="YES" id="DjV-YW-jjY">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

@@ -29,6 +29,7 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
     @NSManaged public var links: Set<Link>?
     @NSManaged public var conference: Conference?
     @NSManaged public var track: Track?
+    @NSManaged public var type: EventType?
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Event> {
         return NSFetchRequest<Event>(entityName: "Event")
@@ -49,9 +50,9 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
         }
 
         item.id = id
-        item.title = XmlFinder.getChildString(element, element: "title")
-        item.subtitle = XmlFinder.getChildString(element, element: "subtitle")
-        item.slug = XmlFinder.getChildString(element, element: "slug")
+        item.title = XmlFinder.getChildString(element, element: "title")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        item.subtitle = XmlFinder.getChildString(element, element: "subtitle")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        item.slug = XmlFinder.getChildString(element, element: "slug")?.trimmingCharacters(in: .whitespacesAndNewlines)
         item.desc = XmlFinder.getChildString(element, element: "description")
 
         if let room = XmlFinder.getChildElement(element, element: "room") {
@@ -59,6 +60,10 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
         }
         if let track = XmlFinder.getChildElement(element, element: "track") {
             item.track = Track.build(track) as? Track
+        }
+
+        if let type = XmlFinder.getChildElement(element, element: "type") {
+            item.type = EventType.build(type) as? EventType
         }
 
         if let dateString = element.parentElement?.parentElement?.attributes["date"],

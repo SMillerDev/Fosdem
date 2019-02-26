@@ -9,10 +9,16 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate {
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text, !text.isEmpty else { return }
+        _fetchedResultsController?.fetchRequest.predicate = NSPredicate(format: "title LIKE *%@* || track.name  LIKE *%@* || type.name LIKE *%@*", text, text, text)
+    }
+
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    var searchController: UISearchController!
     static let year = "2019"
 
     override func viewDidLoad() {
@@ -20,6 +26,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         title = "Fosdem \(MasterViewController.year)"
         RemoteScheduleFetcher.fetchScheduleForYear(MasterViewController.year)
         refreshControl?.addTarget(self, action: #selector(refresh), for: .allEvents)
+        searchController = UISearchController(searchResultsController: self)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Find talks"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController

@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         bgContext.automaticallyMergesChangesFromParent = true
         Conference.context = bgContext
         Event.context = bgContext
+        EventType.context = bgContext
         Room.context = bgContext
         Person.context = bgContext
         Track.context = bgContext

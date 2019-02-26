@@ -21,6 +21,9 @@ public class Room: NSManagedObject, ManagedObjectProtocol {
     var shortName: String {
         get { return String(describing: name?.split(separator: " ").first ?? "UNKNOWN") }
     }
+    var urlName: String {
+        get { return String(describing: shortName.replacingOccurrences(of: ".", with: "").lowercased())}
+    }
     var building: String? {
         get {
             let regex = try? NSRegularExpression(pattern: "^[A-Za-z]*")

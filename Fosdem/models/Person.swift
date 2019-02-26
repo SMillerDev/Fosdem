@@ -25,7 +25,7 @@ public class Person: NSManagedObject, ManagedObjectProtocol {
 
     static func build(_ element: XML.Element) -> NSManagedObject? {
         guard let id = element.attributes["id"],
-            let name = element.text else {
+            let name = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
                 return nil
         }
         let req: NSFetchRequest<Person> = Person.fetchRequest()

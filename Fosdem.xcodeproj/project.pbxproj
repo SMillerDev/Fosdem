@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		09EB3F74167824680D73A3FD /* libPods-FosdemUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4CE0F7D7CBA2DCE3FE34BE /* libPods-FosdemUITests.a */; };
+		142A873D2224651F0034F6D7 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A873C2224651F0034F6D7 /* Hash.swift */; };
+		142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A8741222473A40034F6D7 /* UIColor+hexstring.swift */; };
+		142A87442224752E0034F6D7 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A87432224752E0034F6D7 /* Type.swift */; };
+		142A87462224805C0034F6D7 /* UILinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A87452224805C0034F6D7 /* UILinkButton.swift */; };
 		146A866F2205EFE9008A61AD /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A86672205EFE8008A61AD /* Room.swift */; };
 		146A86702205EFE9008A61AD /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A86682205EFE8008A61AD /* Person.swift */; };
 		146A86732205EFE9008A61AD /* Conference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A866B2205EFE9008A61AD /* Conference.swift */; };
@@ -53,6 +57,11 @@
 		0B4CE0F7D7CBA2DCE3FE34BE /* libPods-FosdemUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FosdemUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D978E3FFA3FEEEAA46A29B9 /* libPods-FosdemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FosdemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB4544F7FB8116479487C48 /* Pods-Fosdem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fosdem.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fosdem/Pods-Fosdem.release.xcconfig"; sourceTree = "<group>"; };
+		142A873C2224651F0034F6D7 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
+		142A873E222465790034F6D7 /* Fosdem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fosdem-Bridging-Header.h"; sourceTree = "<group>"; };
+		142A8741222473A40034F6D7 /* UIColor+hexstring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexstring.swift"; sourceTree = "<group>"; };
+		142A87432224752E0034F6D7 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		142A87452224805C0034F6D7 /* UILinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILinkButton.swift; sourceTree = "<group>"; };
 		146A86672205EFE8008A61AD /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		146A86682205EFE8008A61AD /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		146A866B2205EFE9008A61AD /* Conference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conference.swift; sourceTree = "<group>"; };
@@ -118,9 +127,11 @@
 		146A86602205DC41008A61AD /* Import */ = {
 			isa = PBXGroup;
 			children = (
+				142A873C2224651F0034F6D7 /* Hash.swift */,
 				14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */,
 				146A8676220601DD008A61AD /* XmlFinder.swift */,
 				14DA228F220C735600CBE015 /* DataImporter.swift */,
+				142A8741222473A40034F6D7 /* UIColor+hexstring.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -129,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				146A86782206ED84008A61AD /* Track.swift */,
+				142A87432224752E0034F6D7 /* Type.swift */,
 				146A867D22089497008A61AD /* Link.swift */,
 				146A866B2205EFE9008A61AD /* Conference.swift */,
 				146A866C2205EFE9008A61AD /* Event.swift */,
@@ -142,6 +154,10 @@
 		146A867C220745BF008A61AD /* views */ = {
 			isa = PBXGroup;
 			children = (
+				146A867A220745B8008A61AD /* RoomLabel.swift */,
+				14D2771D2205D07200740042 /* MasterViewController.swift */,
+				14D2771F2205D07200740042 /* DetailViewController.swift */,
+				142A87452224805C0034F6D7 /* UILinkButton.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -171,18 +187,16 @@
 		14D277172205D07200740042 /* Fosdem */ = {
 			isa = PBXGroup;
 			children = (
-				146A867A220745B8008A61AD /* RoomLabel.swift */,
 				146A867C220745BF008A61AD /* views */,
 				146A86632205E159008A61AD /* models */,
 				146A86602205DC41008A61AD /* Import */,
 				14D277182205D07200740042 /* AppDelegate.swift */,
-				14D2771D2205D07200740042 /* MasterViewController.swift */,
-				14D2771F2205D07200740042 /* DetailViewController.swift */,
 				14D277212205D07200740042 /* Main.storyboard */,
 				14D277242205D07500740042 /* Assets.xcassets */,
 				14D277262205D07500740042 /* LaunchScreen.storyboard */,
 				14D277292205D07500740042 /* Info.plist */,
 				14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */,
+				142A873E222465790034F6D7 /* Fosdem-Bridging-Header.h */,
 			);
 			path = Fosdem;
 			sourceTree = "<group>";
@@ -299,6 +313,7 @@
 				TargetAttributes = {
 					14D277142205D07200740042 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					14D2772D2205D07500740042 = {
 						CreatedOnToolsVersion = 10.1;
@@ -433,6 +448,7 @@
 			files = (
 				14D277192205D07200740042 /* AppDelegate.swift in Sources */,
 				146A86792206ED84008A61AD /* Track.swift in Sources */,
+				142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */,
 				146A8677220601DD008A61AD /* XmlFinder.swift in Sources */,
 				14D2771C2205D07200740042 /* Fosdem.xcdatamodeld in Sources */,
 				14D2771E2205D07200740042 /* MasterViewController.swift in Sources */,
@@ -440,12 +456,15 @@
 				146A867E22089497008A61AD /* Link.swift in Sources */,
 				14D277202205D07200740042 /* DetailViewController.swift in Sources */,
 				146A86732205EFE9008A61AD /* Conference.swift in Sources */,
+				142A873D2224651F0034F6D7 /* Hash.swift in Sources */,
 				146A866F2205EFE9008A61AD /* Room.swift in Sources */,
 				146A86742205EFE9008A61AD /* Event.swift in Sources */,
 				14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */,
 				146A86702205EFE9008A61AD /* Person.swift in Sources */,
 				14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */,
 				146A867B220745B9008A61AD /* RoomLabel.swift in Sources */,
+				142A87462224805C0034F6D7 /* UILinkButton.swift in Sources */,
+				142A87442224752E0034F6D7 /* Type.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +640,7 @@
 			baseConfigurationReference = 7C11FEE5C67B2A340C02C5AF /* Pods-Fosdem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = Fosdem/Info.plist;
@@ -630,6 +650,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fosdem/Fosdem-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -640,6 +662,7 @@
 			baseConfigurationReference = 0EB4544F7FB8116479487C48 /* Pods-Fosdem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = Fosdem/Info.plist;
@@ -649,6 +672,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fosdem/Fosdem-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
