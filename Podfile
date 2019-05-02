@@ -4,8 +4,8 @@ use_modular_headers!
 inhibit_all_warnings!
 
 target 'Fosdem' do
-  pod 'Alamofire', '~> 4.8.1'
-  pod 'SwiftyXMLParser', '~> 4.3.0'
+  pod 'Alamofire', '~> 4.8'
+  pod 'SwiftyXMLParser', '~> 5.0'
 
   target 'FosdemTests' do
     inherit! :search_paths

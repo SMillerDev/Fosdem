@@ -11,6 +11,6 @@ import UIKit
 class UILinkButton: UIButton {
     var href: String = "https://fosdem.org"
     override var description: String {
-        return "title=\(self.title), href=\(self.href)"
+        return "title=\(String(describing: self.title)), href=\(self.href)"
     }
 }

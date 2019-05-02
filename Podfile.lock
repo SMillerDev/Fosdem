@@ -1,10 +1,10 @@
 PODS:
-  - Alamofire (4.8.1)
-  - SwiftyXMLParser (4.3.0)
+  - Alamofire (4.8.2)
+  - SwiftyXMLParser (5.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.8.1)
-  - SwiftyXMLParser (~> 4.3.0)
+  - Alamofire (~> 4.8)
+  - SwiftyXMLParser (~> 5.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -12,9 +12,9 @@ SPEC REPOS:
     - SwiftyXMLParser
 
 SPEC CHECKSUMS:
-  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  SwiftyXMLParser: b2e0b0dd0e0fb1ac39869dd4a0c6181847af2945
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  SwiftyXMLParser: 5ebb8793192f403fa8cc691045143906122a7a75
 
-PODFILE CHECKSUM: f3829b7f8e3e7719b3fcfb601b28c904e253e136
+PODFILE CHECKSUM: 289a0d5bc6ce29acd33acff8d55d69b3d974510c
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
