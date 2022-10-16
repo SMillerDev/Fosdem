@@ -13,13 +13,14 @@ class DataImporter {
     static var conference: Conference!
 
     static func process(_ value: Data) {
+        print("📲 Importing Fosdem data")
         let data = XML.parse(value)
         Event.context.perform {
             data.element?.childElements.first?.childElements.forEach { child in
                 switch (child.name) {
                 case Conference.elementName:
                     guard let conf = Conference.build(child) as? Conference else {
-                        debugPrint("No conference found")
+                        print("❌ No conference found")
                         return
                     }
                     DataImporter.conference =  conf
@@ -31,10 +32,11 @@ class DataImporter {
                         }
                     }
                 default:
-                    debugPrint("Data change")
+                    print("Data change")
                 }
             }
             do {
+                print("📲 Imported Fosdem data")
                 try Event.context.save()
             } catch {
                 print("Error saving context: \(error)")

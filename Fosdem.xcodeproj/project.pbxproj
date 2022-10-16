@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09EB3F74167824680D73A3FD /* libPods-FosdemUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4CE0F7D7CBA2DCE3FE34BE /* libPods-FosdemUITests.a */; };
 		142A873D2224651F0034F6D7 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A873C2224651F0034F6D7 /* Hash.swift */; };
 		142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A8741222473A40034F6D7 /* UIColor+hexstring.swift */; };
 		142A87442224752E0034F6D7 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A87432224752E0034F6D7 /* Type.swift */; };
@@ -32,8 +31,7 @@
 		14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */; };
 		14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */; };
 		14DA2290220C735600CBE015 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA228F220C735600CBE015 /* DataImporter.swift */; };
-		85A90172796196DFE9B714C9 /* libPods-FosdemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D978E3FFA3FEEEAA46A29B9 /* libPods-FosdemTests.a */; };
-		B8496C68499EF930C4CCEA6B /* libPods-Fosdem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5701DF45690A6D5B23878EF /* libPods-Fosdem.a */; };
+		92CE31A928FC35D60073813E /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 92CE31A828FC35D60073813E /* SwiftyXMLParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +52,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B4CE0F7D7CBA2DCE3FE34BE /* libPods-FosdemUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FosdemUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D978E3FFA3FEEEAA46A29B9 /* libPods-FosdemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FosdemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EB4544F7FB8116479487C48 /* Pods-Fosdem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fosdem.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fosdem/Pods-Fosdem.release.xcconfig"; sourceTree = "<group>"; };
 		142A873C2224651F0034F6D7 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
 		142A873E222465790034F6D7 /* Fosdem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fosdem-Bridging-Header.h"; sourceTree = "<group>"; };
 		142A8741222473A40034F6D7 /* UIColor+hexstring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexstring.swift"; sourceTree = "<group>"; };
@@ -88,12 +83,6 @@
 		14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteScheduleFetcher.swift; sourceTree = "<group>"; };
 		14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectProtocol.swift; sourceTree = "<group>"; };
 		14DA228F220C735600CBE015 /* DataImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
-		27AB433F1610EA8AB9792A31 /* Pods-FosdemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FosdemUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FosdemUITests/Pods-FosdemUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6C378AE3A5202F71AECAA221 /* Pods-FosdemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FosdemTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FosdemTests/Pods-FosdemTests.release.xcconfig"; sourceTree = "<group>"; };
-		7C11FEE5C67B2A340C02C5AF /* Pods-Fosdem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fosdem.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fosdem/Pods-Fosdem.debug.xcconfig"; sourceTree = "<group>"; };
-		CB544F64548F6EFCF08D63C0 /* Pods-FosdemTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FosdemTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FosdemTests/Pods-FosdemTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D5701DF45690A6D5B23878EF /* libPods-Fosdem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fosdem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F967A840AA5BF580B218DF87 /* Pods-FosdemUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FosdemUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FosdemUITests/Pods-FosdemUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8496C68499EF930C4CCEA6B /* libPods-Fosdem.a in Frameworks */,
+				92CE31A928FC35D60073813E /* SwiftyXMLParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,7 +98,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85A90172796196DFE9B714C9 /* libPods-FosdemTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09EB3F74167824680D73A3FD /* libPods-FosdemUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,16 +114,14 @@
 		146A86602205DC41008A61AD /* Import */ = {
 			isa = PBXGroup;
 			children = (
-				142A873C2224651F0034F6D7 /* Hash.swift */,
 				14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */,
 				146A8676220601DD008A61AD /* XmlFinder.swift */,
 				14DA228F220C735600CBE015 /* DataImporter.swift */,
-				142A8741222473A40034F6D7 /* UIColor+hexstring.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
 		};
-		146A86632205E159008A61AD /* models */ = {
+		146A86632205E159008A61AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				146A86782206ED84008A61AD /* Track.swift */,
@@ -148,10 +133,10 @@
 				146A86682205EFE8008A61AD /* Person.swift */,
 				14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */,
 			);
-			path = models;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		146A867C220745BF008A61AD /* views */ = {
+		146A867C220745BF008A61AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				146A867A220745B8008A61AD /* RoomLabel.swift */,
@@ -159,7 +144,7 @@
 				14D2771F2205D07200740042 /* DetailViewController.swift */,
 				142A87452224805C0034F6D7 /* UILinkButton.swift */,
 			);
-			path = views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		14D2770C2205D07200740042 = {
@@ -169,8 +154,6 @@
 				14D277312205D07500740042 /* FosdemTests */,
 				14D2773C2205D07500740042 /* FosdemUITests */,
 				14D277162205D07200740042 /* Products */,
-				1E439DAF7EEE351FBCA03B21 /* Pods */,
-				EB056638B071217567F3ADA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,8 +170,9 @@
 		14D277172205D07200740042 /* Fosdem */ = {
 			isa = PBXGroup;
 			children = (
-				146A867C220745BF008A61AD /* views */,
-				146A86632205E159008A61AD /* models */,
+				92CE31AD28FC45AF0073813E /* Utils */,
+				146A867C220745BF008A61AD /* Views */,
+				146A86632205E159008A61AD /* Models */,
 				146A86602205DC41008A61AD /* Import */,
 				14D277182205D07200740042 /* AppDelegate.swift */,
 				14D277212205D07200740042 /* Main.storyboard */,
@@ -219,27 +203,13 @@
 			path = FosdemUITests;
 			sourceTree = "<group>";
 		};
-		1E439DAF7EEE351FBCA03B21 /* Pods */ = {
+		92CE31AD28FC45AF0073813E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7C11FEE5C67B2A340C02C5AF /* Pods-Fosdem.debug.xcconfig */,
-				0EB4544F7FB8116479487C48 /* Pods-Fosdem.release.xcconfig */,
-				CB544F64548F6EFCF08D63C0 /* Pods-FosdemTests.debug.xcconfig */,
-				6C378AE3A5202F71AECAA221 /* Pods-FosdemTests.release.xcconfig */,
-				F967A840AA5BF580B218DF87 /* Pods-FosdemUITests.debug.xcconfig */,
-				27AB433F1610EA8AB9792A31 /* Pods-FosdemUITests.release.xcconfig */,
+				142A873C2224651F0034F6D7 /* Hash.swift */,
+				142A8741222473A40034F6D7 /* UIColor+hexstring.swift */,
 			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		EB056638B071217567F3ADA1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D5701DF45690A6D5B23878EF /* libPods-Fosdem.a */,
-				0D978E3FFA3FEEEAA46A29B9 /* libPods-FosdemTests.a */,
-				0B4CE0F7D7CBA2DCE3FE34BE /* libPods-FosdemUITests.a */,
-			);
-			name = Frameworks;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,7 +219,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14D277422205D07500740042 /* Build configuration list for PBXNativeTarget "Fosdem" */;
 			buildPhases = (
-				04435FE1531F0EFA6A919499 /* [CP] Check Pods Manifest.lock */,
 				14D277112205D07200740042 /* Sources */,
 				14D277122205D07200740042 /* Frameworks */,
 				14D277132205D07200740042 /* Resources */,
@@ -259,6 +228,9 @@
 			dependencies = (
 			);
 			name = Fosdem;
+			packageProductDependencies = (
+				92CE31A828FC35D60073813E /* SwiftyXMLParser */,
+			);
 			productName = Fosdem;
 			productReference = 14D277152205D07200740042 /* Fosdem.app */;
 			productType = "com.apple.product-type.application";
@@ -267,7 +239,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14D277452205D07500740042 /* Build configuration list for PBXNativeTarget "FosdemTests" */;
 			buildPhases = (
-				467A716C0C0ECD88E504C9DE /* [CP] Check Pods Manifest.lock */,
 				14D2772A2205D07500740042 /* Sources */,
 				14D2772B2205D07500740042 /* Frameworks */,
 				14D2772C2205D07500740042 /* Resources */,
@@ -286,7 +257,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14D277482205D07500740042 /* Build configuration list for PBXNativeTarget "FosdemUITests" */;
 			buildPhases = (
-				A2D21D653326E691F91682A2 /* [CP] Check Pods Manifest.lock */,
 				14D277352205D07500740042 /* Sources */,
 				14D277362205D07500740042 /* Frameworks */,
 				14D277372205D07500740042 /* Resources */,
@@ -308,19 +278,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Sean Molenaar";
 				TargetAttributes = {
 					14D277142205D07200740042 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = "";
 					};
 					14D2772D2205D07500740042 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = "";
 						TestTargetID = 14D277142205D07200740042;
 					};
 					14D277382205D07500740042 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = "";
 						TestTargetID = 14D277142205D07200740042;
 					};
 				};
@@ -334,6 +306,9 @@
 				Base,
 			);
 			mainGroup = 14D2770C2205D07200740042;
+			packageReferences = (
+				92CE31A728FC35D60073813E /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
+			);
 			productRefGroup = 14D277162205D07200740042 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -371,75 +346,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		04435FE1531F0EFA6A919499 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Fosdem-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		467A716C0C0ECD88E504C9DE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FosdemTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2D21D653326E691F91682A2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FosdemUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14D277112205D07200740042 /* Sources */ = {
@@ -545,6 +451,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -570,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -606,6 +513,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -625,7 +533,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -637,13 +545,14 @@
 		};
 		14D277432205D07500740042 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C11FEE5C67B2A340C02C5AF /* Pods-Fosdem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = Fosdem/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -652,20 +561,21 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Fosdem/Fosdem-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		14D277442205D07500740042 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EB4544F7FB8116479487C48 /* Pods-Fosdem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = Fosdem/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -673,14 +583,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Fosdem/Fosdem-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		14D277462205D07500740042 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB544F64548F6EFCF08D63C0 /* Pods-FosdemTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -694,7 +603,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fosdem.app/Fosdem";
 			};
@@ -702,7 +611,6 @@
 		};
 		14D277472205D07500740042 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C378AE3A5202F71AECAA221 /* Pods-FosdemTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -716,7 +624,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fosdem.app/Fosdem";
 			};
@@ -724,7 +632,6 @@
 		};
 		14D277492205D07500740042 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F967A840AA5BF580B218DF87 /* Pods-FosdemUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -737,7 +644,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Fosdem;
 			};
@@ -745,7 +652,6 @@
 		};
 		14D2774A2205D07500740042 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27AB433F1610EA8AB9792A31 /* Pods-FosdemUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -758,7 +664,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Fosdem;
 			};
@@ -804,6 +710,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		92CE31A728FC35D60073813E /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		92CE31A828FC35D60073813E /* SwiftyXMLParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92CE31A728FC35D60073813E /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
+			productName = SwiftyXMLParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */ = {

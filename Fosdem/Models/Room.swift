@@ -46,8 +46,7 @@ public class Room: NSManagedObject, ManagedObjectProtocol {
         }
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Room
-        if let exRoom = try? req.execute().first,
-            let room = exRoom {
+        if let room = try? req.execute().first {
             item = room
         } else {
             item = Room(context: Room.context)

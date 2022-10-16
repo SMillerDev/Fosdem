@@ -7,18 +7,20 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyXMLParser
 import CoreData
 
 class RemoteScheduleFetcher {
     static func fetchScheduleForYear(_ year: String) {
-        Alamofire.request("https://fosdem.org/\(year)/schedule/xml").responseData { data in
-            guard let value = data.value, data.error == nil else {
-                print("Failed to fetch schedule, \(data.error?.localizedDescription ?? "")")
+        let url = URL(string: "https://fosdem.org/\(year)/schedule/xml")!
+        print("📲 Getting FOSDEM schedule for \(year): \(url)")
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            print("📲 Got FOSDEM schedule for \(year): \(url)")
+            guard let data = data, error == nil else {
+                print("❌ Failed to fetch schedule, \(error?.localizedDescription ?? "")")
                 return
             }
-            DataImporter.process(value)
+            DataImporter.process(data)
         }
+        task.resume()
     }
 }

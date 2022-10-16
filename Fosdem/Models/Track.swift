@@ -31,8 +31,7 @@ public class Track: NSManagedObject {
         let req: NSFetchRequest<Track> = Track.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Track
-        if let exTrack = try? req.execute().first,
-            let track = exTrack {
+        if let track = try? req.execute().first {
             item = track
         } else {
             item = Track(context: Track.context)

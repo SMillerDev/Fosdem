@@ -31,8 +31,7 @@ public class EventType: NSManagedObject {
         let req: NSFetchRequest<EventType> = EventType.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: EventType
-        if let exType = try? req.execute().first,
-            let type = exType {
+        if let type = try? req.execute().first {
             item = type
         } else {
             item = EventType(context: EventType.context)

@@ -31,8 +31,7 @@ public class Link: NSManagedObject {
         let req: NSFetchRequest<Link> = Link.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Link
-        if let exLink = try? req.execute().first,
-            let link = exLink {
+        if let link = try? req.execute().first {
             item = link
         } else {
             item = Link(context: Link.context)

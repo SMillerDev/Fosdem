@@ -32,8 +32,7 @@ public class Conference: NSManagedObject {
         let req: NSFetchRequest<Conference> = Conference.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Conference
-        if let exConference = try? req.execute().first,
-            let conf = exConference {
+        if let conf = try? req.execute().first {
             item = conf
         } else {
             item = Conference(context: Conference.context)

@@ -88,7 +88,6 @@ class DetailViewController: UIViewController {
     }
 
     @objc func clickLinkButton(sender: UILinkButton) {
-        debugPrint("button \(sender)")
         guard let url = URL(string: sender.href) else { return }
         let svc = SFSafariViewController(url: url)
         svc.configuration.entersReaderIfAvailable = true

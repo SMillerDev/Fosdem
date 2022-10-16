@@ -31,8 +31,7 @@ public class Person: NSManagedObject, ManagedObjectProtocol {
         let req: NSFetchRequest<Person> = Person.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "id==%@", id)
         let item: Person
-        if let exPerson = try? req.execute().first,
-            let person = exPerson {
+        if let person = try? req.execute().first {
             item = person
         } else {
             item = Person(context: Person.context)

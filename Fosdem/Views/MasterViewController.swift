@@ -12,19 +12,18 @@ import CoreData
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text, !text.isEmpty else { return }
-        _fetchedResultsController?.fetchRequest.predicate = NSPredicate(format: "title LIKE *%@* || track.name  LIKE *%@* || type.name LIKE *%@*", text, text, text)
+        _fetchedResultsController?.fetchRequest.predicate = NSPredicate(format: "title CONTAINS[cd] %@", text)
     }
 
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var searchController: UISearchController!
-    static let year = "2019"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Fosdem \(MasterViewController.year)"
-        RemoteScheduleFetcher.fetchScheduleForYear(MasterViewController.year)
+        title = "Fosdem \(AppDelegate.year)"
+        RemoteScheduleFetcher.fetchScheduleForYear(AppDelegate.year)
         refreshControl?.addTarget(self, action: #selector(refresh), for: .allEvents)
         searchController = UISearchController(searchResultsController: self)
         searchController.delegate = self
@@ -44,13 +43,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     @objc func refresh(){
         refreshControl?.beginRefreshing()
-        RemoteScheduleFetcher.fetchScheduleForYear(MasterViewController.year)
+        RemoteScheduleFetcher.fetchScheduleForYear(AppDelegate.year)
         tableView.reloadData()
         refreshControl?.endRefreshing()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? false
         super.viewWillAppear(animated)
     }
 
@@ -108,6 +107,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        if let start = dateFormatter.date(from: "01-01-\(AppDelegate.year)"),
+              let end = dateFormatter.date(from: "31-12-\(AppDelegate.year)") {
+            fetchRequest.predicate = NSPredicate(format: "(start >= %@) AND (start <= %@)", argumentArray: [start, end])
+        }
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20

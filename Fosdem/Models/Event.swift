@@ -42,8 +42,7 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
         let req: NSFetchRequest<Event> = Event.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "id==%@", id)
         let item: Event
-        if let exEvent = try? req.execute().first,
-           let event = exEvent {
+        if let event = try? req.execute().first {
             item = event
         } else {
             item = Event(context: Event.context)
