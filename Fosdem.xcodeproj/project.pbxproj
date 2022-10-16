@@ -53,7 +53,6 @@
 
 /* Begin PBXFileReference section */
 		142A873C2224651F0034F6D7 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
-		142A873E222465790034F6D7 /* Fosdem-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fosdem-Bridging-Header.h"; sourceTree = "<group>"; };
 		142A8741222473A40034F6D7 /* UIColor+hexstring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexstring.swift"; sourceTree = "<group>"; };
 		142A87432224752E0034F6D7 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		142A87452224805C0034F6D7 /* UILinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILinkButton.swift; sourceTree = "<group>"; };
@@ -180,7 +179,6 @@
 				14D277262205D07500740042 /* LaunchScreen.storyboard */,
 				14D277292205D07500740042 /* Info.plist */,
 				14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */,
-				142A873E222465790034F6D7 /* Fosdem-Bridging-Header.h */,
 			);
 			path = Fosdem;
 			sourceTree = "<group>";
@@ -559,7 +557,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Fosdem/Fosdem-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -582,7 +579,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Fosdem/Fosdem-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
