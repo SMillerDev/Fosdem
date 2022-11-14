@@ -11,27 +11,27 @@ import CoreData
 import SwiftyXMLParser
 
 @objc(Room)
-public class Room: NSManagedObject, ManagedObjectProtocol {
+public class Room: NSManagedObject, ManagedObjectProtocol, Identifiable {
     static let elementName = "room"
     static var context: NSManagedObjectContext!
 
-    @NSManaged public var name: String?
-    @NSManaged public var events: Set<Event>?
+    @NSManaged public var name: String
+    @NSManaged public var events: Set<Event>
 
     var shortName: String {
-        get { return String(describing: name?.split(separator: " ").first ?? "UNKNOWN") }
+        get { return String(describing: name.split(separator: " ").first ?? "UNKNOWN") }
     }
     var urlName: String {
         get { return String(describing: shortName.replacingOccurrences(of: ".", with: "").lowercased())}
     }
+    
     var building: String? {
         get {
-            let regex = try? NSRegularExpression(pattern: "^[A-Za-z]*")
-            guard let result = regex?.firstMatch(in: shortName,
-                                               range: NSRange(shortName.startIndex..., in: shortName)) else {
-                                                return nil
+            let regex = try? Regex("^[A-Za-z]*")
+            guard let result = try? regex?.firstMatch(in: shortName) else {
+                return nil
             }
-            return String(shortName[Range(result.range, in: shortName)!])
+            return String(shortName[result.range])
         }
     }
 
@@ -49,7 +49,7 @@ public class Room: NSManagedObject, ManagedObjectProtocol {
         if let room = try? req.execute().first {
             item = room
         } else {
-            item = Room(context: Room.context)
+            item = Room(context: DataImporter.context)
         }
 
         item.name = name

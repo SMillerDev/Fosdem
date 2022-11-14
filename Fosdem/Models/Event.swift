@@ -11,33 +11,47 @@ import CoreData
 import SwiftyXMLParser
 
 @objc(Event)
-public class Event: NSManagedObject, ManagedObjectProtocol {
+public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
     static let elementName = "event"
     static var context: NSManagedObjectContext!
 
-    @NSManaged public var id: String?
-    @NSManaged public var title: String?
+    @NSManaged public var id: String
+    @NSManaged public var title: String
+    @NSManaged public var slug: String
     @NSManaged public var subtitle: String?
-    @NSManaged public var slug: String?
     @NSManaged public var desc: String?
-    @NSManaged public var start: NSDate?
+    @NSManaged public var start: Date
     @NSManaged public var duration: TimeInterval
 
     @NSManaged public var favorite: Bool
-    @NSManaged public var room: Room?
-    @NSManaged public var authors: Set<Person>?
-    @NSManaged public var links: Set<Link>?
-    @NSManaged public var conference: Conference?
-    @NSManaged public var track: Track?
-    @NSManaged public var type: EventType?
-
+    @NSManaged public var room: Room
+    @NSManaged public var authors: Set<Person>
+    @NSManaged public var links: Set<Link>
+    @NSManaged public var conference: Conference
+    @NSManaged public var track: Track
+    @NSManaged public var type: EventType
+    
+    @objc public var trackName: String {
+        return track.name
+    }
+    
+    var year: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: start)
+    }
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Event> {
         return NSFetchRequest<Event>(entityName: "Event")
     }
+    
+    static func build(_ element: SwiftyXMLParser.XML.Element) -> NSManagedObject? {
+        return nil
+    }
 
-    static func build(_ element: XML.Element) -> NSManagedObject? {
+    static func build(_ element: XML.Element, date: String) -> NSManagedObject? {
         guard let id = element.attributes["id"] else {
-            return Event(context: Event.context)
+            return Event(context: DataImporter.context)
         }
         let req: NSFetchRequest<Event> = Event.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "id==%@", id)
@@ -45,31 +59,37 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
         if let event = try? req.execute().first {
             item = event
         } else {
-            item = Event(context: Event.context)
+            item = Event(context: DataImporter.context)
         }
 
         item.id = id
-        item.title = XmlFinder.getChildString(element, element: "title")?.trimmingCharacters(in: .whitespacesAndNewlines)
+        item.title = XmlFinder.getChildString(element, element: "title")!.trimmingCharacters(in: .whitespacesAndNewlines)
+        item.slug = XmlFinder.getChildString(element, element: "slug")!.trimmingCharacters(in: .whitespacesAndNewlines)
         item.subtitle = XmlFinder.getChildString(element, element: "subtitle")?.trimmingCharacters(in: .whitespacesAndNewlines)
-        item.slug = XmlFinder.getChildString(element, element: "slug")?.trimmingCharacters(in: .whitespacesAndNewlines)
-        item.desc = XmlFinder.getChildString(element, element: "description")
+        if let desc = XmlFinder.getChildString(element, element: "description") {
+            item.desc = desc
+        }
+        if let abstract = XmlFinder.getChildString(element, element: "abstract") {
+            item.desc = abstract
+        }
 
-        if let room = XmlFinder.getChildElement(element, element: "room") {
-            item.room = Room.build(room) as? Room
+        if let room = XmlFinder.getChildElement(element, element: "room"),
+           let roomObj = Room.build(room) as? Room{
+            item.room = roomObj
         }
         if let track = XmlFinder.getChildElement(element, element: "track") {
-            item.track = Track.build(track) as? Track
+            item.track = Track.build(track) as! Track
         }
 
-        if let type = XmlFinder.getChildElement(element, element: "type") {
-            item.type = EventType.build(type) as? EventType
+        if let typeObj = XmlFinder.getChildElement(element, element: "type"),
+           let type = EventType.build(typeObj) as? EventType {
+            item.type = type
         }
 
-        if let dateString = element.parentElement?.parentElement?.attributes["date"],
-            let date = XmlFinder.parseDateString(dateString),
+        if let date = XmlFinder.parseDateString(date),
             let startString = XmlFinder.getChildString(element, element: "start"),
             let start = XmlFinder.parseTimeString(startString) {
-            item.start = date.addingTimeInterval(start) as NSDate?
+            item.start = date.addingTimeInterval(start)
         }
         if let durationString = XmlFinder.getChildString(element, element: "duration"),
             let duration = XmlFinder.parseTimeString(durationString) {
@@ -79,7 +99,7 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
         if let people = XmlFinder.getChildElement(element, element: "persons") {
             people.childElements.forEach { element in
                 if let person = Person.build(element) as? Person {
-                    item.authors?.insert(person)
+                    item.authors.insert(person)
                 }
             }
         }
@@ -87,7 +107,7 @@ public class Event: NSManagedObject, ManagedObjectProtocol {
         if let links = XmlFinder.getChildElement(element, element: "links") {
             links.childElements.forEach { element in
                 if let link = Link.build(element) as? Link {
-                    item.links?.insert(link)
+                    item.links.insert(link)
                 }
             }
         }

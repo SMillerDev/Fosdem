@@ -22,9 +22,8 @@ class XmlFinder {
     }
 
     static func parseDateString(_ element: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-mm-dd 00:00:00"
-        return formatter.date(from: element)
+        let formatter = ISO8601DateFormatter()
+        return formatter.date(from: "\(element)T00:00:00Z")
     }
 
     static func parseTimeString(_ element: String, base: Date? = nil) -> TimeInterval? {

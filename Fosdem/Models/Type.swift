@@ -11,13 +11,13 @@ import CoreData
 import SwiftyXMLParser
 
 @objc(EventType)
-public class EventType: NSManagedObject {
+public class EventType: NSManagedObject, Identifiable {
     static let elementName = "type"
     static var context: NSManagedObjectContext!
 
-    @NSManaged public var name: String?
-    @NSManaged public var color: String?
-    @NSManaged public var events: Set<Event>?
+    @NSManaged public var name: String
+    @NSManaged public var color: String
+    @NSManaged public var events: Set<Event>
 
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<EventType> {
@@ -34,7 +34,7 @@ public class EventType: NSManagedObject {
         if let type = try? req.execute().first {
             item = type
         } else {
-            item = EventType(context: EventType.context)
+            item = EventType(context: DataImporter.context)
             let hash = Hash.sha256(name)
             item.color = String(hash[hash.startIndex...hash.index(hash.startIndex, offsetBy: 5)])
         }

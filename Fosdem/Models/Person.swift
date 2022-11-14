@@ -11,13 +11,19 @@ import CoreData
 import SwiftyXMLParser
 
 @objc(Person)
-public class Person: NSManagedObject, ManagedObjectProtocol {
+public class Person: NSManagedObject, ManagedObjectProtocol, Identifiable {
     static let elementName = "person"
     static var context: NSManagedObjectContext!
 
     @NSManaged public var id: String
-    @NSManaged public var name: String?
-    @NSManaged public var events: NSSet?
+    @NSManaged public var name: String
+    @NSManaged public var events: Set<Event>
+    
+    var slug: String {
+        return name.folding(options: .diacriticInsensitive, locale: .current)
+            .lowercased()
+            .replacingOccurrences(of: " ", with: "_")
+    }
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Person> {
         return NSFetchRequest<Person>(entityName: "Person")
@@ -34,7 +40,7 @@ public class Person: NSManagedObject, ManagedObjectProtocol {
         if let person = try? req.execute().first {
             item = person
         } else {
-            item = Person(context: Person.context)
+            item = Person(context: DataImporter.context)
         }
 
         item.id = id

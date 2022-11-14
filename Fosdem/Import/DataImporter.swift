@@ -8,14 +8,16 @@
 
 import Foundation
 import SwiftyXMLParser
+import CoreData
 
 class DataImporter {
     static var conference: Conference!
+    static var context: NSManagedObjectContext!
 
     static func process(_ value: Data) {
         print("📲 Importing Fosdem data")
         let data = XML.parse(value)
-        Event.context.perform {
+        context.perform {
             data.element?.childElements.first?.childElements.forEach { child in
                 switch (child.name) {
                 case Conference.elementName:
@@ -25,9 +27,10 @@ class DataImporter {
                     }
                     DataImporter.conference =  conf
                 case "day":
+                    let date = child.attributes["date"]!
                     child.childElements.forEach { element in
                         element.childElements.forEach { child in
-                            let event = Event.build(child) as? Event
+                            let event = Event.build(child, date: date) as? Event
                             event?.conference = conference
                         }
                     }
@@ -37,7 +40,7 @@ class DataImporter {
             }
             do {
                 print("📲 Imported Fosdem data")
-                try Event.context.save()
+                try context.save()
             } catch {
                 print("Error saving context: \(error)")
             }

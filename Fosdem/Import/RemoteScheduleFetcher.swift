@@ -15,9 +15,22 @@ class RemoteScheduleFetcher {
         print("📲 Getting FOSDEM schedule for \(year): \(url)")
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             print("📲 Got FOSDEM schedule for \(year): \(url)")
+            
             guard let data = data, error == nil else {
                 print("❌ Failed to fetch schedule, \(error?.localizedDescription ?? "")")
                 return
+            }
+            if let response = response as? HTTPURLResponse,
+               let etag: String = response.allHeaderFields["Etag"] as? String {
+                if  UserDefaults.standard.string(forKey: "etag_year") == year &&
+                        UserDefaults.standard.string(forKey: "etag") == etag
+                {
+                    print("✅ No new data in FOSDEM schedule for \(year): \(url)")
+                    return
+                }
+                UserDefaults.standard.set(year, forKey: "etag_year")
+                UserDefaults.standard.set(etag, forKey: "etag")
+                
             }
             DataImporter.process(data)
         }

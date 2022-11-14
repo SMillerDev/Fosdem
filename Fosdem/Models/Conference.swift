@@ -11,15 +11,16 @@ import CoreData
 import SwiftyXMLParser
 
 @objc(Conference)
-public class Conference: NSManagedObject {
+public class Conference: NSManagedObject, Identifiable {
     static let elementName = "conference"
-    static var context: NSManagedObjectContext!
 
     @NSManaged public var name: String?
     @NSManaged public var venue: String?
     @NSManaged public var start: NSDate?
     @NSManaged public var end: NSDate?
     @NSManaged public var events: Set<Event>?
+    
+    static var roomStates: [RoomState] = []
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Conference> {
         return NSFetchRequest<Conference>(entityName: "Conference")
@@ -27,7 +28,7 @@ public class Conference: NSManagedObject {
 
     static func build(_ element: XML.Element) -> NSManagedObject {
         guard let name = XmlFinder.getChildString(element, element: "title") else {
-            return Conference(context: Conference.context)
+            return Conference(context: DataImporter.context)
         }
         let req: NSFetchRequest<Conference> = Conference.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
@@ -35,7 +36,7 @@ public class Conference: NSManagedObject {
         if let conf = try? req.execute().first {
             item = conf
         } else {
-            item = Conference(context: Conference.context)
+            item = Conference(context: DataImporter.context)
         }
 
         item.name = XmlFinder.getChildString(element, element: "title")
