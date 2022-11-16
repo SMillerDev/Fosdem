@@ -10,35 +10,47 @@ import SwiftUI
 
 struct EventDetailView: View {
     private var event: Event
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @State private var isBookmarked: Bool = false
+    @State private var selectedColorIndex = 0
     
     init(_ event: Event) {
         self.event = event
+        self.isBookmarked = event.favorite
     }
     
     var body: some View {
-        ScrollView{
             VStack(alignment: .leading) {
                 EventDetailHeader(event)
-                List(Array(event.links)) { link in
-                    if let href = link.href, let url = URL(string: href) {
-                        Button() {
-                            UIApplication.shared.open(url)
-                        } label: { Label(link.name, systemImage: link.icon) }
+                Picker(selection: $selectedColorIndex, content: {
+                    if event.desc?.isEmpty == false { Text("Description").tag(0) }
+                    if event.links.count > 0 { Text("Links").tag(1) }
+                }, label: { Label("Test", systemImage: "a") })
+                .pickerStyle(SegmentedPickerStyle())
+                if selectedColorIndex == 0 {
+                    if let desc = event.desc {
+                        ScrollView {
+                            HTMLFormattedText(desc, colorScheme: colorScheme)
+                        }
                     }
                 }
-                if let desc = event.desc {
-                    HTMLFormattedText(desc)
-                        .font(.body)
+                if selectedColorIndex == 1 {
+                    List(Array(event.links)) { link in
+                        if let href = link.href, let url = URL(string: href) {
+                            SwiftUI.Link(destination: url) {
+                                Label(link.name, systemImage: link.icon)
+                            }
+                        }
+                    }.listStyle(.plain)
                 }
-                
-            }
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .top)
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .navigationTitle(Text(event.title))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button {
-                event.favorite = !event.favorite
+                event.favorite = !isBookmarked
+                isBookmarked = event.favorite
             } label: {
-                Label("Favorite", systemImage: event.favorite ? "star.fill" : "star")
+                Label("Favorite", systemImage: isBookmarked ? "star.fill" : "star")
             })
     }
 }

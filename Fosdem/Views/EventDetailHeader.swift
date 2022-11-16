@@ -20,9 +20,15 @@ struct EventDetailHeader: View {
             GroupBox(event.track.name) {
                 VStack(alignment: .leading) {
                     Text(event.type.name.capitalized)
-                        .foregroundColor(typeColor(event.type))
+                        .foregroundColor(event.type.colorObject)
+                    if let subtitle = event.subtitle {
+                        Text(subtitle)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.leading)
+                            .font(.subheadline)
+                    }
                     Divider()
-                    Label(formatTime(start: event.start, duration: event.duration), systemImage: "calendar.badge.clock")
+                    Label(event.formatTime(), systemImage: "calendar.badge.clock")
                     Divider()
                     HStack{
                         Button() {
@@ -41,28 +47,7 @@ struct EventDetailHeader: View {
                     }
                 }
             }.padding(.bottom, 20)
-            if let subtitle = event.subtitle {
-                Text(subtitle)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.leading)
-                    .font(.subheadline)
-            }
         }
-    }
-    
-    func typeColor(_ type: EventType) -> Color
-    {
-        return Color(hexString: type.color)
-    }
-    
-    func formatTime(start: Date, duration: TimeInterval) -> String
-    {
-        let formatter = DateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("E")
-        let date = formatter.string(from: start)
-        let startString = DateFormatter.localizedString(from: start, dateStyle: .none, timeStyle: .short)
-        let endString = DateFormatter.localizedString(from: start.addingTimeInterval(duration), dateStyle: .none, timeStyle: .short)
-        return date + " " + startString + " - " + endString
     }
 }
 

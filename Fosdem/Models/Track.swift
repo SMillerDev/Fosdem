@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyXMLParser
+import SwiftUI
 
 @objc(Track)
 public class Track: NSManagedObject, Identifiable {
@@ -16,7 +17,7 @@ public class Track: NSManagedObject, Identifiable {
     static var context: NSManagedObjectContext!
 
     @NSManaged public var name: String
-    @NSManaged public var color: String?
+    @NSManaged public var color: String
     @NSManaged public var events: Set<Event>?
 
     public var eventArray: [Event] {
@@ -26,6 +27,10 @@ public class Track: NSManagedObject, Identifiable {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Track> {
         return NSFetchRequest<Track>(entityName: "Track")
+    }
+
+    var colorObject: Color {
+        return Color(hexString: color)
     }
 
     static func build(_ element: XML.Element) -> NSManagedObject {

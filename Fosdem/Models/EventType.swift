@@ -9,6 +9,36 @@
 import Foundation
 import CoreData
 import SwiftyXMLParser
+import SwiftUI
+
+enum EventTypeIcon: String {
+    case devroom = "keyboard"
+    case keynotes = "sparkles.tv"
+    case lightningtalk = "bolt"
+    case maintrack = "road.lanes"
+    case certification = "checkmark.seal"
+    case bof = "bird"
+    case none = "questionmark.circle"
+
+    static func getIconFor(_ string: String) -> EventTypeIcon {
+        switch(string.lowercased()) {
+        case "devroom":
+            return .devroom
+        case "keynotes":
+            return .keynotes
+        case "lightningtalk":
+            return .lightningtalk
+        case "maintrack":
+            return .maintrack
+        case "bof":
+            return .bof
+        case "certification":
+            return .certification
+        default:
+            return .none
+        }
+    }
+}
 
 @objc(EventType)
 public class EventType: NSManagedObject, Identifiable {
@@ -19,9 +49,16 @@ public class EventType: NSManagedObject, Identifiable {
     @NSManaged public var color: String
     @NSManaged public var events: Set<Event>
 
+    var colorObject: Color {
+        return Color(hexString: color)
+    }
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<EventType> {
         return NSFetchRequest<EventType>(entityName: "EventType")
+    }
+
+    public var icon: String {
+        return EventTypeIcon.getIconFor(name.lowercased()).rawValue
     }
 
     static func build(_ element: XML.Element) -> NSManagedObject? {

@@ -34,6 +34,10 @@ public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
     @objc public var trackName: String {
         return track.name
     }
+
+    @objc public var authorName: String {
+        return authors.first!.name
+    }
     
     var year: String {
         let dateFormatter = DateFormatter()
@@ -47,6 +51,16 @@ public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
     
     static func build(_ element: SwiftyXMLParser.XML.Element) -> NSManagedObject? {
         return nil
+    }
+
+    func formatTime() -> String
+    {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("E")
+        let date = formatter.string(from: start)
+        let startString = DateFormatter.localizedString(from: start, dateStyle: .none, timeStyle: .short)
+        let endString = DateFormatter.localizedString(from: start.addingTimeInterval(duration), dateStyle: .none, timeStyle: .short)
+        return date + " " + startString + " - " + endString
     }
 
     static func build(_ element: XML.Element, date: String) -> NSManagedObject? {
