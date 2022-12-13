@@ -10,23 +10,21 @@ import SwiftUI
 
 struct EventListView: View {
     @State private var query = ""
-    @AppStorage("year") private var year = "2019"
-    @Environment(\.managedObjectContext) var context
+    @State private var selectedEvent: Event?
+
     @SectionedFetchRequest(
         sectionIdentifier: \.trackName,
-        sortDescriptors: [NSSortDescriptor(key: "track.name", ascending: true), NSSortDescriptor(key: "start", ascending: true)],
+        sortDescriptors: [SortDescriptor(\.track.name, order: .forward), SortDescriptor(\.start, order: .forward)],
         predicate: yearPredicate()
     ) var trackEvents: SectionedFetchResults<String, Event>
 
     @FetchRequest(
-        entity: Person.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]
+        sortDescriptors: [SortDescriptor(\.name, order: .forward)]
     ) var personEvents: FetchedResults<Person>
 
     @FetchRequest(
-        entity: Event.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
-        predicate: NSPredicate(format: "favorite == YES")
+        sortDescriptors: [SortDescriptor(\.title, order: .forward)],
+        predicate: NSPredicate(format: "userInfo.favorite == YES")
     ) var bookmarks: FetchedResults<Event>
 
     static func yearPredicate() -> NSPredicate {
@@ -41,53 +39,52 @@ struct EventListView: View {
     }
 
     var body: some View {
-        NavigationView {
-            TabView{
-                List {
-                    ForEach(trackEvents) { section in
-                        Section(header: Text("\(section.id)")) {
-                            ForEach(section) { event in
-                                NavigationLink(destination: {
-                                    EventDetailView(event)
-                                }, label:  {
-                                    ListItem(event)
-                                })
-                            }
+        NavigationSplitView(sidebar: {
+            TabView {
+                List(trackEvents, selection: $selectedEvent) { section in
+                    Section(header: Text("\(section.id)")) {
+                        ForEach(section) { event in
+                            NavigationLink(value: event, label: { ListItem(event) })
                         }
                     }
-                }
-                .tabItem {
+                }.tabItem {
                     Label("Tracks", systemImage: "road.lanes")
                 }
-                List(personEvents) { person in
+
+                List(personEvents, selection: $selectedEvent) { person in
                     Section(person.name) {
                         ForEach(Array(person.events)) { event in
-                            NavigationLink(destination: {
-                                EventDetailView(event)
-                            }, label:  {
-                                ListItem(event)
-                            })
+                            NavigationLink(value: event, label: { ListItem(event) })
                         }
                     }
                 }.tabItem {
                     Label("People", systemImage: "person")
                 }
-                List(bookmarks) { event in
-                    NavigationLink(destination: {
-                        EventDetailView(event)
-                    }, label:  {
-                        ListItem(event)
-                    })
+
+                List(bookmarks, selection: $selectedEvent) { event in
+                    NavigationLink(value: event, label: { ListItem(event) })
                 }.tabItem {
                     Label("Bookmarks", systemImage: "star")
-                }
-            }
-        }.navigationTitle("Fosdem \(year)")
-            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic))
+                }.badge(bookmarks.count)
+            }.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic))
             .onChange(of: query) { newValue in
                 trackEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Event.title))
                 personEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Person.name))
             }
+            .overlay(Group {
+                if trackEvents.isEmpty {
+                    Text("Oops, loos like there's no data...")
+                }
+            })
+            .refreshable {
+                RoomStatusFetcher.fetchRoomStatus()
+                RemoteScheduleFetcher.fetchSchedule()
+            }
+        }, detail: {
+            if let event = selectedEvent {
+                EventDetailView(event)
+            }
+        })
     }
 
     private func searchPredicate(query: String, keypath: String) -> NSPredicate? {
@@ -96,7 +93,6 @@ struct EventListView: View {
     }
 
 }
-
 
 struct EventListView_Previews: PreviewProvider {
     static var previews: some View {

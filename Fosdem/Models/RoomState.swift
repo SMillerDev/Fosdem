@@ -13,7 +13,7 @@ struct RoomState {
     let roominfo: String
     let roomname: String
     let full: Bool
-    
+
     init?(json: [String: Any]) {
         guard let id = json["id"] as? String,
             let roominfo = json["roominfo"] as? String,

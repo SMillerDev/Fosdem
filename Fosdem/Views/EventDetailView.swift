@@ -9,49 +9,96 @@
 import SwiftUI
 
 struct EventDetailView: View {
-    private var event: Event
+    @ObservedObject private var event: Event
+
+    @State private var selectedTabIndex = 0
+    @State private var permissionGranted = false
+
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @State private var isBookmarked: Bool = false
-    @State private var selectedColorIndex = 0
-    
+    @Environment(\.managedObjectContext) var context
+
     init(_ event: Event) {
         self.event = event
-        self.isBookmarked = event.favorite
     }
-    
+
+    private func requestPermissions() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                permissionGranted = true
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "Hello world!"
+        notificationContent.subtitle = "Here's how you send a notification in SwiftUI"
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: event.start.timeIntervalSinceNow + 300, repeats: false)
+
+        let req = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(req)
+    }
+
     var body: some View {
-            VStack(alignment: .leading) {
-                EventDetailHeader(event)
-                Picker(selection: $selectedColorIndex, content: {
-                    if event.desc?.isEmpty == false { Text("Description").tag(0) }
-                    if event.links.count > 0 { Text("Links").tag(1) }
-                }, label: { Label("Test", systemImage: "a") })
-                .pickerStyle(SegmentedPickerStyle())
-                if selectedColorIndex == 0 {
-                    if let desc = event.desc {
-                        ScrollView {
-                            HTMLFormattedText(desc, colorScheme: colorScheme)
+        ViewThatFits {
+            ScrollView {
+                EventDetailHeader(event).frame(maxWidth: .infinity)
+
+                Picker("Test", selection: $selectedTabIndex, content: {
+                    Text("Description").tag(0)
+                    Text("Links").disabled(event.links.isEmpty).tag(1)
+                }).pickerStyle(.segmented)
+
+                ZStack {
+                    if selectedTabIndex == 0 {
+                        HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
+                    }
+                    if selectedTabIndex == 1 {
+                        Text("Test")
+
+                        List(Array(event.links)) { link in
+
+                            Text(link.description)
+                            if let url = link.url() {
+                                SwiftUI.Link(destination: url) {
+                                    Label(link.name, systemImage: link.icon)
+                                }
+                            }
                         }
                     }
                 }
-                if selectedColorIndex == 1 {
-                    List(Array(event.links)) { link in
-                        if let href = link.href, let url = URL(string: href) {
-                            SwiftUI.Link(destination: url) {
-                                Label(link.name, systemImage: link.icon)
-                            }
-                        }
-                    }.listStyle(.plain)
+            }
+        }.navigationTitle(Text(event.title))
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(trailing: Toggle(isOn: $event.userInfo.favorite, label: {
+            Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
+        }))
+        .toolbar(content: {
+            if event.start.timeIntervalSinceNow > 0 {
+                Button(action: {
+                    if !permissionGranted {
+                        requestPermissions()
+                    }
+                    if permissionGranted {
+                        sendNotification()
+                    }
+                }, label: {
+                    Label("Notify", systemImage: "a")
+                })
+            }
+        })
+        .onAppear {
+            // Check if we already have permissions to send notifications
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                if settings.authorizationStatus == .authorized {
+                    permissionGranted = true
                 }
-            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .navigationTitle(Text(event.title))
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button {
-                event.favorite = !isBookmarked
-                isBookmarked = event.favorite
-            } label: {
-                Label("Favorite", systemImage: isBookmarked ? "star.fill" : "star")
-            })
+            }
+        }
     }
 }
 

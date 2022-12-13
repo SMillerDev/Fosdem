@@ -20,7 +20,7 @@ struct HTMLFormattedText: UIViewRepresentable {
     }
 
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UITextView {
-        textView.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width).isActive = true
+        textView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ struct HTMLFormattedText: UIViewRepresentable {
         }
     }
 
-    private func converHTML(text: String) -> NSAttributedString?{
+    private func converHTML(text: String) -> NSAttributedString? {
         let color = colorScheme == .light ? "#212529" : "#f8f9fa"
         let css = """
         <style>
@@ -54,9 +54,11 @@ struct HTMLFormattedText: UIViewRepresentable {
 
         guard let data = "\(css)\n \(text)".data(using: .utf8) else { return nil }
 
-        if let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
-            return attributedString
-        } else{
+        if let string = try? NSAttributedString(data: data,
+                                                options: [.documentType: NSAttributedString.DocumentType.html],
+                                                documentAttributes: nil) {
+            return string
+        } else {
             return nil
         }
     }

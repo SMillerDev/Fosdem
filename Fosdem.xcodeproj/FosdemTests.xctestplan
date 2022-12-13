@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B8871E4B-8380-42E2-B742-04D58B2BBD70",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Fosdem.xcodeproj",
+        "identifier" : "14D2772D2205D07500740042",
+        "name" : "FosdemTests"
+      }
+    }
+  ],
+  "version" : 1
+}

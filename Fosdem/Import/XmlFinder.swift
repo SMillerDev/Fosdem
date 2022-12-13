@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyXMLParser
 
-class XmlFinder {
+final class XmlFinder {
     static func getChildString(_ object: XML.Element, element: String) -> String? {
         return XmlFinder.getChildElement(object, element: element)?.text
     }

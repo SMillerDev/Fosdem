@@ -7,28 +7,117 @@
 //
 
 import XCTest
+import CoreData
 @testable import Fosdem
 
 class FosdemTests: XCTestCase {
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let context = TestCoreDataStack().persistentContainer.newBackgroundContext()
+        DataImporter.context = context
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testProcessDataSucceeds2019() {
+        let bundle = Bundle(for: type(of: self))
+        let url = bundle.url(forResource: "schedule_2019", withExtension: "xml")!
+        let xmlData = try? Data(contentsOf: url)
+        XCTAssertNotNil(xmlData, "No test data")
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        expectation(
+          forNotification: .NSManagedObjectContextDidSave,
+          object: DataImporter.context) { _ in
+            return true
+        }
+
+        DataImporter.handler = { conference in
+            XCTAssertNotNil(conference, "Conference parsed")
+            XCTAssertEqual(conference.name, "FOSDEM 2019")
+            XCTAssertEqual(conference.venue, "ULB (Université Libre de Bruxelles)")
+            XCTAssertEqual(conference.start?.timeIntervalSince1970, TimeInterval("1549065600"))
+            XCTAssertEqual(conference.end?.timeIntervalSince1970, TimeInterval("1549152000"))
+            XCTAssertNotNil(conference.events)
+            XCTAssertEqual(conference.events.count, 775)
+        }
+        DataImporter.process(xmlData!)
+
+        waitForExpectations(timeout: 3) { error in
+          XCTAssertNil(error, "Save did not occur")
         }
     }
 
+    func testProcessDataSucceedsVirtual() {
+        let bundle = Bundle(for: type(of: self))
+        let url = bundle.url(forResource: "schedule_2022", withExtension: "xml")!
+        let xmlData = try? Data(contentsOf: url)
+        XCTAssertNotNil(xmlData, "No test data")
+
+        expectation(
+          forNotification: .NSManagedObjectContextDidSave,
+          object: DataImporter.context) { _ in
+            return true
+        }
+
+        DataImporter.handler = { conference in
+            XCTAssertNotNil(conference, "Conference parsed")
+            XCTAssertEqual(conference.name, "FOSDEM 2022")
+            XCTAssertEqual(conference.venue, "ULB (Université Libre de Bruxelles)")
+            XCTAssertEqual(conference.start?.timeIntervalSince1970, TimeInterval("1644019200"))
+            XCTAssertEqual(conference.end?.timeIntervalSince1970, TimeInterval("1644105600"))
+            XCTAssertNotNil(conference.events)
+            XCTAssertEqual(conference.events.count, 730)
+        }
+        DataImporter.process(xmlData!)
+
+        waitForExpectations(timeout: 10) { error in
+          XCTAssertNil(error, "Save did not occur")
+        }
+    }
+
+    func testProcessDataSucceedsEmpty() {
+        let bundle = Bundle(for: type(of: self))
+        let url = bundle.url(forResource: "schedule_2023", withExtension: "xml")!
+        let xmlData = try? Data(contentsOf: url)
+        XCTAssertNotNil(xmlData, "No test data")
+
+        expectation(
+          forNotification: .NSManagedObjectContextDidSave,
+          object: DataImporter.context) { _ in
+            return true
+        }
+
+        DataImporter.handler = { conference in
+            XCTAssertNotNil(conference, "Conference parsed")
+            XCTAssertEqual(conference.name, "FOSDEM 2023")
+            XCTAssertEqual(conference.venue, "ULB (Université Libre de Bruxelles)")
+            XCTAssertEqual(conference.start?.timeIntervalSince1970, TimeInterval("1675468800"))
+            XCTAssertEqual(conference.end?.timeIntervalSince1970, TimeInterval("1675555200"))
+            XCTAssertNotNil(conference.events)
+            XCTAssertEqual(conference.events.count, 0)
+        }
+        DataImporter.process(xmlData!)
+
+        waitForExpectations(timeout: 3) { error in
+          XCTAssertNil(error, "Save did not occur")
+        }
+    }
+
+}
+
+class TestCoreDataStack: NSObject {
+    lazy var persistentContainer: NSPersistentContainer = {
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+
+        let container = NSPersistentContainer(name: "Fosdem")
+        container.persistentStoreDescriptions = [description]
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        return container
+    }()
 }

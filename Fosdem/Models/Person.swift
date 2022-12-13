@@ -18,7 +18,7 @@ public class Person: NSManagedObject, ManagedObjectProtocol, Identifiable {
     @NSManaged public var id: String
     @NSManaged public var name: String
     @NSManaged public var events: Set<Event>
-    
+
     var slug: String {
         return name.folding(options: .diacriticInsensitive, locale: .current)
             .lowercased()

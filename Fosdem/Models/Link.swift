@@ -17,16 +17,22 @@ public class Link: NSManagedObject, Identifiable {
 
     @NSManaged public var icon: String
     @NSManaged public var name: String
-    @NSManaged public var href: String?
+    @NSManaged public var href: String
     @NSManaged public var event: Event
-    
+
+    public func url() -> URL? {
+        guard let url = URL(string: href) else {
+            return nil
+        }
+
+        return url
+    }
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Link> {
         return NSFetchRequest<Link>(entityName: "Link")
     }
 
-    
-    static func build(name: String, href: String?, icon: String? = nil) -> NSManagedObject?{
+    static func build(name: String, href: String, icon: String? = nil) -> NSManagedObject? {
         let req: NSFetchRequest<Link> = Link.fetchRequest()
         req.predicate = NSComparisonPredicate(format: "name==%@", name)
         let item: Link
@@ -43,13 +49,13 @@ public class Link: NSManagedObject, Identifiable {
         }
         return item
     }
-    
+
     static func build(_ element: XML.Element) -> NSManagedObject? {
         guard let name = element.text,
               let url = element.attributes["href"] else {
             return nil
         }
-        
+
         return Link.build(name: name, href: url)
     }
 }

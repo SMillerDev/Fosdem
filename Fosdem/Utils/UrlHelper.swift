@@ -10,7 +10,7 @@ import Foundation
 
 extension Room {
     func getNavigationLink() -> URL {
-        return URL(string: "\(BaseURL.NAV.rawValue)/\(urlName)")!
+        return URL(string: "\(BaseURL.navigationBase.rawValue)/\(urlName)")!
     }
 }
 
@@ -27,8 +27,8 @@ extension Person {
 }
 
 enum BaseURL: String {
-    case NAV = "https://nav.fosdem.org/l"
-    case SCHEDULE = "https://fosdem.org/schedule/xml"
-    case ROOM_STATUS = "https://api.fosdem.org/roomstatus/v1/listrooms"
-    case VOLUNTEER_LINK = "https://fosdem.org/volunteer/"
+    case navigationBase = "https://nav.fosdem.org/l"
+    case schedule = "https://fosdem.org/schedule/xml"
+    case roomStatus = "https://api.fosdem.org/roomstatus/v1/listrooms"
+    case volunteerLink = "https://fosdem.org/volunteer/"
 }

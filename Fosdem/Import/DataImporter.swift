@@ -13,19 +13,20 @@ import CoreData
 class DataImporter {
     static var conference: Conference!
     static var context: NSManagedObjectContext!
+    static var handler: (Conference) -> Void = { _ in }
 
     static func process(_ value: Data) {
         print("📲 Importing Fosdem data")
         let data = XML.parse(value)
         context.perform {
             data.element?.childElements.first?.childElements.forEach { child in
-                switch (child.name) {
+                switch child.name {
                 case Conference.elementName:
                     guard let conf = Conference.build(child) as? Conference else {
                         print("❌ No conference found")
                         return
                     }
-                    DataImporter.conference =  conf
+                    DataImporter.conference = conf
                 case "day":
                     let date = child.attributes["date"]!
                     child.childElements.forEach { element in
@@ -40,6 +41,7 @@ class DataImporter {
             }
             do {
                 print("📲 Imported Fosdem data")
+                handler(self.conference)
                 try context.save()
             } catch {
                 print("Error saving context: \(error)")

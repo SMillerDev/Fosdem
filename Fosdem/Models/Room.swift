@@ -19,20 +19,18 @@ public class Room: NSManagedObject, ManagedObjectProtocol, Identifiable {
     @NSManaged public var events: Set<Event>
 
     var shortName: String {
-        get { return String(describing: name.split(separator: " ").first ?? "UNKNOWN") }
+        return String(describing: name.split(separator: " ").first ?? "UNKNOWN")
     }
     var urlName: String {
-        get { return String(describing: shortName.replacingOccurrences(of: ".", with: "").lowercased())}
+        return String(describing: shortName.replacingOccurrences(of: ".", with: "").lowercased())
     }
-    
+
     var building: String? {
-        get {
-            let regex = try? Regex("^[A-Za-z]*")
-            guard let result = try? regex?.firstMatch(in: shortName) else {
-                return nil
-            }
-            return String(shortName[result.range])
+        let regex = try? Regex("^[A-Za-z]*")
+        guard let result = try? regex?.firstMatch(in: shortName) else {
+            return nil
         }
+        return String(shortName[result.range])
     }
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Room> {

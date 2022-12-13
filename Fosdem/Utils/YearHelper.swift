@@ -9,7 +9,7 @@
 import Foundation
 
 class YearHelper: ObservableObject {
-    
+
     @Published var year: String {
         didSet {
             UserDefaults.standard.set(year, forKey: "year")
@@ -17,6 +17,6 @@ class YearHelper: ObservableObject {
     }
 
     init() {
-        year = UserDefaults.standard.string(forKey: "year") ?? "2019"
+        year = UserDefaults.standard.string(forKey: "year") ?? "2023"
     }
 }

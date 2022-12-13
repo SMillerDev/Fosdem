@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,9 +19,7 @@
 		146A867E22089497008A61AD /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A867D22089497008A61AD /* Link.swift */; };
 		14D277192205D07200740042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D277182205D07200740042 /* AppDelegate.swift */; };
 		14D2771C2205D07200740042 /* Fosdem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */; };
-		14D277232205D07200740042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D277212205D07200740042 /* Main.storyboard */; };
 		14D277252205D07500740042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D277242205D07500740042 /* Assets.xcassets */; };
-		14D277282205D07500740042 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D277262205D07500740042 /* LaunchScreen.storyboard */; };
 		14D277332205D07500740042 /* FosdemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D277322205D07500740042 /* FosdemTests.swift */; };
 		14D2773E2205D07500740042 /* FosdemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2773D2205D07500740042 /* FosdemUITests.swift */; };
 		14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */; };
@@ -30,10 +28,13 @@
 		92077D5128FF01C600BF8A03 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92077D5028FF01C600BF8A03 /* EventDetailView.swift */; };
 		924E15BC2922C637005A8EA2 /* RoomStatusImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */; };
 		924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BD2922CCA9005A8EA2 /* RoomState.swift */; };
-		924E15C12922D8C8005A8EA2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15C02922D8C8005A8EA2 /* SettingsView.swift */; };
 		924E15C329238AA5005A8EA2 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15C229238AA5005A8EA2 /* ListItem.swift */; };
+		925321602925716A004C7E5C /* EventUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9253215F2925716A004C7E5C /* EventUserInfo.swift */; };
+		9253216329257360004C7E5C /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9253216229257360004C7E5C /* SwiftyXMLParser */; };
+		92A2BDF82948CAE50034864F /* schedule_2019.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDF72948CAE50034864F /* schedule_2019.xml */; };
+		92A2BDFC2948D4AC0034864F /* schedule_2023.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFA2948D4AC0034864F /* schedule_2023.xml */; };
+		92A2BDFD2948D4AC0034864F /* schedule_2022.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFB2948D4AC0034864F /* schedule_2022.xml */; };
 		92C271D02922292500E8C25D /* PreviewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C271CF2922292500E8C25D /* PreviewEvent.swift */; };
-		92CE31A928FC35D60073813E /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 92CE31A828FC35D60073813E /* SwiftyXMLParser */; };
 		92CE31AF28FC49DC0073813E /* YearHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31AE28FC49DC0073813E /* YearHelper.swift */; };
 		92CE31B128FC4A940073813E /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31B028FC4A940073813E /* EventListView.swift */; };
 		92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */; };
@@ -72,9 +73,7 @@
 		14D277152205D07200740042 /* Fosdem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fosdem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D277182205D07200740042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14D2771B2205D07200740042 /* Fosdem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fosdem.xcdatamodel; sourceTree = "<group>"; };
-		14D277222205D07200740042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14D277242205D07500740042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		14D277272205D07500740042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14D277292205D07500740042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14D2772E2205D07500740042 /* FosdemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FosdemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D277322205D07500740042 /* FosdemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FosdemTests.swift; sourceTree = "<group>"; };
@@ -88,8 +87,12 @@
 		92077D5028FF01C600BF8A03 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStatusImporter.swift; sourceTree = "<group>"; };
 		924E15BD2922CCA9005A8EA2 /* RoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomState.swift; sourceTree = "<group>"; };
-		924E15C02922D8C8005A8EA2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		924E15C229238AA5005A8EA2 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
+		9253215F2925716A004C7E5C /* EventUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUserInfo.swift; sourceTree = "<group>"; };
+		92A2BDF72948CAE50034864F /* schedule_2019.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2019.xml; sourceTree = "<group>"; };
+		92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FosdemTests.xctestplan; path = Fosdem.xcodeproj/FosdemTests.xctestplan; sourceTree = "<group>"; };
+		92A2BDFA2948D4AC0034864F /* schedule_2023.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2023.xml; sourceTree = "<group>"; };
+		92A2BDFB2948D4AC0034864F /* schedule_2022.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2022.xml; sourceTree = "<group>"; };
 		92C271CF2922292500E8C25D /* PreviewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewEvent.swift; sourceTree = "<group>"; };
 		92CE31AE28FC49DC0073813E /* YearHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearHelper.swift; sourceTree = "<group>"; };
 		92CE31B028FC4A940073813E /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
@@ -103,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CE31A928FC35D60073813E /* SwiftyXMLParser in Frameworks */,
+				9253216329257360004C7E5C /* SwiftyXMLParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +150,7 @@
 				146A86682205EFE8008A61AD /* Person.swift */,
 				14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */,
 				924E15BD2922CCA9005A8EA2 /* RoomState.swift */,
+				9253215F2925716A004C7E5C /* EventUserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,7 +161,6 @@
 				92CE31B028FC4A940073813E /* EventListView.swift */,
 				92077D5028FF01C600BF8A03 /* EventDetailView.swift */,
 				92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */,
-				924E15C02922D8C8005A8EA2 /* SettingsView.swift */,
 				924E15C229238AA5005A8EA2 /* ListItem.swift */,
 			);
 			path = Views;
@@ -166,6 +169,7 @@
 		14D2770C2205D07200740042 = {
 			isa = PBXGroup;
 			children = (
+				92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */,
 				14D277172205D07200740042 /* Fosdem */,
 				14D277312205D07500740042 /* FosdemTests */,
 				14D2773C2205D07500740042 /* FosdemUITests */,
@@ -191,9 +195,7 @@
 				146A86632205E159008A61AD /* Models */,
 				146A86602205DC41008A61AD /* Import */,
 				14D277182205D07200740042 /* AppDelegate.swift */,
-				14D277212205D07200740042 /* Main.storyboard */,
 				14D277242205D07500740042 /* Assets.xcassets */,
-				14D277262205D07500740042 /* LaunchScreen.storyboard */,
 				14D277292205D07500740042 /* Info.plist */,
 				14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */,
 			);
@@ -203,6 +205,9 @@
 		14D277312205D07500740042 /* FosdemTests */ = {
 			isa = PBXGroup;
 			children = (
+				92A2BDFB2948D4AC0034864F /* schedule_2022.xml */,
+				92A2BDFA2948D4AC0034864F /* schedule_2023.xml */,
+				92A2BDF72948CAE50034864F /* schedule_2019.xml */,
 				14D277322205D07500740042 /* FosdemTests.swift */,
 				14D277342205D07500740042 /* Info.plist */,
 			);
@@ -241,6 +246,7 @@
 				14D277112205D07200740042 /* Sources */,
 				14D277122205D07200740042 /* Frameworks */,
 				14D277132205D07200740042 /* Resources */,
+				92AD2C9429380DC800EDC2EF /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -248,7 +254,7 @@
 			);
 			name = Fosdem;
 			packageProductDependencies = (
-				92CE31A828FC35D60073813E /* SwiftyXMLParser */,
+				9253216229257360004C7E5C /* SwiftyXMLParser */,
 			);
 			productName = Fosdem;
 			productReference = 14D277152205D07200740042 /* Fosdem.app */;
@@ -317,7 +323,7 @@
 				};
 			};
 			buildConfigurationList = 14D277102205D07200740042 /* Build configuration list for PBXProject "Fosdem" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -326,7 +332,7 @@
 			);
 			mainGroup = 14D2770C2205D07200740042;
 			packageReferences = (
-				92CE31A728FC35D60073813E /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
+				9253216129257360004C7E5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 			);
 			productRefGroup = 14D277162205D07200740042 /* Products */;
 			projectDirPath = "";
@@ -344,9 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14D277282205D07500740042 /* LaunchScreen.storyboard in Resources */,
 				14D277252205D07500740042 /* Assets.xcassets in Resources */,
-				14D277232205D07200740042 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +358,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92A2BDFD2948D4AC0034864F /* schedule_2022.xml in Resources */,
+				92A2BDF82948CAE50034864F /* schedule_2019.xml in Resources */,
+				92A2BDFC2948D4AC0034864F /* schedule_2023.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +373,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		92AD2C9429380DC800EDC2EF /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		14D277112205D07200740042 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -374,6 +403,7 @@
 				92D9E7BA291D95E1007D203D /* EventDetailHeader.swift in Sources */,
 				14D277192205D07200740042 /* AppDelegate.swift in Sources */,
 				146A86792206ED84008A61AD /* Track.swift in Sources */,
+				925321602925716A004C7E5C /* EventUserInfo.swift in Sources */,
 				142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */,
 				146A8677220601DD008A61AD /* XmlFinder.swift in Sources */,
 				92CE31AF28FC49DC0073813E /* YearHelper.swift in Sources */,
@@ -388,7 +418,6 @@
 				142A873D2224651F0034F6D7 /* Hash.swift in Sources */,
 				924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */,
 				146A866F2205EFE9008A61AD /* Room.swift in Sources */,
-				924E15C12922D8C8005A8EA2 /* SettingsView.swift in Sources */,
 				146A86742205EFE9008A61AD /* Event.swift in Sources */,
 				14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */,
 				146A86702205EFE9008A61AD /* Person.swift in Sources */,
@@ -430,25 +459,6 @@
 			targetProxy = 14D2773A2205D07500740042 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		14D277212205D07200740042 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14D277222205D07200740042 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		14D277262205D07500740042 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14D277272205D07500740042 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		14D277402205D07500740042 /* Debug */ = {
@@ -578,13 +588,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = Fosdem/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FOSDEM;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -600,13 +615,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = Fosdem/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FOSDEM;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -627,6 +647,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fosdem.app/Fosdem";
@@ -648,6 +671,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fosdem.app/Fosdem";
@@ -668,6 +694,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Fosdem;
@@ -688,6 +717,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.FosdemUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Fosdem;
@@ -736,20 +768,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		92CE31A728FC35D60073813E /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
+		9253216129257360004C7E5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		92CE31A828FC35D60073813E /* SwiftyXMLParser */ = {
+		9253216229257360004C7E5C /* SwiftyXMLParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 92CE31A728FC35D60073813E /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
+			package = 9253216129257360004C7E5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
 			productName = SwiftyXMLParser;
 		};
 /* End XCSwiftPackageProductDependency section */

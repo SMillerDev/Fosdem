@@ -21,7 +21,7 @@ enum EventTypeIcon: String {
     case none = "questionmark.circle"
 
     static func getIconFor(_ string: String) -> EventTypeIcon {
-        switch(string.lowercased()) {
+        switch string.lowercased() {
         case "devroom":
             return .devroom
         case "keynotes":

@@ -10,11 +10,11 @@ import SwiftUI
 
 struct EventDetailHeader: View {
     private var event: Event
-    
+
     init(_ event: Event) {
         self.event = event
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             GroupBox(event.track.name) {
@@ -30,11 +30,11 @@ struct EventDetailHeader: View {
                     Divider()
                     Label(event.formatTime(), systemImage: "calendar.badge.clock")
                     Divider()
-                    HStack{
-                        Button() {
+                    HStack {
+                        Button {
                             UIApplication.shared.open(event.room.getNavigationLink())
                         } label: { Label(event.room.name, systemImage: "location.circle") }
-                        
+
                         if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }) {
                             Text("-").foregroundColor(.secondary)
                             Text(item.full ? "Full" : "Available").foregroundColor(item.full ? .red : .green)

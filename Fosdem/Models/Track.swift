@@ -22,9 +22,9 @@ public class Track: NSManagedObject, Identifiable {
 
     public var eventArray: [Event] {
         let events = self.events ?? []
-        return events.sorted(by:  { $0.title < $1.title })
+        return events.sorted(by: { $0.title < $1.title })
     }
-    
+
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Track> {
         return NSFetchRequest<Track>(entityName: "Track")
     }
@@ -50,4 +50,3 @@ public class Track: NSManagedObject, Identifiable {
         return item
     }
 }
-

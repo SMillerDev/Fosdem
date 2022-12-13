@@ -18,8 +18,8 @@ public class Conference: NSManagedObject, Identifiable {
     @NSManaged public var venue: String?
     @NSManaged public var start: NSDate?
     @NSManaged public var end: NSDate?
-    @NSManaged public var events: Set<Event>?
-    
+    @NSManaged public var events: Set<Event>
+
     static var roomStates: [RoomState] = []
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Conference> {

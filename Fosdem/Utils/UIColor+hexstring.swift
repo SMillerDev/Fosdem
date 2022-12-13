@@ -6,7 +6,6 @@
 //  Copyright © 2019 Sean Molenaar. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
 extension Color {
@@ -17,12 +16,12 @@ extension Color {
         var color: UInt64 = 0
         scanner.scanHexInt64(&color)
         let mask = 0x000000FF
-        let r = Int(color >> 16) & mask
-        let g = Int(color >> 8) & mask
-        let b = Int(color) & mask
-        let red   = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
-        self.init(red:red, green:green, blue:blue)
+        let redInt = Int(color >> 16) & mask
+        let greenInt = Int(color >> 8) & mask
+        let blueInt = Int(color) & mask
+        let red   = CGFloat(redInt) / 255.0
+        let green = CGFloat(greenInt) / 255.0
+        let blue  = CGFloat(blueInt) / 255.0
+        self.init(red: red, green: green, blue: blue)
     }
 }

@@ -4,7 +4,7 @@
 //
 //  Created by Sean Molenaar on 14/11/2022.
 //  Copyright © 2022 Sean Molenaar. All rights reserved.
-//
+// swiftlint:disable line_length
 
 import Foundation
 
@@ -17,25 +17,25 @@ struct PreviewEvent {
         let person2 = Person(context: DataImporter.context)
         person2.name = "Jane Doei"
         person2.id = "1011"
-        event.authors = Set(arrayLiteral: person, person2)
-        
+        event.authors = Set([person, person2])
+
         event.track = Track(context: DataImporter.context)
         event.track.name = "Mozilla Devroom"
         event.track.color = "#0057B8"
-        
+
         event.type = EventType(context: DataImporter.context)
         event.type.name = "keynote"
         event.type.color = "#0057B8"
-        
+
         event.room = Room(context: DataImporter.context)
         event.room.name = "UD2.120 (Chavanne)"
-        
+
         let link = Link(context: DataImporter.context)
         link.name = "Some Link"
         link.icon = "link.circle"
         link.href = "https://fosdem.org"
-        event.links = Set(arrayLiteral: link)
-        
+        event.links = Set([link])
+
         event.start = Date()
         event.duration = TimeInterval(15)
         event.title = "Welcome to the Free Software Radio Devroom"
@@ -54,7 +54,7 @@ struct PreviewEvent {
         In this talk, we will report on where the resistance fails the most and why. Finally, we will make suggestions of where volunteer developers can most strategically focus their efforts to build a world where all can live in software freedom.
 
         """
-        
+
         return event
     }
 }
