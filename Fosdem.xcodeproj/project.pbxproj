@@ -30,10 +30,11 @@
 		924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BD2922CCA9005A8EA2 /* RoomState.swift */; };
 		924E15C329238AA5005A8EA2 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15C229238AA5005A8EA2 /* ListItem.swift */; };
 		925321602925716A004C7E5C /* EventUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9253215F2925716A004C7E5C /* EventUserInfo.swift */; };
-		9253216329257360004C7E5C /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9253216229257360004C7E5C /* SwiftyXMLParser */; };
 		92A2BDF82948CAE50034864F /* schedule_2019.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDF72948CAE50034864F /* schedule_2019.xml */; };
 		92A2BDFC2948D4AC0034864F /* schedule_2023.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFA2948D4AC0034864F /* schedule_2023.xml */; };
 		92A2BDFD2948D4AC0034864F /* schedule_2022.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFB2948D4AC0034864F /* schedule_2022.xml */; };
+		92C22E6029806C70006D7B5C /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 92C22E5F29806C70006D7B5C /* SwiftyXMLParser */; };
+		92C22E6229806F61006D7B5C /* privacy.md in Resources */ = {isa = PBXBuildFile; fileRef = 92C22E6129806F61006D7B5C /* privacy.md */; };
 		92C271D02922292500E8C25D /* PreviewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C271CF2922292500E8C25D /* PreviewEvent.swift */; };
 		92CE31AF28FC49DC0073813E /* YearHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31AE28FC49DC0073813E /* YearHelper.swift */; };
 		92CE31B128FC4A940073813E /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31B028FC4A940073813E /* EventListView.swift */; };
@@ -93,6 +94,7 @@
 		92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FosdemTests.xctestplan; path = Fosdem.xcodeproj/FosdemTests.xctestplan; sourceTree = "<group>"; };
 		92A2BDFA2948D4AC0034864F /* schedule_2023.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2023.xml; sourceTree = "<group>"; };
 		92A2BDFB2948D4AC0034864F /* schedule_2022.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2022.xml; sourceTree = "<group>"; };
+		92C22E6129806F61006D7B5C /* privacy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = privacy.md; sourceTree = "<group>"; };
 		92C271CF2922292500E8C25D /* PreviewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewEvent.swift; sourceTree = "<group>"; };
 		92CE31AE28FC49DC0073813E /* YearHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearHelper.swift; sourceTree = "<group>"; };
 		92CE31B028FC4A940073813E /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
@@ -106,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9253216329257360004C7E5C /* SwiftyXMLParser in Frameworks */,
+				92C22E6029806C70006D7B5C /* SwiftyXMLParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +200,7 @@
 				14D277242205D07500740042 /* Assets.xcassets */,
 				14D277292205D07500740042 /* Info.plist */,
 				14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */,
+				92C22E6129806F61006D7B5C /* privacy.md */,
 			);
 			path = Fosdem;
 			sourceTree = "<group>";
@@ -254,7 +257,7 @@
 			);
 			name = Fosdem;
 			packageProductDependencies = (
-				9253216229257360004C7E5C /* SwiftyXMLParser */,
+				92C22E5F29806C70006D7B5C /* SwiftyXMLParser */,
 			);
 			productName = Fosdem;
 			productReference = 14D277152205D07200740042 /* Fosdem.app */;
@@ -332,7 +335,7 @@
 			);
 			mainGroup = 14D2770C2205D07200740042;
 			packageReferences = (
-				9253216129257360004C7E5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
+				92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 			);
 			productRefGroup = 14D277162205D07200740042 /* Products */;
 			projectDirPath = "";
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14D277252205D07500740042 /* Assets.xcassets in Resources */,
+				92C22E6229806F61006D7B5C /* privacy.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +603,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -626,7 +630,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -768,20 +772,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9253216129257360004C7E5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
+		92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9253216229257360004C7E5C /* SwiftyXMLParser */ = {
+		92C22E5F29806C70006D7B5C /* SwiftyXMLParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9253216129257360004C7E5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
+			package = 92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
 			productName = SwiftyXMLParser;
 		};
 /* End XCSwiftPackageProductDependency section */

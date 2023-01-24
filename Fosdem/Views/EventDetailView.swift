@@ -36,7 +36,8 @@ struct EventDetailView: View {
         notificationContent.title = "Hello world!"
         notificationContent.subtitle = "Here's how you send a notification in SwiftUI"
 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: event.start.timeIntervalSinceNow + 300, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: event.start.timeIntervalSinceNow + 300,
+                                                        repeats: false)
 
         let req = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: trigger)
 
