@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22C5033e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D5027d" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Conference" representedClassName="Conference" syncable="YES">
         <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
@@ -33,6 +33,7 @@
     <entity name="EventUserInfo" representedClassName="EventUserInfo" syncable="YES">
         <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastSeen" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="notify" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="userInfo" inverseEntity="Event"/>
     </entity>
     <entity name="Link" representedClassName="Link" syncable="YES">

@@ -33,8 +33,8 @@ struct EventDetailView: View {
 
     private func sendNotification() {
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "Hello world!"
-        notificationContent.subtitle = "Here's how you send a notification in SwiftUI"
+        notificationContent.title = "Heads up!"
+        notificationContent.subtitle = "Your event \"\(event.title)\" starts in 5 minutes"
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: event.start.timeIntervalSinceNow + 300,
                                                         repeats: false)
@@ -59,8 +59,6 @@ struct EventDetailView: View {
                         HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
                     }
                     if selectedTabIndex == 1 {
-                        Text("Test")
-
                         List(Array(event.links)) { link in
 
                             Text(link.description)
@@ -75,22 +73,27 @@ struct EventDetailView: View {
             }
         }.navigationTitle(Text(event.title))
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: Toggle(isOn: $event.userInfo.favorite, label: {
-            Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
-        }))
         .toolbar(content: {
+            var label = "bell"
             if event.start.timeIntervalSinceNow > 0 {
-                Button(action: {
+                Toggle(isOn: $event.userInfo.notify, label: {
+                    Label("Notify", systemImage: label)
+                }).task {
+                    if $event.userInfo.notify.wrappedValue == false {
+                        return
+                    }
                     if !permissionGranted {
+                        label = "bell.slash"
                         requestPermissions()
                     }
                     if permissionGranted {
                         sendNotification()
                     }
-                }, label: {
-                    Label("Notify", systemImage: "a")
-                })
+                }
             }
+            Toggle(isOn: $event.userInfo.favorite, label: {
+                Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
+            })
         })
         .onAppear {
             // Check if we already have permissions to send notifications
