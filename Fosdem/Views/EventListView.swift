@@ -11,35 +11,36 @@ import SwiftUI
 struct EventListView: View {
     @State private var query = ""
     @State private var selectedEvent: Event?
+    @State private var onlyBookmark: Bool = false
+    @State private var visibility: NavigationSplitViewVisibility = .doubleColumn
 
-    @SectionedFetchRequest(
-        sectionIdentifier: \.trackName,
-        sortDescriptors: [SortDescriptor(\.track.name, order: .forward), SortDescriptor(\.start, order: .forward)],
-        predicate: yearPredicate()
-    ) var trackEvents: SectionedFetchResults<String, Event>
+    @SectionedFetchRequest var trackEvents: SectionedFetchResults<String, Event>
 
     @FetchRequest(
         sortDescriptors: [SortDescriptor(\.name, order: .forward)]
     ) var personEvents: FetchedResults<Person>
 
-    @FetchRequest(
-        sortDescriptors: [SortDescriptor(\.title, order: .forward)],
-        predicate: NSPredicate(format: "userInfo.favorite == YES")
-    ) var bookmarks: FetchedResults<Event>
-
-    static func yearPredicate() -> NSPredicate {
+    init(_ onlyBookmark: Bool) {
         let year = YearHelper().year
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
 
-        return NSPredicate(format: "start >= %@ AND start <= %@", argumentArray: [
+        let suffix = onlyBookmark ? " AND userInfo.favorite == YES" : ""
+
+        let preficate = NSPredicate(format: "start >= %@ AND start <= %@" + suffix, argumentArray: [
             formatter.date(from: "\(year)-01-01") as Any,
             formatter.date(from: "\(year)-12-31") as Any
         ])
+
+        _trackEvents = SectionedFetchRequest(
+            sectionIdentifier: \.trackName,
+            sortDescriptors: [SortDescriptor(\.track.name, order: .forward), SortDescriptor(\.start, order: .forward)],
+            predicate: preficate
+        )
     }
 
     var body: some View {
-        NavigationSplitView(sidebar: {
+        NavigationSplitView(columnVisibility: $visibility, sidebar: {
             TabView {
                 List(trackEvents, selection: $selectedEvent) { section in
                     Section(header: Text("\(section.id)")) {
@@ -61,11 +62,11 @@ struct EventListView: View {
                     Label("People", systemImage: "person")
                 }
 
-                List(bookmarks, selection: $selectedEvent) { event in
-                    NavigationLink(value: event, label: { ListItem(event) })
-                }.tabItem {
-                    Label("Bookmarks", systemImage: "star")
-                }.badge(bookmarks.count)
+                AboutView().tabItem {
+                    Label("About", systemImage: "questionmark.bubble.fill")
+                }
+            }.toolbar {
+                Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "star")})
             }.searchable(text: $query, placement: .navigationBarDrawer(displayMode: .automatic))
             .onChange(of: query) { newValue in
                 trackEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Event.title))
@@ -84,7 +85,7 @@ struct EventListView: View {
             if let event = selectedEvent {
                 EventDetailView(event)
             }
-        })
+        }).navigationSplitViewStyle(.prominentDetail)
     }
 
     private func searchPredicate(query: String, keypath: String) -> NSPredicate? {
@@ -96,6 +97,6 @@ struct EventListView: View {
 
 struct EventListView_Previews: PreviewProvider {
     static var previews: some View {
-        EventListView()
+        EventListView(false)
     }
 }

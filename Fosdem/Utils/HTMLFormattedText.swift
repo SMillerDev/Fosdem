@@ -47,7 +47,8 @@ struct HTMLFormattedText: UIViewRepresentable {
                 color: \(color);
                 font-size: 18px;
                 text-align: justify;
-                font-family: \(UIFont.systemFont(ofSize: 10).familyName) sans-serif;
+                font-family: sans-serif;
+                padding: 10pc;
             }
         </style>
         """
