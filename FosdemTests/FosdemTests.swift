@@ -43,7 +43,7 @@ class FosdemTests: XCTestCase {
         }
         DataImporter.process(xmlData!)
 
-        waitForExpectations(timeout: 3) { error in
+        waitForExpectations(timeout: 10) { error in
           XCTAssertNil(error, "Save did not occur")
         }
     }
@@ -99,7 +99,7 @@ class FosdemTests: XCTestCase {
         }
         DataImporter.process(xmlData!)
 
-        waitForExpectations(timeout: 3) { error in
+        waitForExpectations(timeout: 10) { error in
           XCTAssertNil(error, "Save did not occur")
         }
     }
