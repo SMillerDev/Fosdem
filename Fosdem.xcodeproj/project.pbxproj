@@ -257,6 +257,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				925FE1B5298680F700686A4D /* PBXTargetDependency */,
 			);
 			name = Fosdem;
 			packageProductDependencies = (
@@ -466,6 +467,10 @@
 			target = 14D277142205D07200740042 /* Fosdem */;
 			targetProxy = 14D2773A2205D07500740042 /* PBXContainerItemProxy */;
 		};
+		925FE1B5298680F700686A4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 925FE1B4298680F700686A4D /* SwiftyXMLParser */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -602,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -629,7 +634,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -787,6 +792,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		925FE1B4298680F700686A4D /* SwiftyXMLParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
+			productName = SwiftyXMLParser;
+		};
 		92C22E5F29806C70006D7B5C /* SwiftyXMLParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;

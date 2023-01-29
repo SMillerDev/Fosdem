@@ -59,14 +59,24 @@ struct EventDetailView: View {
                         HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
                     }
                     if selectedTabIndex == 1 {
-                        List(Array(event.links)) { link in
-
-                            Text(link.description)
-                            if let url = link.url() {
-                                SwiftUI.Link(destination: url) {
-                                    Label(link.name, systemImage: link.icon)
+                        if event.links.isEmpty {
+                            Text("No links").foregroundColor(.gray).font(.caption)
+                        } else {
+                            VStack(alignment: .leading) {
+                                ForEach(Array(event.links)) { link in
+                                    SwiftUI.Link(destination: URL(string: link.href)!) {
+                                        Label(link.name, systemImage: "link")
+                                    }.padding()
                                 }
                             }
+//                            List(Array(event.links)) { link in
+//                                Text(link.description)
+//                                if let url = link.url() {
+//                                    SwiftUI.Link(destination: url) {
+//                                        Label(link.name, systemImage: link.icon)
+//                                    }
+//                                }
+//                            }
                         }
                     }
                 }

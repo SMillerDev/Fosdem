@@ -13,13 +13,13 @@ import SwiftyXMLParser
 @objc(Event)
 public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
     static let elementName = "event"
-    static var context: NSManagedObjectContext!
 
     @NSManaged public var id: String
     @NSManaged public var title: String
     @NSManaged public var slug: String
     @NSManaged public var subtitle: String?
     @NSManaged public var desc: String?
+    @NSManaged public var date: Date
     @NSManaged public var start: Date
     @NSManaged public var duration: TimeInterval
     @NSManaged public var lastUpdated: Date
@@ -32,17 +32,21 @@ public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
     @NSManaged public var authors: Set<Person>
     @NSManaged public var links: Set<Link>
 
-    @objc public var trackName: String {
-        return track.name
-    }
-
     @objc public var authorName: String {
         return authors.first!.name
     }
 
     var year: String {
+        return startInFormat("yyyy")
+    }
+
+    @objc public var day: Int {
+        return Int(startInFormat("dd")) ?? 0
+    }
+
+    func startInFormat(_ format: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
+        dateFormatter.dateFormat = format
         return dateFormatter.string(from: start)
     }
 
@@ -62,10 +66,11 @@ extension Event {
         return nil
     }
 
-    class func build(_ element: XML.Element, date: String) -> NSManagedObject? {
+    class func build(_ element: XML.Element, date: Date) -> NSManagedObject? {
         guard let id = element.attributes["id"] else {
             return Event(context: DataImporter.context)
         }
+
         let req: NSFetchRequest<Event> = NSFetchRequest<Event>(entityName: "Event")
         req.predicate = NSComparisonPredicate(format: "id==%@", id)
         let item: Event
@@ -84,12 +89,8 @@ extension Event {
                              .trimmingCharacters(in: .whitespacesAndNewlines)
         item.subtitle = XmlFinder.getChildString(element, element: "subtitle")?
                                  .trimmingCharacters(in: .whitespacesAndNewlines)
-        if let desc = XmlFinder.getChildString(element, element: "description") {
-            item.desc = desc
-        }
-        if let abstract = XmlFinder.getChildString(element, element: "abstract") {
-            item.desc = abstract
-        }
+        if let desc = XmlFinder.getChildString(element, element: "description") { item.desc = desc }
+        if let abstract = XmlFinder.getChildString(element, element: "abstract") { item.desc = abstract }
 
         if let room = XmlFinder.getChildElement(element, element: "room"),
            let roomObj = Room.build(room) as? Room {
@@ -106,9 +107,9 @@ extension Event {
             item.type = type
         }
 
-        if let date = XmlFinder.parseDateString(date),
-            let startString = XmlFinder.getChildString(element, element: "start"),
-            let start = XmlFinder.parseTimeString(startString) {
+        if let startString = XmlFinder.getChildString(element, element: "start"),
+           let start = XmlFinder.parseTimeString(startString) {
+            item.date = date
             item.start = date.addingTimeInterval(start)
         }
 

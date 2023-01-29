@@ -18,6 +18,7 @@ class DataImporter {
     static func process(_ value: Data) {
         print("📲 Importing Fosdem data")
         let data = XML.parse(value)
+
         context.perform {
             data.element?.childElements.first?.childElements.forEach { child in
                 switch child.name {
@@ -28,10 +29,10 @@ class DataImporter {
                     }
                     DataImporter.conference = conf
                 case "day":
-                    let date = child.attributes["date"]!
+                    let date = XmlFinder.parseDateString(child.attributes["date"]!, timezone: "+01:00")
                     child.childElements.forEach { element in
                         element.childElements.forEach { child in
-                            let event = Event.build(child, date: date) as? Event
+                            let event = Event.build(child, date: date!) as? Event
                             event?.conference = conference
                         }
                     }

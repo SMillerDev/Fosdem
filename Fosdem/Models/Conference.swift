@@ -14,10 +14,10 @@ import SwiftyXMLParser
 public class Conference: NSManagedObject, Identifiable {
     static let elementName = "conference"
 
-    @NSManaged public var name: String?
-    @NSManaged public var venue: String?
-    @NSManaged public var start: NSDate?
-    @NSManaged public var end: NSDate?
+    @NSManaged public var name: String
+    @NSManaged public var venue: String
+    @NSManaged public var start: Date
+    @NSManaged public var end: Date
     @NSManaged public var events: Set<Event>
 
     static var roomStates: [RoomState] = []
@@ -39,10 +39,10 @@ public class Conference: NSManagedObject, Identifiable {
             item = Conference(context: DataImporter.context)
         }
 
-        item.name = XmlFinder.getChildString(element, element: "title")
-        item.venue = XmlFinder.getChildString(element, element: "venue")
-        item.start = XmlFinder.getChildDate(element, element: "start") as NSDate?
-        item.end = XmlFinder.getChildDate(element, element: "end") as NSDate?
+        item.name = XmlFinder.getChildString(element, element: "title")!
+        item.venue = XmlFinder.getChildString(element, element: "venue")!
+        item.start = XmlFinder.getChildDate(element, element: "start")!
+        item.end = XmlFinder.getChildDate(element, element: "end")!
         item.events = Set<Event>()
 
         return item

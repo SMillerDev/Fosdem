@@ -12,7 +12,6 @@ import SwiftyXMLParser
 
 protocol ManagedObjectProtocol {
     static var elementName: String { get }
-    static var context: NSManagedObjectContext! { get set }
 
     static func build(_ element: XML.Element) -> NSManagedObject?
 }

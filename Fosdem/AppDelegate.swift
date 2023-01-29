@@ -17,7 +17,7 @@ struct Fosdem: App {
 
     var body: some Scene {
         WindowGroup {
-            EventListView(false).environment(\.managedObjectContext, appDelegate.persistentContainer.viewContext)
+            EventListView().environment(\.managedObjectContext, appDelegate.persistentContainer.viewContext)
         }
     }
 }

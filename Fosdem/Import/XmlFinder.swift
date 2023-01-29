@@ -14,16 +14,16 @@ final class XmlFinder {
         return XmlFinder.getChildElement(object, element: element)?.text
     }
 
-    static func getChildDate(_ object: XML.Element, element: String) -> Date? {
+    static func getChildDate(_ object: XML.Element, element: String, timezone: String = "Z") -> Date? {
         guard let text = XmlFinder.getChildElement(object, element: element)?.text else {
             return nil
         }
-        return parseDateString(text)
+        return parseDateString(text, timezone: timezone)
     }
 
-    static func parseDateString(_ element: String) -> Date? {
+    static func parseDateString(_ element: String, timezone: String) -> Date? {
         let formatter = ISO8601DateFormatter()
-        return formatter.date(from: "\(element)T00:00:00Z")
+        return formatter.date(from: "\(element)T00:00:00\(timezone)")
     }
 
     static func parseTimeString(_ element: String, base: Date? = nil) -> TimeInterval? {
