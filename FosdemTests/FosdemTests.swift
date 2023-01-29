@@ -36,8 +36,8 @@ class FosdemTests: XCTestCase {
             XCTAssertNotNil(conference, "Conference parsed")
             XCTAssertEqual(conference.name, "FOSDEM 2019")
             XCTAssertEqual(conference.venue, "ULB (Université Libre de Bruxelles)")
-            XCTAssertEqual(conference.start?.timeIntervalSince1970, TimeInterval("1549065600"))
-            XCTAssertEqual(conference.end?.timeIntervalSince1970, TimeInterval("1549152000"))
+            XCTAssertEqual(conference.start.timeIntervalSince1970, TimeInterval("1549065600"))
+            XCTAssertEqual(conference.end.timeIntervalSince1970, TimeInterval("1549152000"))
             XCTAssertNotNil(conference.events)
             XCTAssertEqual(conference.events.count, 775)
         }
@@ -64,8 +64,8 @@ class FosdemTests: XCTestCase {
             XCTAssertNotNil(conference, "Conference parsed")
             XCTAssertEqual(conference.name, "FOSDEM 2022")
             XCTAssertEqual(conference.venue, "ULB (Université Libre de Bruxelles)")
-            XCTAssertEqual(conference.start?.timeIntervalSince1970, TimeInterval("1644019200"))
-            XCTAssertEqual(conference.end?.timeIntervalSince1970, TimeInterval("1644105600"))
+            XCTAssertEqual(conference.start.timeIntervalSince1970, TimeInterval("1644019200"))
+            XCTAssertEqual(conference.end.timeIntervalSince1970, TimeInterval("1644105600"))
             XCTAssertNotNil(conference.events)
             XCTAssertEqual(conference.events.count, 730)
         }
@@ -92,8 +92,8 @@ class FosdemTests: XCTestCase {
             XCTAssertNotNil(conference, "Conference parsed")
             XCTAssertEqual(conference.name, "FOSDEM 2023")
             XCTAssertEqual(conference.venue, "ULB (Université Libre de Bruxelles)")
-            XCTAssertEqual(conference.start?.timeIntervalSince1970, TimeInterval("1675468800"))
-            XCTAssertEqual(conference.end?.timeIntervalSince1970, TimeInterval("1675555200"))
+            XCTAssertEqual(conference.start.timeIntervalSince1970, TimeInterval("1675468800"))
+            XCTAssertEqual(conference.end.timeIntervalSince1970, TimeInterval("1675555200"))
             XCTAssertNotNil(conference.events)
             XCTAssertEqual(conference.events.count, 0)
         }
