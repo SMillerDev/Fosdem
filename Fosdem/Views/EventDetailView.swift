@@ -60,7 +60,7 @@ struct EventDetailView: View {
                     }
                     if selectedTabIndex == 1 {
                         if event.links.isEmpty {
-                            Text("No links").foregroundColor(.gray).font(.caption)
+                            Text("No links").foregroundColor(.gray).font(.title2).padding()
                         } else {
                             VStack(alignment: .leading) {
                                 ForEach(Array(event.links)) { link in
@@ -69,42 +69,41 @@ struct EventDetailView: View {
                                     }.padding()
                                 }
                             }
-//                            List(Array(event.links)) { link in
-//                                Text(link.description)
-//                                if let url = link.url() {
-//                                    SwiftUI.Link(destination: url) {
-//                                        Label(link.name, systemImage: link.icon)
-//                                    }
-//                                }
-//                            }
                         }
                     }
                 }
             }
         }.navigationTitle(Text(event.title))
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar(content: {
-            var label = "bell"
-            if event.start.timeIntervalSinceNow > 0 {
-                Toggle(isOn: $event.userInfo.notify, label: {
-                    Label("Notify", systemImage: label)
-                }).task {
-                    if $event.userInfo.notify.wrappedValue == false {
-                        return
-                    }
-                    if !permissionGranted {
-                        label = "bell.slash"
-                        requestPermissions()
-                    }
-                    if permissionGranted {
-                        sendNotification()
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                var label = "bell"
+                if event.start.timeIntervalSinceNow > 0 {
+                    Toggle(isOn: $event.userInfo.notify, label: {
+                        Label("Notify", systemImage: label)
+                    }).task {
+                        if $event.userInfo.notify.wrappedValue == false {
+                            return
+                        }
+                        if !permissionGranted {
+                            label = "bell.slash"
+                            requestPermissions()
+                        }
+                        if permissionGranted {
+                            sendNotification()
+                        }
                     }
                 }
             }
-            Toggle(isOn: $event.userInfo.favorite, label: {
-                Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
-            })
-        })
+            ToolbarItem(placement: .secondaryAction) {
+                ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
+            }
+            ToolbarItem(placement: .primaryAction) {
+                Toggle(isOn: $event.userInfo.favorite, label: {
+                    Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
+                })
+            }
+        }
         .onAppear {
             // Check if we already have permissions to send notifications
             UNUserNotificationCenter.current().getNotificationSettings { settings in

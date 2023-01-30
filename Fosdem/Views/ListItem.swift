@@ -22,9 +22,14 @@ struct ListItem: View {
             if let lastSeen = event.userInfo.lastSeen, event.lastUpdated > lastSeen {
                 Rectangle().foregroundColor(.accentColor).frame(maxWidth: 1, maxHeight: .infinity)
             }
-            Text(DateFormatter.localizedString(from: event.start, dateStyle: .none, timeStyle: .short) )
-                .foregroundColor(.secondary)
-                .italic()
+            VStack(alignment: .trailing) {
+                Text(event.startInFormat("EE").capitalized)
+                    .foregroundColor(.secondary)
+                    .italic()
+                Text(DateFormatter.localizedString(from: event.start, dateStyle: .none, timeStyle: .short) )
+                    .foregroundColor(.secondary)
+                    .italic()
+            }
 
             Text(event.title)
                 .bold(event.userInfo.favorite)
@@ -40,10 +45,7 @@ struct ListItem: View {
             }
             ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
         }.swipeActions {
-            Button(action: {
-                print("⭐️ toggled bookmark")
-                event.userInfo.favorite.toggle()
-            }, label: {
+            Toggle(isOn: $event.userInfo.favorite, label: {
                 Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
             }).tint(.orange)
         }

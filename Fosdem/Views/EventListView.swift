@@ -24,12 +24,21 @@ struct EventListView: View {
     @SectionedFetchRequest(
         sectionIdentifier: \.track.name,
         sortDescriptors: [
-            SortDescriptor(\.date, order: .forward),
             SortDescriptor(\.track.name, order: .forward),
             SortDescriptor(\.start, order: .forward)
         ],
         predicate: nil
     ) var trackEvents: SectionedFetchResults<String, Event>
+
+
+    @SectionedFetchRequest(
+        sectionIdentifier: \.room.name,
+        sortDescriptors: [
+            SortDescriptor(\.room.name, order: .forward),
+            SortDescriptor(\.start, order: .forward)
+        ],
+        predicate: nil
+    ) var roomEvents: SectionedFetchResults<String, Event>
 
     var body: some View {
         NavigationStack {
@@ -66,12 +75,25 @@ struct EventListView: View {
                     }
                 })
 
-                AboutView().tabItem {
-                    Label("About", systemImage: "questionmark.bubble.fill")
-                }
+                List(roomEvents) { section in
+                    Section(header: Text("\(section.id)")) {
+                        ForEach(section) { event in
+                            NavigationLink(value: event, label: { ListItem(event) })
+                        }
+                    }
+                }.onChange(of: query) { newValue in
+                    roomEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Room.name))
+                }.tabItem {
+                    Label("Rooms", systemImage: "door.left.hand.open")
+                }.overlay(Group {
+                    if roomEvents.isEmpty {
+                        Text("Oops, loos like there's no data...")
+                    }
+                })
             }.onChange(of: onlyBookmark, perform: { value in
                 let predicate = NSPredicate(format: "userInfo.favorite == YES", [])
                 trackEvents.nsPredicate = value ? predicate : nil
+                roomEvents.nsPredicate = value ? predicate : nil
                 let personPredicate = NSPredicate(format: "ANY events.userInfo.favorite == YES", [])
                 personEvents.nsPredicate = value ? personPredicate : nil
             }).searchable(
@@ -80,17 +102,24 @@ struct EventListView: View {
             ).refreshable {
                 RoomStatusFetcher.fetchRoomStatus()
                 RemoteScheduleFetcher.fetchSchedule()
-            }.toolbar {
-                Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "star")})
             }.navigationDestination(for: Event.self, destination: { event in
                 EventDetailView(event)
-            })
+            }).toolbar {
+                ToolbarItem(placement: .secondaryAction) {
+                    NavigationLink { AboutView() } label: {
+                        Label("About", systemImage: "questionmark.bubble.fill")
+                    }
+                }
+                ToolbarItem(placement: .primaryAction) {
+                    Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "star")})
+                }
+            }.navigationTitle("Fosdem \(YearHelper().year)")
         }
     }
 
     private func searchPredicate(query: String, keypath: String) -> NSPredicate? {
-      if query.isEmpty { return nil }
-      return NSPredicate(format: "%K CONTAINS[cd] %@", keypath, query)
+        if query.isEmpty { return nil }
+        return NSPredicate(format: "%K CONTAINS[cd] %@", keypath, query)
     }
 
 }
