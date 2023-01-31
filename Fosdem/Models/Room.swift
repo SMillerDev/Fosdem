@@ -13,7 +13,6 @@ import SwiftyXMLParser
 @objc(Room)
 public class Room: NSManagedObject, ManagedObjectProtocol, Identifiable {
     static let elementName = "room"
-    static var context: NSManagedObjectContext!
 
     @NSManaged public var name: String
     @NSManaged public var events: Set<Event>
@@ -33,6 +32,12 @@ public class Room: NSManagedObject, ManagedObjectProtocol, Identifiable {
         return String(shortName[result.range])
     }
 
+    func isVirtual() -> Bool {
+        return ["D", "M"].contains { $0 == building }
+    }
+}
+
+extension Room {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Room> {
         return NSFetchRequest<Room>(entityName: "Room")
     }

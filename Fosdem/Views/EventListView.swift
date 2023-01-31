@@ -30,7 +30,6 @@ struct EventListView: View {
         predicate: nil
     ) var trackEvents: SectionedFetchResults<String, Event>
 
-
     @SectionedFetchRequest(
         sectionIdentifier: \.room.name,
         sortDescriptors: [
@@ -56,7 +55,7 @@ struct EventListView: View {
                 }).tabItem {
                     Label("Tracks", systemImage: "road.lanes")
                 }.onChange(of: query) { newValue in
-                    trackEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Event.title))
+                    trackEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Event.title), #keyPath(Event.track.name)])
                 }
 
                 List(personEvents) { person in
@@ -66,7 +65,7 @@ struct EventListView: View {
                         }
                     }
                 }.onChange(of: query) { newValue in
-                    personEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Person.name))
+                    personEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Person.name)])
                 }.tabItem {
                     Label("People", systemImage: "person")
                 }.overlay(Group {
@@ -82,7 +81,7 @@ struct EventListView: View {
                         }
                     }
                 }.onChange(of: query) { newValue in
-                    roomEvents.nsPredicate = searchPredicate(query: newValue, keypath: #keyPath(Room.name))
+                    roomEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Event.room.name), #keyPath(Event.title)])
                 }.tabItem {
                     Label("Rooms", systemImage: "door.left.hand.open")
                 }.overlay(Group {
@@ -117,9 +116,16 @@ struct EventListView: View {
         }
     }
 
-    private func searchPredicate(query: String, keypath: String) -> NSPredicate? {
+    private func searchPredicate(query: String, keypaths: [String]) -> NSPredicate? {
         if query.isEmpty { return nil }
-        return NSPredicate(format: "%K CONTAINS[cd] %@", keypath, query)
+        var format: [String] = []
+        var queries: [String] = []
+        keypaths.forEach { keypath in
+            format.append("%K CONTAINS[cd] %@")
+            queries.append(keypath)
+            queries.append(query)
+        }
+        return NSPredicate(format: format.joined(separator: " OR "), argumentArray: queries)
     }
 
 }

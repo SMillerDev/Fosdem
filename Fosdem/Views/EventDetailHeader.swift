@@ -31,9 +31,15 @@ struct EventDetailHeader: View {
                     Label(event.formatTime(), systemImage: "calendar.badge.clock")
                     Divider()
                     HStack {
-                        Button {
-                            UIApplication.shared.open(event.room.getNavigationLink())
-                        } label: { Label(event.room.name, systemImage: "location.circle") }
+                        if event.room.isVirtual() {
+                            SwiftUI.Link(destination: event.room.chatLink()) {
+                                Label(event.room.name, systemImage: "message.fill")
+                            }
+                        } else {
+                            SwiftUI.Link(destination: event.room.getNavigationLink()) {
+                                Label(event.room.name, systemImage: "location.circle")
+                            }
+                        }
 
                         if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }) {
                             Text("-").foregroundColor(.secondary)

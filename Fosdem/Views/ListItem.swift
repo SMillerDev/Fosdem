@@ -37,9 +37,14 @@ struct ListItem: View {
         }.contextMenu {
             Label(event.track.name.capitalized, systemImage: event.type.icon)
             Label(event.formatTime(), systemImage: "calendar.badge.clock")
-            SwiftUI.Link(destination: event.room.getNavigationLink()) {
-                Label(event.room.name, systemImage: "location.circle")
+            if event.room.isVirtual() {
+                Label(event.room.name, systemImage: "message.fill")
+            } else {
+                SwiftUI.Link(destination: event.room.getNavigationLink()) {
+                    Label(event.room.name, systemImage: "location.circle")
+                }
             }
+
             if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }), item.full {
                 Label("Room full", systemImage: "hand.raised").foregroundColor(.red)
             }

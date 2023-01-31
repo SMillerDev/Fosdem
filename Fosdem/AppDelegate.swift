@@ -8,7 +8,6 @@
 
 import CoreData
 import SwiftUI
-
 @main
 struct Fosdem: App {
 
