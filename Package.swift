@@ -1,10 +1,10 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
     name: "Fosdem",
     platforms: [
-        .iOS("16.0")
+        .iOS(.v16),
     ],
     products: [
     ],
@@ -12,7 +12,7 @@ let package = Package(
         .package(url: "https://github.com/yahoojapan/SwiftyXMLParser.git", from: "5.0.0"),
     ],
     targets: [
-        .target(name: "Fosdem", path: "Fosdem"),
+        .target(name: "Fosdem", dependencies: ["SwiftyXMLParser"], path: "Fosdem"),
         .testTarget(
             name: "FosdemTests",
             dependencies: ["Fosdem"],
