@@ -33,7 +33,7 @@ struct EventDetailHeader: View {
                     HStack {
                         if event.room.isVirtual() {
                             SwiftUI.Link(destination: event.room.chatLink()) {
-                                Label(event.room.name, systemImage: "message.fill")
+                                Label(event.room.name, systemImage: "bubble.left.circle")
                             }
                         } else {
                             SwiftUI.Link(destination: event.room.getNavigationLink()) {

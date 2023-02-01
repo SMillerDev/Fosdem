@@ -11,6 +11,7 @@ import SwiftUI
 struct EventListView: View {
     @State private var query = ""
     @State private var onlyBookmark: Bool = false
+    @State private var isSheetPresented: Bool = false
     @State private var visibility: NavigationSplitViewVisibility = .doubleColumn
 
     var suffix = ""
@@ -110,7 +111,14 @@ struct EventListView: View {
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "star")})
+                    Button(action: {
+                        isSheetPresented.toggle()
+                    }, label: { Label("Filter", systemImage: "slider.horizontal.2.square.on.square")})
+                        .sheet(isPresented: $isSheetPresented, content: {
+                            Form {
+                                Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "star")})
+                            }.presentationDetents([.medium])
+                        })
                 }
             }.navigationTitle("Fosdem \(YearHelper().year)")
         }
