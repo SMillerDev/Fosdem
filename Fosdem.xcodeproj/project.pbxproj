@@ -101,6 +101,8 @@
 		92C271CF2922292500E8C25D /* PreviewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewEvent.swift; sourceTree = "<group>"; };
 		92CE31AE28FC49DC0073813E /* YearHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearHelper.swift; sourceTree = "<group>"; };
 		92CE31B028FC4A940073813E /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
+		92D2EC51298C486A0047A437 /* Fosdem 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Fosdem 1.1.xcdatamodel"; sourceTree = "<group>"; };
+		92D2EC52298C4DE90047A437 /* Migration1.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = Migration1.1.xcmappingmodel; path = "../../Library/Developer/Xcode/DerivedData/Fosdem-cwvcjrfyxyxsrkdiimbbbikwtjsl/SourcePackages/checkouts/SwiftyXMLParser/Migration1.1.xcmappingmodel"; sourceTree = "<group>"; };
 		92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFormattedText.swift; sourceTree = "<group>"; };
 		92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailHeader.swift; sourceTree = "<group>"; };
 		92F70A9F2922B49A000BE6CB /* UrlHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlHelper.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		14D2770C2205D07200740042 = {
 			isa = PBXGroup;
 			children = (
+				92D2EC52298C4DE90047A437 /* Migration1.1.xcmappingmodel */,
 				92A57B392988FD1C00C0BB78 /* Package.swift */,
 				92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */,
 				14D277172205D07200740042 /* Fosdem */,
@@ -605,11 +608,12 @@
 				INFOPLIST_FILE = Fosdem/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FOSDEM;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -632,11 +636,12 @@
 				INFOPLIST_FILE = Fosdem/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FOSDEM;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -810,9 +815,10 @@
 		14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				92D2EC51298C486A0047A437 /* Fosdem 1.1.xcdatamodel */,
 				14D2771B2205D07200740042 /* Fosdem.xcdatamodel */,
 			);
-			currentVersion = 14D2771B2205D07200740042 /* Fosdem.xcdatamodel */;
+			currentVersion = 92D2EC51298C486A0047A437 /* Fosdem 1.1.xcdatamodel */;
 			path = Fosdem.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

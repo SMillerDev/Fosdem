@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             container.viewContext.mergePolicy = NSMergePolicy(merge: .overwriteMergePolicyType)
             container.viewContext.automaticallyMergesChangesFromParent = true
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })

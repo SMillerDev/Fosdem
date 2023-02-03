@@ -31,7 +31,7 @@ struct EventDetailView: View {
         }
     }
 
-    private func sendNotification() {
+    private func notificationRequest() -> UNNotificationRequest {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "Heads up!"
         notificationContent.subtitle = "Your event \"\(event.title)\" starts in 5 minutes"
@@ -39,9 +39,8 @@ struct EventDetailView: View {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: event.start.timeIntervalSinceNow + 300,
                                                         repeats: false)
 
-        let req = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: trigger)
-
-        UNUserNotificationCenter.current().add(req)
+        event.userInfo.ensureUUID()
+        return UNNotificationRequest(identifier: event.userInfo.notificationUUID!.uuidString, content: notificationContent, trigger: trigger)
     }
 
     var body: some View {
@@ -77,30 +76,24 @@ struct EventDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                var label = "bell"
-                if event.start.timeIntervalSinceNow > 0 {
-                    Toggle(isOn: $event.userInfo.notify, label: {
-                        Label("Notify", systemImage: label)
-                    }).task {
-                        if $event.userInfo.notify.wrappedValue == false {
-                            return
-                        }
-                        if !permissionGranted {
-                            label = "bell.slash"
-                            requestPermissions()
-                        }
-                        if permissionGranted {
-                            sendNotification()
-                        }
-                    }
-                }
-            }
-            ToolbarItem(placement: .secondaryAction) {
                 ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
             }
             ToolbarItem(placement: .primaryAction) {
                 Toggle(isOn: $event.userInfo.favorite, label: {
-                    Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
+                    Label("Favorite", systemImage: event.userInfo.favorite ? "bookmark.fill" : "bookmark").backgroundStyle(.clear)
+                }).onTapGesture(count: 1, perform: {
+                    let _ = debugPrint(event.userInfo.favorite)
+                    if event.start.timeIntervalSinceNow <= 0 {
+                        return
+                    }
+                    if !permissionGranted {
+                        requestPermissions()
+                    }
+                    if permissionGranted {
+                        UNUserNotificationCenter.current().add(notificationRequest())
+                    }
+                    event.userInfo.ensureUUID()
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [event.userInfo.notificationUUID!.uuidString])
                 })
             }
         }

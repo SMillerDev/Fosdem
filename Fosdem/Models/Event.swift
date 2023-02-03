@@ -79,6 +79,7 @@ extension Event {
         } else {
             item = Event(context: DataImporter.context)
             item.userInfo = EventUserInfo(context: DataImporter.context)
+            item.userInfo.notificationUUID = UUID()
         }
 
         item.id = id

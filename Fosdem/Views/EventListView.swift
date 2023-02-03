@@ -22,6 +22,13 @@ struct EventListView: View {
         ]
     ) var personEvents: FetchedResults<Person>
 
+    @FetchRequest(
+        sortDescriptors: [
+            SortDescriptor(\.start, order: .forward)
+        ],
+        predicate: NSPredicate(format: "userInfo.favorite == YES", [])
+    ) var myEvents: FetchedResults<Event>
+
     @SectionedFetchRequest(
         sectionIdentifier: \.track.name,
         sortDescriptors: [
@@ -51,13 +58,13 @@ struct EventListView: View {
                     }
                 }.overlay(Group {
                     if trackEvents.isEmpty {
-                        Text("Oops, loos like there's no data...")
+                        ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
                     }
                 }).tabItem {
                     Label("Tracks", systemImage: "road.lanes")
                 }.onChange(of: query) { newValue in
                     trackEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Event.title), #keyPath(Event.track.name)])
-                }
+                }.listStyle(.plain)
 
                 List(personEvents) { person in
                     Section(person.name) {
@@ -68,12 +75,12 @@ struct EventListView: View {
                 }.onChange(of: query) { newValue in
                     personEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Person.name)])
                 }.tabItem {
-                    Label("People", systemImage: "person")
+                    Label("People", systemImage: "person.3")
                 }.overlay(Group {
                     if personEvents.isEmpty {
-                        Text("Oops, loos like there's no data...")
+                        ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
                     }
-                })
+                }).listStyle(.plain)
 
                 List(roomEvents) { section in
                     Section(header: Text("\(section.id)")) {
@@ -87,7 +94,18 @@ struct EventListView: View {
                     Label("Rooms", systemImage: "door.left.hand.open")
                 }.overlay(Group {
                     if roomEvents.isEmpty {
-                        Text("Oops, loos like there's no data...")
+                        ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
+                    }
+                }).listStyle(.plain)
+
+
+                List(myEvents) { event in
+                    NavigationLink(value: event, label: { ListItem(event) })
+                }.listStyle(.plain).tabItem {
+                    Label("My events", systemImage: "person.circle")
+                }.overlay(Group {
+                    if myEvents.isEmpty {
+                        Label("No Bookmarks yet", systemImage: "bookmark.slash")
                     }
                 })
             }.onChange(of: onlyBookmark, perform: { value in
@@ -116,8 +134,8 @@ struct EventListView: View {
                     }, label: { Label("Filter", systemImage: "slider.horizontal.2.square.on.square")})
                         .sheet(isPresented: $isSheetPresented, content: {
                             Form {
-                                Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "star")})
-                            }.presentationDetents([.medium])
+                                Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "bookmark")})
+                            }.presentationDetents([.fraction(0.3)])
                         })
                 }
             }.navigationTitle("Fosdem \(YearHelper().year)")

@@ -10,9 +10,15 @@ import Foundation
 import CoreData
 
 @objc(EventUserInfo)
+/// Contains user data relating to an event
 public class EventUserInfo: NSManagedObject, Identifiable {
     @NSManaged public var favorite: Bool
-    @NSManaged public var notify: Bool
+    @NSManaged public var notificationUUID: UUID?
     @NSManaged public var lastSeen: Date?
     @NSManaged public var event: Event
+
+    public func ensureUUID() {
+        if notificationUUID != nil { return }
+        notificationUUID = UUID()
+    }
 }
