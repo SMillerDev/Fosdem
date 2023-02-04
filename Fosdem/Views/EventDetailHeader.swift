@@ -28,17 +28,20 @@ struct EventDetailHeader: View {
                             .font(.subheadline)
                     }
                     Divider()
-                    Label(event.formatTime(), systemImage: "calendar.badge.clock")
+                    HStack {
+                        Label(event.formatTime(), systemImage: "calendar.badge.clock")
+                        if event.isOngoing { LiveIcon() }
+                    }
                     Divider()
                     HStack {
-                        if event.room.isVirtual() {
-                            SwiftUI.Link(destination: event.room.chatLink()) {
-                                Label(event.room.name, systemImage: "bubble.left.circle")
-                            }
-                        } else {
+                        if !event.room.isVirtual() {
                             SwiftUI.Link(destination: event.room.getNavigationLink()) {
                                 Label(event.room.name, systemImage: "location.circle")
                             }
+                            Divider()
+                        }
+                        SwiftUI.Link(destination: event.room.chatLink()) {
+                            Label(event.room.name, systemImage: "bubble.left.circle")
                         }
 
                         if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }) {

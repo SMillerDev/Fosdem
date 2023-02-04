@@ -14,11 +14,11 @@ extension Room {
     }
 
     func liveStreamLink() -> URL {
-        return URL(string: "https://live.fosdem.org/watch/\(urlName)")!
+        return URL(string: "https://stream.fosdem.org/\(urlName).m3u8")!
     }
 
     func chatLink() -> URL {
-        return URL(string: "https://chat.fosdem.org/#/room/\(urlName):fosdem.org")!
+        return URL(string: "https://chat.fosdem.org/#/room/%23\(YearHelper().year)-\(name.lowercased()):fosdem.org")!
     }
 }
 

@@ -100,7 +100,7 @@ struct EventListView: View {
 
 
                 List(myEvents) { event in
-                    NavigationLink(value: event, label: { ListItem(event) })
+                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: false) })
                 }.listStyle(.plain).tabItem {
                     Label("My events", systemImage: "person.circle")
                 }.overlay(Group {

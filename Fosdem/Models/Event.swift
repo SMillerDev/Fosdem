@@ -44,6 +44,19 @@ public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
         return Int(startInFormat("dd")) ?? 0
     }
 
+    public var end: Date {
+        return start.addingTimeInterval(duration)
+    }
+
+    public var isOngoing: Bool {
+        let date = Date()
+        return date > start && date < end
+    }
+
+    public var isEnded: Bool {
+        return end < Date()
+    }
+
     func startInFormat(_ format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format

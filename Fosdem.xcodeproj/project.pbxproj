@@ -30,6 +30,8 @@
 		924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BD2922CCA9005A8EA2 /* RoomState.swift */; };
 		924E15C329238AA5005A8EA2 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15C229238AA5005A8EA2 /* ListItem.swift */; };
 		925321602925716A004C7E5C /* EventUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9253215F2925716A004C7E5C /* EventUserInfo.swift */; };
+		925B0261298EAE0E00AFA83D /* LiveIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B0260298EAE0E00AFA83D /* LiveIcon.swift */; };
+		925B0263298EB2A400AFA83D /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B0262298EB2A400AFA83D /* VideoPlayer.swift */; };
 		92A2BDF82948CAE50034864F /* schedule_2019.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDF72948CAE50034864F /* schedule_2019.xml */; };
 		92A2BDFC2948D4AC0034864F /* schedule_2023.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFA2948D4AC0034864F /* schedule_2023.xml */; };
 		92A2BDFD2948D4AC0034864F /* schedule_2022.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFB2948D4AC0034864F /* schedule_2022.xml */; };
@@ -91,6 +93,8 @@
 		924E15BD2922CCA9005A8EA2 /* RoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomState.swift; sourceTree = "<group>"; };
 		924E15C229238AA5005A8EA2 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		9253215F2925716A004C7E5C /* EventUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUserInfo.swift; sourceTree = "<group>"; };
+		925B0260298EAE0E00AFA83D /* LiveIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveIcon.swift; sourceTree = "<group>"; };
+		925B0262298EB2A400AFA83D /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		92A2BDF72948CAE50034864F /* schedule_2019.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2019.xml; sourceTree = "<group>"; };
 		92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FosdemTests.xctestplan; path = Fosdem.xcodeproj/FosdemTests.xctestplan; sourceTree = "<group>"; };
 		92A2BDFA2948D4AC0034864F /* schedule_2023.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2023.xml; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 				92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */,
 				924E15C229238AA5005A8EA2 /* ListItem.swift */,
 				92B987FB2981CD10007574EB /* AboutView.swift */,
+				925B0260298EAE0E00AFA83D /* LiveIcon.swift */,
+				925B0262298EB2A400AFA83D /* VideoPlayer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +427,7 @@
 				146A8677220601DD008A61AD /* XmlFinder.swift in Sources */,
 				92CE31AF28FC49DC0073813E /* YearHelper.swift in Sources */,
 				92C271D02922292500E8C25D /* PreviewEvent.swift in Sources */,
+				925B0263298EB2A400AFA83D /* VideoPlayer.swift in Sources */,
 				14D2771C2205D07200740042 /* Fosdem.xcdatamodeld in Sources */,
 				14DA2290220C735600CBE015 /* DataImporter.swift in Sources */,
 				146A867E22089497008A61AD /* Link.swift in Sources */,
@@ -435,6 +442,7 @@
 				14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */,
 				146A86702205EFE9008A61AD /* Person.swift in Sources */,
 				14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */,
+				925B0261298EAE0E00AFA83D /* LiveIcon.swift in Sources */,
 				92B987FC2981CD10007574EB /* AboutView.swift in Sources */,
 				92077D5128FF01C600BF8A03 /* EventDetailView.swift in Sources */,
 				92F70AA02922B49A000BE6CB /* UrlHelper.swift in Sources */,
@@ -613,7 +621,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -641,7 +649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

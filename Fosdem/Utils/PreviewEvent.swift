@@ -37,7 +37,7 @@ struct PreviewEvent {
         event.links = Set([link])
 
         event.start = Date()
-        event.duration = TimeInterval(15)
+        event.duration = TimeInterval(150)
         event.title = "Welcome to the Free Software Radio Devroom"
         event.subtitle = subtitle ? "This presentation will give you an overview what to expect in the Free Software Radio devroom at FOSDEM 2022." : nil
         event.desc = """

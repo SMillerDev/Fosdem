@@ -10,17 +10,20 @@ import SwiftUI
 
 struct ListItem: View {
     @ObservedObject private var event: Event
+    private var bookmarkEmphasis: Bool
 
     @Environment(\.managedObjectContext) var context
 
-    init(_ event: Event) {
+    init(_ event: Event, bookmarkEmphasis: Bool = true) {
         self.event = event
+        self.bookmarkEmphasis = bookmarkEmphasis
     }
 
     var body: some View {
         HStack {
-            if let lastSeen = event.userInfo.lastSeen, event.lastUpdated > lastSeen {
-                Rectangle().foregroundColor(.accentColor).frame(maxWidth: 1, maxHeight: .infinity)
+            if let lastSeen = event.userInfo.lastSeen, event.lastUpdated > lastSeen && !event.isEnded {
+                Circle().foregroundColor(.accentColor)
+                        .frame(width: 7, height: 7)
             }
             VStack(alignment: .trailing) {
                 Text(event.startInFormat("EE").capitalized)
@@ -31,8 +34,11 @@ struct ListItem: View {
                     .italic()
             }
 
+            if event.isOngoing { LiveIcon() }
+
             Text(event.title)
-                .bold(event.userInfo.favorite)
+                .bold(event.userInfo.favorite && bookmarkEmphasis)
+                .foregroundColor(!event.isEnded ? .primary : .gray)
 
         }.contextMenu {
             Label(event.track.name.capitalized, systemImage: event.type.icon)
@@ -50,7 +56,7 @@ struct ListItem: View {
             }
             ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
         }.swipeActions {
-            Toggle(isOn: $event.userInfo.favorite, label: {
+            Button(action: { event.userInfo.favorite.toggle() }, label: {
                 Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
             }).tint(.orange)
         }
