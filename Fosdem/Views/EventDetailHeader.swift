@@ -41,12 +41,13 @@ struct EventDetailHeader: View {
                             Divider()
                         }
                         SwiftUI.Link(destination: event.room.chatLink()) {
-                            Label(event.room.name, systemImage: "bubble.left.circle")
+                            Label("button.chat", systemImage: "bubble.left.circle")
                         }
 
                         if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }) {
-                            Text("-").foregroundColor(.secondary)
-                            Text(item.full ? "Full" : "Available").foregroundColor(item.full ? .red : .green)
+                            Divider()
+                            Text(item.full ? "room.full" : "room.available")
+                                .foregroundColor(item.full ? .red : .green)
                         }
                     }
                     Divider()

@@ -10,8 +10,11 @@ import SwiftUI
 
 struct EventListView: View {
     @State private var query = ""
-    @State private var onlyBookmark: Bool = false
+    private var listPredicate: ListPredicate = ListPredicate()
     @State private var isSheetPresented: Bool = false
+    @State private var bookmarks: Bool = false
+    @State private var future: Bool = false
+    @State private var localTime: Bool = false
     @State private var visibility: NavigationSplitViewVisibility = .doubleColumn
 
     var suffix = ""
@@ -47,57 +50,56 @@ struct EventListView: View {
         predicate: nil
     ) var roomEvents: SectionedFetchResults<String, Event>
 
+    var trackList: some View {
+        List(trackEvents) { section in
+            Section(header: Text("\(section.id)")) {
+                ForEach(section) { event in
+                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
+                }
+            }
+        }.overlay(Group {
+            if trackEvents.isEmpty && query.isEmpty {
+                ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
+            }
+        }).listStyle(.plain)
+    }
+
+    var roomList: some View {
+        List(roomEvents) { section in
+            Section(header: Text("\(section.id)")) {
+                ForEach(section) { event in
+                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
+                }
+            }
+        }.overlay(Group {
+            if trackEvents.isEmpty && query.isEmpty {
+                ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
+            }
+        }).listStyle(.plain)
+    }
+
+    var personList: some View {
+        List(personEvents) { person in
+            Section(person.name) {
+                ForEach(Array(person.events)) { event in
+                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
+                }
+            }
+        }.overlay(Group {
+            if personEvents.isEmpty && query.isEmpty {
+                ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
+            }
+        }).listStyle(.plain)
+    }
+
     var body: some View {
         NavigationStack {
             TabView {
-                List(trackEvents) { section in
-                    Section(header: Text("\(section.id)")) {
-                        ForEach(section) { event in
-                            NavigationLink(value: event, label: { ListItem(event) })
-                        }
-                    }
-                }.overlay(Group {
-                    if trackEvents.isEmpty {
-                        ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
-                    }
-                }).tabItem {
-                    Label("Tracks", systemImage: "road.lanes")
-                }.onChange(of: query) { newValue in
-                    trackEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Event.title), #keyPath(Event.track.name)])
-                }.listStyle(.plain)
+                trackList.tabItem { Label("Tracks", systemImage: "road.lanes") }
 
-                List(personEvents) { person in
-                    Section(person.name) {
-                        ForEach(Array(person.events)) { event in
-                            NavigationLink(value: event, label: { ListItem(event) })
-                        }
-                    }
-                }.onChange(of: query) { newValue in
-                    personEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Person.name)])
-                }.tabItem {
-                    Label("People", systemImage: "person.3")
-                }.overlay(Group {
-                    if personEvents.isEmpty {
-                        ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
-                    }
-                }).listStyle(.plain)
+                personList.tabItem { Label("People", systemImage: "person.3") }
 
-                List(roomEvents) { section in
-                    Section(header: Text("\(section.id)")) {
-                        ForEach(section) { event in
-                            NavigationLink(value: event, label: { ListItem(event) })
-                        }
-                    }
-                }.onChange(of: query) { newValue in
-                    roomEvents.nsPredicate = searchPredicate(query: newValue, keypaths: [#keyPath(Event.room.name), #keyPath(Event.title)])
-                }.tabItem {
-                    Label("Rooms", systemImage: "door.left.hand.open")
-                }.overlay(Group {
-                    if roomEvents.isEmpty {
-                        ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
-                    }
-                }).listStyle(.plain)
-
+                roomList.tabItem { Label("Rooms", systemImage: "door.left.hand.open") }
 
                 List(myEvents) { event in
                     NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: false) })
@@ -108,13 +110,22 @@ struct EventListView: View {
                         Label("No Bookmarks yet", systemImage: "bookmark.slash")
                     }
                 })
-            }.onChange(of: onlyBookmark, perform: { value in
-                let predicate = NSPredicate(format: "userInfo.favorite == YES", [])
-                trackEvents.nsPredicate = value ? predicate : nil
-                roomEvents.nsPredicate = value ? predicate : nil
-                let personPredicate = NSPredicate(format: "ANY events.userInfo.favorite == YES", [])
-                personEvents.nsPredicate = value ? personPredicate : nil
-            }).searchable(
+            }.onChange(of: bookmarks, perform: { value in
+                listPredicate.bookmarks = bookmarks
+                trackEvents.nsPredicate = listPredicate.predicate(.track)
+                roomEvents.nsPredicate = listPredicate.predicate(.room)
+                personEvents.nsPredicate = listPredicate.predicate(.person)
+            }).onChange(of: future, perform: { value in
+                listPredicate.future = future
+                trackEvents.nsPredicate = listPredicate.predicate(.track)
+                roomEvents.nsPredicate = listPredicate.predicate(.room)
+                personEvents.nsPredicate = listPredicate.predicate(.person)
+            }).onChange(of: query) { newValue in
+                listPredicate.searchQuery = newValue
+                trackEvents.nsPredicate = listPredicate.predicate(.track)
+                roomEvents.nsPredicate = listPredicate.predicate(.room)
+                personEvents.nsPredicate = listPredicate.predicate(.person)
+            }.searchable(
                 text: $query,
                 placement: .navigationBarDrawer
             ).refreshable {
@@ -134,26 +145,19 @@ struct EventListView: View {
                     }, label: { Label("Filter", systemImage: "slider.horizontal.2.square.on.square")})
                         .sheet(isPresented: $isSheetPresented, content: {
                             Form {
-                                Toggle(isOn: $onlyBookmark, label: { Label("Bookmarks only", systemImage: "bookmark")})
+                                Section("Filters") {
+                                    Toggle(isOn: $bookmarks, label: { Label("Bookmarks only", systemImage: "bookmark")})
+                                    Toggle(isOn: $future, label: { Label("Future events only", systemImage: "clock")})
+                                }
+                                Section("Settings") {
+                                    Toggle(isOn: $localTime, label: { Label("button.timezone.local", systemImage: "globe")})
+                                }
                             }.presentationDetents([.fraction(0.3)])
                         })
                 }
             }.navigationTitle("Fosdem \(YearHelper().year)")
         }
     }
-
-    private func searchPredicate(query: String, keypaths: [String]) -> NSPredicate? {
-        if query.isEmpty { return nil }
-        var format: [String] = []
-        var queries: [String] = []
-        keypaths.forEach { keypath in
-            format.append("%K CONTAINS[cd] %@")
-            queries.append(keypath)
-            queries.append(query)
-        }
-        return NSPredicate(format: format.joined(separator: " OR "), argumentArray: queries)
-    }
-
 }
 
 struct EventListView_Previews: PreviewProvider {

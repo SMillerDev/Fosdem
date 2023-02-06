@@ -18,7 +18,7 @@ extension Room {
     }
 
     func chatLink() -> URL {
-        return URL(string: "https://chat.fosdem.org/#/room/%23\(YearHelper().year)-\(name.lowercased()):fosdem.org")!
+        return URL(string: "https://chat.fosdem.org/#/room/%23\(YearHelper().year)-\(shortName.lowercased()):fosdem.org")!
     }
 }
 

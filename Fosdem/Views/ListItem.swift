@@ -21,17 +21,21 @@ struct ListItem: View {
 
     var body: some View {
         HStack {
-            if let lastSeen = event.userInfo.lastSeen, event.lastUpdated > lastSeen && !event.isEnded {
-                Circle().foregroundColor(.accentColor)
-                        .frame(width: 7, height: 7)
-            }
-            VStack(alignment: .trailing) {
-                Text(event.startInFormat("EE").capitalized)
-                    .foregroundColor(.secondary)
-                    .italic()
-                Text(DateFormatter.localizedString(from: event.start, dateStyle: .none, timeStyle: .short) )
-                    .foregroundColor(.secondary)
-                    .italic()
+            ZStack(alignment: .topLeading) {
+                if let lastSeen = event.userInfo.lastSeen,
+                    event.lastUpdated > lastSeen && !event.isEnded {
+                    Circle()
+                        .foregroundColor(.accentColor)
+                        .frame(width: 10, height: 10)
+                }
+                VStack(alignment: .trailing) {
+                    Text(event.startInFormat("EE").capitalized)
+                        .foregroundColor(.secondary)
+                        .italic()
+                    Text(DateFormatter.localizedString(from: event.start, dateStyle: .none, timeStyle: .short) )
+                        .foregroundColor(.secondary)
+                        .italic()
+                }
             }
 
             if event.isOngoing { LiveIcon() }

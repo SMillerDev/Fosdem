@@ -51,7 +51,12 @@ struct EventDetailView: View {
                 Picker("Test", selection: $selectedTabIndex, content: {
                     Text("Description").tag(0)
                     Text("Links").disabled(event.links.isEmpty).tag(1)
-                    if event.isOngoing { Text("Live Video").tag(2) }
+                    if event.isOngoing {
+                        HStack {
+                            LiveIcon()
+                            Text("Live Video").tag(2)
+                        }
+                    }
                 }).pickerStyle(.segmented)
 
                 ZStack {
@@ -59,10 +64,10 @@ struct EventDetailView: View {
                         HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
                     }
                     if selectedTabIndex == 1 {
-                        if event.links.isEmpty {
-                            Text("No links").foregroundColor(.gray).font(.title2).padding()
-                        } else {
-                            VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            if event.links.isEmpty {
+                                Text("No links").foregroundColor(.gray).font(.title2).padding()
+                            } else {
                                 ForEach(Array(event.links)) { link in
                                     SwiftUI.Link(destination: URL(string: link.href)!) {
                                         Label(link.name, systemImage: "link")
@@ -72,7 +77,9 @@ struct EventDetailView: View {
                         }
                     }
                     if selectedTabIndex == 2 {
-                        VideoPlayer(event.room.liveStreamLink())
+                        VStack {
+                            VideoPlayer(event.room.liveStreamLink())
+                        }
                     }
                 }
             }

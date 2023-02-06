@@ -17,6 +17,13 @@ struct VideoPlayer: View {
         player.allowsExternalPlayback = true
 
         self.player = player
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback)
+        } catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
     }
 
     var body: some View {
