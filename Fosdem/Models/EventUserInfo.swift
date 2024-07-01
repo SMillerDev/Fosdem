@@ -7,18 +7,25 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
-@objc(EventUserInfo)
+@Model
 /// Contains user data relating to an event
-public class EventUserInfo: NSManagedObject, Identifiable {
-    @NSManaged public var favorite: Bool
-    @NSManaged public var notificationUUID: UUID?
-    @NSManaged public var lastSeen: Date?
-    @NSManaged public var event: Event
+public class EventUserInfo {
+    public var favorite: Bool
+    public var notificationUUID: UUID?
+    public var lastSeen: Date?
+    public var event: Event
 
     public func ensureUUID() {
         if notificationUUID != nil { return }
         notificationUUID = UUID()
+    }
+
+    init(favorite: Bool = false, notificationUUID: UUID? = nil, lastSeen: Date? = nil, event: Event) {
+        self.favorite = favorite
+        self.notificationUUID = notificationUUID
+        self.lastSeen = lastSeen
+        self.event = event
     }
 }

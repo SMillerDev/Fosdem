@@ -17,10 +17,10 @@ struct EventDetailHeader: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            GroupBox(event.track.name) {
+            GroupBox(event.track?.name ?? "UNKNOWN_TRACK") {
                 VStack(alignment: .leading) {
-                    Text(event.type.name.capitalized)
-                        .foregroundColor(event.type.colorObject)
+                    Text(event.type?.name.capitalized ?? "UNKNOWN_TYPE")
+                        .foregroundColor(event.type?.colorObject ?? .gray)
                     if let subtitle = event.subtitle {
                         Text(subtitle)
                             .foregroundColor(.secondary)
@@ -41,12 +41,12 @@ struct EventDetailHeader: View {
                             Divider()
                         }
                         SwiftUI.Link(destination: event.room.chatLink()) {
-                            Label("button.chat", systemImage: "bubble.left.circle")
+                            Label("Chat", systemImage: "bubble.left.circle")
                         }
 
                         if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }) {
                             Divider()
-                            Text(item.full ? "room.full" : "room.available")
+                            Text(item.full ? "Room full" : "Room available")
                                 .foregroundColor(item.full ? .red : .green)
                         }
                     }

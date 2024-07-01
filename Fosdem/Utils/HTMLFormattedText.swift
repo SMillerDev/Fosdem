@@ -53,9 +53,7 @@ struct HTMLFormattedText: UIViewRepresentable {
         </style>
         """
 
-        guard let data = "\(css)\n \(text)".data(using: .utf8) else { return nil }
-
-        if let string = try? NSAttributedString(data: data,
+        if let string = try? NSAttributedString(data: Data("\(css)\n \(text)".utf8),
                                                 options: [.documentType: NSAttributedString.DocumentType.html],
                                                 documentAttributes: nil) {
             return string

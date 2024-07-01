@@ -9,10 +9,12 @@
 import SwiftUI
 
 struct EventDetailView: View {
-    @ObservedObject private var event: Event
+    @Bindable private var event: Event
 
     @State private var selectedTabIndex = 0
     @State private var permissionGranted = false
+    @State private var shouldPresentSheet = false
+    @State private var urlPlaying: Link?
 
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) var context
@@ -39,8 +41,10 @@ struct EventDetailView: View {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: event.start.timeIntervalSinceNow + 300,
                                                         repeats: false)
 
-        event.userInfo.ensureUUID()
-        return UNNotificationRequest(identifier: event.userInfo.notificationUUID!.uuidString, content: notificationContent, trigger: trigger)
+        event.userInfo!.ensureUUID()
+        return UNNotificationRequest(identifier: event.userInfo!.notificationUUID!.uuidString,
+                                     content: notificationContent,
+                                     trigger: trigger)
     }
 
     var body: some View {
@@ -48,7 +52,7 @@ struct EventDetailView: View {
             ScrollView {
                 EventDetailHeader(event).frame(maxWidth: .infinity)
 
-                Picker("Test", selection: $selectedTabIndex, content: {
+                Picker("Details", selection: $selectedTabIndex, content: {
                     Text("Description").tag(0)
                     Text("Links").disabled(event.links.isEmpty).tag(1)
                     if event.isOngoing {
@@ -61,39 +65,71 @@ struct EventDetailView: View {
 
                 ZStack {
                     if selectedTabIndex == 0 {
-                        HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
+                        if event.hasHTMLDescription {
+                            HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
+                        } else {
+                            if let desc = event.desc {
+                                Text(LocalizedStringKey(desc)).padding()
+                            } else {
+                                Text("No description").foregroundColor(.gray)
+                                                      .font(.title2)
+                                                      .padding()
+                            }
+                        }
                     }
                     if selectedTabIndex == 1 {
                         VStack(alignment: .leading) {
                             if event.links.isEmpty {
-                                Text("No links").foregroundColor(.gray).font(.title2).padding()
+                                Text("No links").foregroundColor(.gray)
+                                                .font(.title2)
+                                                .padding()
                             } else {
-                                ForEach(Array(event.links)) { link in
-                                    SwiftUI.Link(destination: URL(string: link.href)!) {
-                                        Label(link.name, systemImage: "link")
-                                    }.padding()
+                                ForEach(event.links) { link in
+                                    if link.isVideo {
+                                        Button(action: {
+                                            urlPlaying = link
+                                            shouldPresentSheet.toggle()
+                                        }, label: {
+                                            Label(link.name, systemImage: link.icon)
+                                        })
+                                    } else {
+                                        SwiftUI.Link(destination: link.url) {
+                                            Label(link.name, systemImage: link.icon)
+                                        }.padding()
+                                    }
                                 }
                             }
                         }
                     }
                     if selectedTabIndex == 2 {
                         VStack {
-                            VideoPlayer(event.room.liveStreamLink())
+                            VideoPlayer(Link(name: "Livestream", url: event.room.liveStreamLink(), type: "video"))
                         }
                     }
                 }
             }
         }.navigationTitle(Text(event.title))
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $shouldPresentSheet) {
+            print("Sheet dismissed!")
+        } content: {
+            if let url = urlPlaying {
+                VideoPlayer(url)
+            } else {
+                Text("No video available 😔")
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
             }
             ToolbarItem(placement: .primaryAction) {
-                Toggle(isOn: $event.userInfo.favorite, label: {
-                    Label("Favorite", systemImage: event.userInfo.favorite ? "bookmark.fill" : "bookmark").backgroundStyle(.clear)
+                Toggle(isOn: $event.isFavourite, label: {
+                    Label("Favorite",
+                          systemImage: event.userInfo!.favorite ? "bookmark.fill" : "bookmark")
+                        .backgroundStyle(.clear)
                 }).onTapGesture(count: 1, perform: {
-                    let _ = debugPrint(event.userInfo.favorite)
+                    debugPrint(event.userInfo!.favorite)
                     if event.start.timeIntervalSinceNow <= 0 {
                         return
                     }
@@ -103,8 +139,10 @@ struct EventDetailView: View {
                     if permissionGranted {
                         UNUserNotificationCenter.current().add(notificationRequest())
                     }
-                    event.userInfo.ensureUUID()
-                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [event.userInfo.notificationUUID!.uuidString])
+                    event.userInfo!.ensureUUID()
+                    UNUserNotificationCenter.current()
+                        .removePendingNotificationRequests(withIdentifiers:
+                                                            [event.userInfo!.notificationUUID!.uuidString])
                 })
             }
         }

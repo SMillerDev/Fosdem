@@ -18,10 +18,10 @@ extension Room {
     }
 
     func chatLink() -> URL {
-        return URL(string: "https://chat.fosdem.org/#/room/%23\(YearHelper().year)-\(shortName.lowercased()):fosdem.org")!
+        return URL(string:
+                    "https://chat.fosdem.org/#/room/%23\(SettingsHelper().year)-\(shortName.lowercased()):fosdem.org")!
     }
 }
-
 
 extension Event {
     func getPublicLink() -> URL {
@@ -29,7 +29,8 @@ extension Event {
     }
 
     func chatLink() -> URL {
-        return URL(string: "https://chat.fosdem.org/#/room/\(room.name.lowercased())-\(type.name.lowercased()):fosdem.org")!
+        let type = type?.name.lowercased() ?? "UNKNOWN"
+        return URL(string: "https://chat.fosdem.org/#/room/\(room.name.lowercased())-\(type):fosdem.org")!
     }
 }
 

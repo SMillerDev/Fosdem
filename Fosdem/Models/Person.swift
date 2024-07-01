@@ -7,44 +7,45 @@
 //
 
 import Foundation
-import CoreData
-import SwiftyXMLParser
+import SwiftData
+import PentabarfKit
 
-@objc(Person)
-public class Person: NSManagedObject, ManagedObjectProtocol, Identifiable {
-    static let elementName = "person"
-    static var context: NSManagedObjectContext!
+@Model
+public class Person {
 
-    @NSManaged public var id: String
-    @NSManaged public var name: String
-    @NSManaged public var events: Set<Event>
+    @Attribute(.unique) public var id: Int
+    public var name: String
 
+    @Relationship(deleteRule: .cascade, inverse: \Event.authors)
+    public var events: [Event]
+
+    @Transient
     var slug: String {
         return name.folding(options: .diacriticInsensitive, locale: .current)
             .lowercased()
             .replacingOccurrences(of: " ", with: "_")
     }
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Person> {
-        return NSFetchRequest<Person>(entityName: "Person")
+    init(id: Int, name: String, events: [Event] = []) {
+        self.id = id
+        self.name = name
+        self.events = events
     }
 
-    static func build(_ element: XML.Element) -> NSManagedObject? {
-        guard let id = element.attributes["id"],
-            let name = element.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-                return nil
-        }
-        let req: NSFetchRequest<Person> = Person.fetchRequest()
-        req.predicate = NSComparisonPredicate(format: "id==%@", id)
-        let item: Person
-        if let person = try? req.execute().first {
-            item = person
-        } else {
-            item = Person(context: DataImporter.context)
-        }
+    convenience init(_ base: PentabarfKit.Person) {
+        self.init(id: base.id, name: base.name)
+    }
+}
 
-        item.id = id
-        item.name = name
-        return item
+extension Person {
+    static func fetchWith(id: Int, _ context: ModelContext) -> Person? {
+        var descriptor = FetchDescriptor<Person>(predicate: #Predicate<Person> { person in
+            person.id == id
+        })
+        descriptor.fetchLimit = 1
+
+        let items = try? context.fetch(descriptor)
+
+        return items?.first
     }
 }

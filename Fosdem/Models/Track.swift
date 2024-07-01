@@ -7,46 +7,40 @@
 //
 
 import Foundation
-import CoreData
-import SwiftyXMLParser
-import SwiftUI
+import SwiftData
 
-@objc(Track)
-public class Track: NSManagedObject, Identifiable {
-    static let elementName = "track"
-    static var context: NSManagedObjectContext!
+@Model
+public class Track {
+    @Attribute(.unique) public var name: String
 
-    @NSManaged public var name: String
-    @NSManaged public var color: String
-    @NSManaged public var events: Set<Event>?
+    @Relationship(deleteRule: .cascade, inverse: \Event.track)
+    public var events: [Event] = []
 
+    @Transient
+    public var color: String {
+        let hash = Hash.sha256(name)
+        return String(hash[hash.startIndex...hash.index(hash.startIndex, offsetBy: 5)])
+    }
+
+    @Transient
     public var eventArray: [Event] {
-        let events = self.events ?? []
-        return events.sorted(by: { $0.title < $1.title })
+        return events.sorted { $0.title < $1.title }
     }
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Track> {
-        return NSFetchRequest<Track>(entityName: "Track")
+    init(name: String) {
+        self.name = name
     }
+}
 
-    var colorObject: Color {
-        return Color(hexString: color)
-    }
+extension Track {
+    static func fetchWith(name: String, _ context: ModelContext) -> Track? {
+        var descriptor = FetchDescriptor<Track>(predicate: #Predicate<Track> { track in
+            track.name == name
+        })
+        descriptor.fetchLimit = 1
 
-    static func build(_ element: XML.Element) -> NSManagedObject {
-        let name = element.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        let req: NSFetchRequest<Track> = Track.fetchRequest()
-        req.predicate = NSComparisonPredicate(format: "name==%@", name)
-        let item: Track
-        if let track = try? req.execute().first {
-            item = track
-        } else {
-            item = Track(context: DataImporter.context)
-            let hash = Hash.sha256(name)
-            item.color = String(hash[hash.startIndex...hash.index(hash.startIndex, offsetBy: 5)])
-        }
+        let items = try? context.fetch(descriptor)
 
-        item.name = name
-        return item
+        return items?.first
     }
 }

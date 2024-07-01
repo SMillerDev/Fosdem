@@ -7,44 +7,48 @@
 //
 
 import Foundation
-import CoreData
-import SwiftyXMLParser
+import SwiftData
+import PentabarfKit
 
-@objc(Conference)
-public class Conference: NSManagedObject, Identifiable {
-    static let elementName = "conference"
+@Model
+public class Conference {
+    @Attribute(.unique)
+    public var name: String
+    public var venue: String
+    public var start: Date
+    public var end: Date
 
-    @NSManaged public var name: String
-    @NSManaged public var venue: String
-    @NSManaged public var start: Date
-    @NSManaged public var end: Date
-    @NSManaged public var events: Set<Event>
+    @Relationship(deleteRule: .cascade)
+    public var events: [Event] = []
+
+    @Relationship(deleteRule: .cascade)
+    public var rooms: [Room] = []
 
     static var roomStates: [RoomState] = []
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Conference> {
-        return NSFetchRequest<Conference>(entityName: "Conference")
+    init(name: String, venue: String, start: Date, end: Date, events: [Event] = [], rooms: [Room] = []) {
+        self.name = name
+        self.venue = venue
+        self.start = start
+        self.end = end
+        self.events = events
+        self.rooms = rooms
     }
 
-    static func build(_ element: XML.Element) -> NSManagedObject {
-        guard let name = XmlFinder.getChildString(element, element: "title") else {
-            return Conference(context: DataImporter.context)
-        }
-        let req: NSFetchRequest<Conference> = Conference.fetchRequest()
-        req.predicate = NSComparisonPredicate(format: "name==%@", name)
-        let item: Conference
-        if let conf = try? req.execute().first {
-            item = conf
-        } else {
-            item = Conference(context: DataImporter.context)
-        }
+    convenience init(_ base: PentabarfKit.Conference, rooms: [Room], events: [Event] = []) {
+        self.init(name: base.title, venue: base.venue, start: base.start, end: base.end, events: events, rooms: rooms)
+    }
+}
 
-        item.name = XmlFinder.getChildString(element, element: "title")!
-        item.venue = XmlFinder.getChildString(element, element: "venue")!
-        item.start = XmlFinder.getChildDate(element, element: "start")!
-        item.end = XmlFinder.getChildDate(element, element: "end")!
-        item.events = Set<Event>()
+extension Conference {
+    static func fetchWith(name: String, _ context: ModelContext) -> Conference? {
+        var descriptor = FetchDescriptor<Conference>(predicate: #Predicate<Conference> { base in
+            base.name == name
+        })
+        descriptor.fetchLimit = 1
 
-        return item
+        let items = try? context.fetch(descriptor)
+
+        return items?.first
     }
 }

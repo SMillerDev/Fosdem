@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,17 +14,14 @@
 		146A86702205EFE9008A61AD /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A86682205EFE8008A61AD /* Person.swift */; };
 		146A86732205EFE9008A61AD /* Conference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A866B2205EFE9008A61AD /* Conference.swift */; };
 		146A86742205EFE9008A61AD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A866C2205EFE9008A61AD /* Event.swift */; };
-		146A8677220601DD008A61AD /* XmlFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A8676220601DD008A61AD /* XmlFinder.swift */; };
 		146A86792206ED84008A61AD /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A86782206ED84008A61AD /* Track.swift */; };
 		146A867E22089497008A61AD /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146A867D22089497008A61AD /* Link.swift */; };
 		14D277192205D07200740042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D277182205D07200740042 /* AppDelegate.swift */; };
-		14D2771C2205D07200740042 /* Fosdem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */; };
 		14D277252205D07500740042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D277242205D07500740042 /* Assets.xcassets */; };
 		14D277332205D07500740042 /* FosdemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D277322205D07500740042 /* FosdemTests.swift */; };
 		14D2773E2205D07500740042 /* FosdemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2773D2205D07500740042 /* FosdemUITests.swift */; };
 		14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */; };
-		14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */; };
-		14DA2290220C735600CBE015 /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA228F220C735600CBE015 /* DataImporter.swift */; };
+		9203845F2B5B0A2100B793AA /* PentabarfKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9203845E2B5B0A2100B793AA /* PentabarfKit */; };
 		92077D5128FF01C600BF8A03 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92077D5028FF01C600BF8A03 /* EventDetailView.swift */; };
 		924E15BC2922C637005A8EA2 /* RoomStatusImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */; };
 		924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BD2922CCA9005A8EA2 /* RoomState.swift */; };
@@ -32,15 +29,16 @@
 		925321602925716A004C7E5C /* EventUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9253215F2925716A004C7E5C /* EventUserInfo.swift */; };
 		925B0261298EAE0E00AFA83D /* LiveIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B0260298EAE0E00AFA83D /* LiveIcon.swift */; };
 		925B0263298EB2A400AFA83D /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B0262298EB2A400AFA83D /* VideoPlayer.swift */; };
+		925F4A7D2B2863D8007E9D1D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 925F4A7C2B285A70007E9D1D /* Localizable.xcstrings */; };
 		9268D79A298F251E0067A6B1 /* ListPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268D799298F251E0067A6B1 /* ListPredicate.swift */; };
-		92A2BDF82948CAE50034864F /* schedule_2019.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDF72948CAE50034864F /* schedule_2019.xml */; };
-		92A2BDFC2948D4AC0034864F /* schedule_2023.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFA2948D4AC0034864F /* schedule_2023.xml */; };
-		92A2BDFD2948D4AC0034864F /* schedule_2022.xml in Resources */ = {isa = PBXBuildFile; fileRef = 92A2BDFB2948D4AC0034864F /* schedule_2022.xml */; };
 		92B987FC2981CD10007574EB /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B987FB2981CD10007574EB /* AboutView.swift */; };
-		92C22E6029806C70006D7B5C /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 92C22E5F29806C70006D7B5C /* SwiftyXMLParser */; };
+		92BB58562B5FB84400C54292 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB58552B5FB84400C54292 /* SettingsView.swift */; };
+		92BD1D2E2B5C345700DB8FC1 /* EventTypeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BD1D2D2B5C345700DB8FC1 /* EventTypeIcon.swift */; };
+		92BD1D302B5C34F100DB8FC1 /* EventTypeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BD1D2F2B5C34F100DB8FC1 /* EventTypeColor.swift */; };
+		92BD1D322B5C374A00DB8FC1 /* TrackColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BD1D312B5C374A00DB8FC1 /* TrackColor.swift */; };
 		92C22E6229806F61006D7B5C /* privacy.md in Resources */ = {isa = PBXBuildFile; fileRef = 92C22E6129806F61006D7B5C /* privacy.md */; };
 		92C271D02922292500E8C25D /* PreviewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C271CF2922292500E8C25D /* PreviewEvent.swift */; };
-		92CE31AF28FC49DC0073813E /* YearHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31AE28FC49DC0073813E /* YearHelper.swift */; };
+		92CE31AF28FC49DC0073813E /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31AE28FC49DC0073813E /* SettingsHelper.swift */; };
 		92CE31B128FC4A940073813E /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31B028FC4A940073813E /* EventListView.swift */; };
 		92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */; };
 		92D9E7BA291D95E1007D203D /* EventDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */; };
@@ -72,12 +70,10 @@
 		146A86682205EFE8008A61AD /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		146A866B2205EFE9008A61AD /* Conference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conference.swift; sourceTree = "<group>"; };
 		146A866C2205EFE9008A61AD /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		146A8676220601DD008A61AD /* XmlFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlFinder.swift; sourceTree = "<group>"; };
 		146A86782206ED84008A61AD /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		146A867D22089497008A61AD /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		14D277152205D07200740042 /* Fosdem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fosdem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D277182205D07200740042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		14D2771B2205D07200740042 /* Fosdem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fosdem.xcdatamodel; sourceTree = "<group>"; };
 		14D277242205D07500740042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14D277292205D07500740042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14D2772E2205D07500740042 /* FosdemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FosdemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,8 +83,6 @@
 		14D2773D2205D07500740042 /* FosdemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FosdemUITests.swift; sourceTree = "<group>"; };
 		14D2773F2205D07500740042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteScheduleFetcher.swift; sourceTree = "<group>"; };
-		14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectProtocol.swift; sourceTree = "<group>"; };
-		14DA228F220C735600CBE015 /* DataImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
 		92077D5028FF01C600BF8A03 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStatusImporter.swift; sourceTree = "<group>"; };
 		924E15BD2922CCA9005A8EA2 /* RoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomState.swift; sourceTree = "<group>"; };
@@ -96,19 +90,19 @@
 		9253215F2925716A004C7E5C /* EventUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUserInfo.swift; sourceTree = "<group>"; };
 		925B0260298EAE0E00AFA83D /* LiveIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveIcon.swift; sourceTree = "<group>"; };
 		925B0262298EB2A400AFA83D /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		925F4A7C2B285A70007E9D1D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9268D799298F251E0067A6B1 /* ListPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPredicate.swift; sourceTree = "<group>"; };
-		92A2BDF72948CAE50034864F /* schedule_2019.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2019.xml; sourceTree = "<group>"; };
 		92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FosdemTests.xctestplan; path = Fosdem.xcodeproj/FosdemTests.xctestplan; sourceTree = "<group>"; };
-		92A2BDFA2948D4AC0034864F /* schedule_2023.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2023.xml; sourceTree = "<group>"; };
-		92A2BDFB2948D4AC0034864F /* schedule_2022.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schedule_2022.xml; sourceTree = "<group>"; };
 		92A57B392988FD1C00C0BB78 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		92B987FB2981CD10007574EB /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		92BB58552B5FB84400C54292 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		92BD1D2D2B5C345700DB8FC1 /* EventTypeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeIcon.swift; sourceTree = "<group>"; };
+		92BD1D2F2B5C34F100DB8FC1 /* EventTypeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTypeColor.swift; sourceTree = "<group>"; };
+		92BD1D312B5C374A00DB8FC1 /* TrackColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackColor.swift; sourceTree = "<group>"; };
 		92C22E6129806F61006D7B5C /* privacy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = privacy.md; sourceTree = "<group>"; };
 		92C271CF2922292500E8C25D /* PreviewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewEvent.swift; sourceTree = "<group>"; };
-		92CE31AE28FC49DC0073813E /* YearHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearHelper.swift; sourceTree = "<group>"; };
-		92CE31B028FC4A940073813E /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
-		92D2EC51298C486A0047A437 /* Fosdem 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Fosdem 1.1.xcdatamodel"; sourceTree = "<group>"; };
-		92D2EC52298C4DE90047A437 /* Migration1.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = Migration1.1.xcmappingmodel; path = "../../Library/Developer/Xcode/DerivedData/Fosdem-cwvcjrfyxyxsrkdiimbbbikwtjsl/SourcePackages/checkouts/SwiftyXMLParser/Migration1.1.xcmappingmodel"; sourceTree = "<group>"; };
+		92CE31AE28FC49DC0073813E /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
+		92CE31B028FC4A940073813E /* EventListView.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFormattedText.swift; sourceTree = "<group>"; };
 		92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailHeader.swift; sourceTree = "<group>"; };
 		92F70A9F2922B49A000BE6CB /* UrlHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlHelper.swift; sourceTree = "<group>"; };
@@ -119,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C22E6029806C70006D7B5C /* SwiftyXMLParser in Frameworks */,
+				9203845F2B5B0A2100B793AA /* PentabarfKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,8 +139,6 @@
 			children = (
 				924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */,
 				14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */,
-				146A8676220601DD008A61AD /* XmlFinder.swift */,
-				14DA228F220C735600CBE015 /* DataImporter.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -161,7 +153,6 @@
 				146A866C2205EFE9008A61AD /* Event.swift */,
 				146A86672205EFE8008A61AD /* Room.swift */,
 				146A86682205EFE8008A61AD /* Person.swift */,
-				14DA228D220C6B9000CBE015 /* ManagedObjectProtocol.swift */,
 				924E15BD2922CCA9005A8EA2 /* RoomState.swift */,
 				9253215F2925716A004C7E5C /* EventUserInfo.swift */,
 			);
@@ -171,6 +162,7 @@
 		146A867C220745BF008A61AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				92BB58552B5FB84400C54292 /* SettingsView.swift */,
 				92CE31B028FC4A940073813E /* EventListView.swift */,
 				92077D5028FF01C600BF8A03 /* EventDetailView.swift */,
 				92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */,
@@ -179,6 +171,9 @@
 				925B0260298EAE0E00AFA83D /* LiveIcon.swift */,
 				925B0262298EB2A400AFA83D /* VideoPlayer.swift */,
 				9268D799298F251E0067A6B1 /* ListPredicate.swift */,
+				92BD1D2D2B5C345700DB8FC1 /* EventTypeIcon.swift */,
+				92BD1D2F2B5C34F100DB8FC1 /* EventTypeColor.swift */,
+				92BD1D312B5C374A00DB8FC1 /* TrackColor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,7 +181,7 @@
 		14D2770C2205D07200740042 = {
 			isa = PBXGroup;
 			children = (
-				92D2EC52298C4DE90047A437 /* Migration1.1.xcmappingmodel */,
+				925F4A7C2B285A70007E9D1D /* Localizable.xcstrings */,
 				92A57B392988FD1C00C0BB78 /* Package.swift */,
 				92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */,
 				14D277172205D07200740042 /* Fosdem */,
@@ -216,7 +211,6 @@
 				14D277182205D07200740042 /* AppDelegate.swift */,
 				14D277242205D07500740042 /* Assets.xcassets */,
 				14D277292205D07500740042 /* Info.plist */,
-				14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */,
 				92C22E6129806F61006D7B5C /* privacy.md */,
 			);
 			path = Fosdem;
@@ -225,9 +219,6 @@
 		14D277312205D07500740042 /* FosdemTests */ = {
 			isa = PBXGroup;
 			children = (
-				92A2BDFB2948D4AC0034864F /* schedule_2022.xml */,
-				92A2BDFA2948D4AC0034864F /* schedule_2023.xml */,
-				92A2BDF72948CAE50034864F /* schedule_2019.xml */,
 				14D277322205D07500740042 /* FosdemTests.swift */,
 				14D277342205D07500740042 /* Info.plist */,
 			);
@@ -248,7 +239,7 @@
 			children = (
 				142A873C2224651F0034F6D7 /* Hash.swift */,
 				142A8741222473A40034F6D7 /* UIColor+hexstring.swift */,
-				92CE31AE28FC49DC0073813E /* YearHelper.swift */,
+				92CE31AE28FC49DC0073813E /* SettingsHelper.swift */,
 				92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */,
 				92C271CF2922292500E8C25D /* PreviewEvent.swift */,
 				92F70A9F2922B49A000BE6CB /* UrlHelper.swift */,
@@ -271,11 +262,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				925FE1B5298680F700686A4D /* PBXTargetDependency */,
+				92FC930A2B5C2DA100C2D13D /* PBXTargetDependency */,
 			);
 			name = Fosdem;
 			packageProductDependencies = (
-				92C22E5F29806C70006D7B5C /* SwiftyXMLParser */,
+				9203845E2B5B0A2100B793AA /* PentabarfKit */,
 			);
 			productName = Fosdem;
 			productReference = 14D277152205D07200740042 /* Fosdem.app */;
@@ -323,8 +314,9 @@
 		14D2770D2205D07200740042 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = "Sean Molenaar";
 				TargetAttributes = {
 					14D277142205D07200740042 = {
@@ -344,16 +336,18 @@
 				};
 			};
 			buildConfigurationList = 14D277102205D07200740042 /* Build configuration list for PBXProject "Fosdem" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				nl,
+				uk,
 			);
 			mainGroup = 14D2770C2205D07200740042;
 			packageReferences = (
-				92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
+				9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */,
 			);
 			productRefGroup = 14D277162205D07200740042 /* Products */;
 			projectDirPath = "";
@@ -373,6 +367,7 @@
 			files = (
 				14D277252205D07500740042 /* Assets.xcassets in Resources */,
 				92C22E6229806F61006D7B5C /* privacy.md in Resources */,
+				925F4A7D2B2863D8007E9D1D /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,9 +375,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92A2BDFD2948D4AC0034864F /* schedule_2022.xml in Resources */,
-				92A2BDF82948CAE50034864F /* schedule_2019.xml in Resources */,
-				92A2BDFC2948D4AC0034864F /* schedule_2023.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,31 +419,31 @@
 				146A86792206ED84008A61AD /* Track.swift in Sources */,
 				925321602925716A004C7E5C /* EventUserInfo.swift in Sources */,
 				142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */,
-				146A8677220601DD008A61AD /* XmlFinder.swift in Sources */,
-				92CE31AF28FC49DC0073813E /* YearHelper.swift in Sources */,
+				92CE31AF28FC49DC0073813E /* SettingsHelper.swift in Sources */,
 				9268D79A298F251E0067A6B1 /* ListPredicate.swift in Sources */,
 				92C271D02922292500E8C25D /* PreviewEvent.swift in Sources */,
 				925B0263298EB2A400AFA83D /* VideoPlayer.swift in Sources */,
-				14D2771C2205D07200740042 /* Fosdem.xcdatamodeld in Sources */,
-				14DA2290220C735600CBE015 /* DataImporter.swift in Sources */,
 				146A867E22089497008A61AD /* Link.swift in Sources */,
 				924E15C329238AA5005A8EA2 /* ListItem.swift in Sources */,
 				92CE31B128FC4A940073813E /* EventListView.swift in Sources */,
 				146A86732205EFE9008A61AD /* Conference.swift in Sources */,
+				92BD1D2E2B5C345700DB8FC1 /* EventTypeIcon.swift in Sources */,
 				924E15BC2922C637005A8EA2 /* RoomStatusImporter.swift in Sources */,
 				142A873D2224651F0034F6D7 /* Hash.swift in Sources */,
 				924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */,
 				146A866F2205EFE9008A61AD /* Room.swift in Sources */,
 				146A86742205EFE9008A61AD /* Event.swift in Sources */,
-				14DA228E220C6B9000CBE015 /* ManagedObjectProtocol.swift in Sources */,
 				146A86702205EFE9008A61AD /* Person.swift in Sources */,
+				92BD1D302B5C34F100DB8FC1 /* EventTypeColor.swift in Sources */,
 				14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */,
 				925B0261298EAE0E00AFA83D /* LiveIcon.swift in Sources */,
+				92BB58562B5FB84400C54292 /* SettingsView.swift in Sources */,
 				92B987FC2981CD10007574EB /* AboutView.swift in Sources */,
 				92077D5128FF01C600BF8A03 /* EventDetailView.swift in Sources */,
 				92F70AA02922B49A000BE6CB /* UrlHelper.swift in Sources */,
 				92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */,
 				142A87442224752E0034F6D7 /* EventType.swift in Sources */,
+				92BD1D322B5C374A00DB8FC1 /* TrackColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,9 +476,9 @@
 			target = 14D277142205D07200740042 /* Fosdem */;
 			targetProxy = 14D2773A2205D07500740042 /* PBXContainerItemProxy */;
 		};
-		925FE1B5298680F700686A4D /* PBXTargetDependency */ = {
+		92FC930A2B5C2DA100C2D13D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 925FE1B4298680F700686A4D /* SwiftyXMLParser */;
+			productRef = 92FC93092B5C2DA100C2D13D /* PentabarfKit */;
 		};
 /* End PBXTargetDependency section */
 
@@ -495,6 +487,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -529,6 +523,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -543,12 +538,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -557,6 +553,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -591,6 +589,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -599,11 +598,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -616,16 +616,17 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B6S5V56E82;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Fosdem/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FOSDEM;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -644,16 +645,17 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B6S5V56E82;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = Fosdem/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FOSDEM;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -667,7 +669,6 @@
 		14D277462205D07500740042 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
@@ -691,7 +692,6 @@
 		14D277472205D07500740042 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
@@ -715,7 +715,6 @@
 		14D277492205D07500740042 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = FosdemUITests/Info.plist;
@@ -738,7 +737,6 @@
 		14D2774A2205D07500740042 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6S5V56E82;
 				INFOPLIST_FILE = FosdemUITests/Info.plist;
@@ -800,42 +798,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
+		9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser";
+			repositoryURL = "https://github.com/SMillerDev/PentabarfKit";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		925FE1B4298680F700686A4D /* SwiftyXMLParser */ = {
+		9203845E2B5B0A2100B793AA /* PentabarfKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
-			productName = SwiftyXMLParser;
+			package = 9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */;
+			productName = PentabarfKit;
 		};
-		92C22E5F29806C70006D7B5C /* SwiftyXMLParser */ = {
+		92FC93092B5C2DA100C2D13D /* PentabarfKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 92C22E5E29806C70006D7B5C /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
-			productName = SwiftyXMLParser;
+			package = 9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */;
+			productName = PentabarfKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		14D2771A2205D07200740042 /* Fosdem.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				92D2EC51298C486A0047A437 /* Fosdem 1.1.xcdatamodel */,
-				14D2771B2205D07200740042 /* Fosdem.xcdatamodel */,
-			);
-			currentVersion = 92D2EC51298C486A0047A437 /* Fosdem 1.1.xcdatamodel */;
-			path = Fosdem.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 14D2770D2205D07200740042 /* Project object */;
 }

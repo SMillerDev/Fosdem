@@ -7,23 +7,27 @@
 //
 
 import Foundation
-import CoreData
-import SwiftyXMLParser
+import SwiftData
+import PentabarfKit
 
-@objc(Room)
-public class Room: NSManagedObject, ManagedObjectProtocol, Identifiable {
-    static let elementName = "room"
+@Model
+public class Room {
+    @Attribute(.unique) public var name: String
 
-    @NSManaged public var name: String
-    @NSManaged public var events: Set<Event>
+    @Relationship(deleteRule: .cascade, inverse: \Event.room)
+    public var events: [Event] = []
 
+    @Transient
     var shortName: String {
         return String(describing: name.split(separator: " ").first ?? "UNKNOWN")
     }
+
+    @Transient
     var urlName: String {
         return String(describing: shortName.replacingOccurrences(of: ".", with: "").lowercased())
     }
 
+    @Transient
     var building: String? {
         let regex = try? Regex("^[A-Za-z]*")
         guard let result = try? regex?.firstMatch(in: shortName) else {
@@ -32,30 +36,28 @@ public class Room: NSManagedObject, ManagedObjectProtocol, Identifiable {
         return String(shortName[result.range])
     }
 
+    convenience init(_ base: PentabarfKit.Room) {
+        self.init(name: base.name)
+    }
+
+    init(name: String) {
+        self.name = name
+    }
+
     func isVirtual() -> Bool {
         return ["D", "M"].contains { $0 == building }
     }
 }
 
 extension Room {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Room> {
-        return NSFetchRequest<Room>(entityName: "Room")
-    }
+    static func fetchWith(name: String, _ context: ModelContext) -> Room? {
+        var descriptor = FetchDescriptor<Room>(predicate: #Predicate<Room> { room in
+            room.name == name
+        })
+        descriptor.fetchLimit = 1
 
-    static func build(_ element: XML.Element) -> NSManagedObject? {
-        let req: NSFetchRequest<Room> = Room.fetchRequest()
-        guard let name = element.text else {
-            return nil
-        }
-        req.predicate = NSComparisonPredicate(format: "name==%@", name)
-        let item: Room
-        if let room = try? req.execute().first {
-            item = room
-        } else {
-            item = Room(context: DataImporter.context)
-        }
+        let items = try? context.fetch(descriptor)
 
-        item.name = name
-        return item
+        return items?.first
     }
 }

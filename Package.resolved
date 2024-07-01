@@ -1,16 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "SwiftyXMLParser",
-        "repositoryURL": "https://github.com/yahoojapan/SwiftyXMLParser.git",
-        "state": {
-          "branch": null,
-          "revision": "d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be",
-          "version": "5.6.0"
-        }
+  "pins" : [
+    {
+      "identity" : "pentabarfkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SMillerDev/PentabarfKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "845f413bd7bb48c4bed1650153a33bbaf184c941"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "swiftyxmlparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yahoojapan/SwiftyXMLParser.git",
+      "state" : {
+        "revision" : "d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be",
+        "version" : "5.6.0"
+      }
+    }
+  ],
+  "version" : 2
 }

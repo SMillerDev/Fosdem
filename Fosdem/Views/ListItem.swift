@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ListItem: View {
-    @ObservedObject private var event: Event
+    private var event: Event
     private var bookmarkEmphasis: Bool
 
     @Environment(\.managedObjectContext) var context
@@ -22,7 +22,7 @@ struct ListItem: View {
     var body: some View {
         HStack {
             ZStack(alignment: .topLeading) {
-                if let lastSeen = event.userInfo.lastSeen,
+                if let lastSeen = event.userInfo?.lastSeen,
                     event.lastUpdated > lastSeen && !event.isEnded {
                     Circle()
                         .foregroundColor(.accentColor)
@@ -41,31 +41,32 @@ struct ListItem: View {
             if event.isOngoing { LiveIcon() }
 
             Text(event.title)
-                .bold(event.userInfo.favorite && bookmarkEmphasis)
+                .bold(event.userInfo?.favorite ?? false && bookmarkEmphasis)
                 .foregroundColor(!event.isEnded ? .primary : .gray)
 
         }.contextMenu {
-            Label(event.track.name.capitalized, systemImage: event.type.icon)
+            Label(event.track?.name.capitalized ?? "TRACK", systemImage: event.type?.icon ?? "questionmark.app")
             Label(event.formatTime(), systemImage: "calendar.badge.clock")
-            if event.room.isVirtual() {
-                Label(event.room.name, systemImage: "message.fill")
+            let room = event.room
+            if room.isVirtual() {
+                Label(room.name, systemImage: "message.fill")
             } else {
-                SwiftUI.Link(destination: event.room.getNavigationLink()) {
-                    Label(event.room.name, systemImage: "location.circle")
+                SwiftUI.Link(destination: room.getNavigationLink()) {
+                    Label(room.name, systemImage: "location.circle")
                 }
             }
 
-            if let item = Conference.roomStates.first(where: { $0.roomname == event.room.name }), item.full {
+            if let item = Conference.roomStates.first(where: { $0.roomname == room.name }), item.full {
                 Label("Room full", systemImage: "hand.raised").foregroundColor(.red)
             }
             ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
         }.swipeActions {
-            Button(action: { event.userInfo.favorite.toggle() }, label: {
-                Label("Favorite", systemImage: event.userInfo.favorite ? "star.fill" : "star")
+            Button(action: { event.userInfo?.favorite.toggle() }, label: {
+                Label("Favorite", systemImage: event.userInfo?.favorite ?? false ? "star.fill" : "star")
             }).tint(.orange)
         }
         .onAppear {
-            event.userInfo.lastSeen = Date()
+            event.userInfo?.lastSeen = Date()
             try? context.save()
         }
     }

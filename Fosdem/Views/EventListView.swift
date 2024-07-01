@@ -7,53 +7,31 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct EventListView: View {
     @State private var query = ""
     private var listPredicate: ListPredicate = ListPredicate()
     @State private var isSheetPresented: Bool = false
-    @State private var bookmarks: Bool = false
-    @State private var future: Bool = false
-    @State private var localTime: Bool = false
+    @State private var bookmarks: Bool = SettingsHelper().bookmarks
+    @State private var future: Bool = SettingsHelper().future
+    @State private var localTime: Bool = SettingsHelper().localTime
+    @State private var year: String = SettingsHelper().year
     @State private var visibility: NavigationSplitViewVisibility = .doubleColumn
 
-    var suffix = ""
+    @Environment(\.modelContext) var modelContext
 
-    @FetchRequest(
-        sortDescriptors: [
-            SortDescriptor(\.name, order: .forward)
-        ]
-    ) var personEvents: FetchedResults<Person>
-
-    @FetchRequest(
-        sortDescriptors: [
-            SortDescriptor(\.start, order: .forward)
-        ],
-        predicate: NSPredicate(format: "userInfo.favorite == YES", [])
-    ) var myEvents: FetchedResults<Event>
-
-    @SectionedFetchRequest(
-        sectionIdentifier: \.track.name,
-        sortDescriptors: [
-            SortDescriptor(\.track.name, order: .forward),
-            SortDescriptor(\.start, order: .forward)
-        ],
-        predicate: nil
-    ) var trackEvents: SectionedFetchResults<String, Event>
-
-    @SectionedFetchRequest(
-        sectionIdentifier: \.room.name,
-        sortDescriptors: [
-            SortDescriptor(\.room.name, order: .forward),
-            SortDescriptor(\.start, order: .forward)
-        ],
-        predicate: nil
-    ) var roomEvents: SectionedFetchResults<String, Event>
+    @Query(sort: \Person.name) var personEvents: [Person]
+    @Query(filter: #Predicate<Event> { event in
+        event.userInfo?.favorite == true
+    }, sort: \Event.start, order: .forward) var myEvents: [Event]
+    @Query(sort: [SortDescriptor(\Track.name)]) var trackEvents: [Track]
+    @Query(sort: \Room.name) var roomEvents: [Room]
 
     var trackList: some View {
-        List(trackEvents) { section in
-            Section(header: Text("\(section.id)")) {
-                ForEach(section) { event in
+        List(trackEvents) { track in
+            Section(header: Text("\(track.name)")) {
+                ForEach(track.events.sorted { $0.start >= $1.start }) { event in
                     NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
                 }
             }
@@ -65,12 +43,12 @@ struct EventListView: View {
     }
 
     var roomList: some View {
-        List(roomEvents) { section in
-            Section(header: Text("\(section.id)")) {
-                ForEach(section) { event in
-                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
-                }
-            }
+        List(roomEvents) { _ in
+//            Section(header: Text("\(room.name)")) {
+//                ForEach(room.events.sorted { $0.start >= $1.start }) { event in
+//                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
+//                }
+//            }
         }.overlay(Group {
             if trackEvents.isEmpty && query.isEmpty {
                 ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
@@ -81,7 +59,7 @@ struct EventListView: View {
     var personList: some View {
         List(personEvents) { person in
             Section(person.name) {
-                ForEach(Array(person.events)) { event in
+                ForEach(Array(person.events.sorted { $0.start >= $1.start })) { event in
                     NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
                 }
             }
@@ -110,30 +88,23 @@ struct EventListView: View {
                         Label("No Bookmarks yet", systemImage: "bookmark.slash")
                     }
                 })
-            }.onChange(of: bookmarks, perform: { value in
-                listPredicate.bookmarks = bookmarks
-                trackEvents.nsPredicate = listPredicate.predicate(.track)
-                roomEvents.nsPredicate = listPredicate.predicate(.room)
-                personEvents.nsPredicate = listPredicate.predicate(.person)
-            }).onChange(of: future, perform: { value in
-                listPredicate.future = future
-                trackEvents.nsPredicate = listPredicate.predicate(.track)
-                roomEvents.nsPredicate = listPredicate.predicate(.room)
-                personEvents.nsPredicate = listPredicate.predicate(.person)
-            }).onChange(of: query) { newValue in
-                listPredicate.searchQuery = newValue
-                trackEvents.nsPredicate = listPredicate.predicate(.track)
-                roomEvents.nsPredicate = listPredicate.predicate(.room)
-                personEvents.nsPredicate = listPredicate.predicate(.person)
+            }.onChange(of: year) {
+                Task {
+                    await RoomStatusFetcher.fetchRoomStatus()
+                    await RemoteScheduleFetcher.fetchSchedule()
+                }
             }.searchable(
                 text: $query,
                 placement: .navigationBarDrawer
             ).refreshable {
-                RoomStatusFetcher.fetchRoomStatus()
-                RemoteScheduleFetcher.fetchSchedule()
+                Task {
+                    await RoomStatusFetcher.fetchRoomStatus()
+                    await RemoteScheduleFetcher.fetchSchedule()
+                }
             }.navigationDestination(for: Event.self, destination: { event in
                 EventDetailView(event)
-            }).toolbar {
+            })
+            .toolbar {
                 ToolbarItem(placement: .secondaryAction) {
                     NavigationLink { AboutView() } label: {
                         Label("About", systemImage: "questionmark.bubble.fill")
@@ -142,20 +113,18 @@ struct EventListView: View {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
                         isSheetPresented.toggle()
-                    }, label: { Label("Filter", systemImage: "slider.horizontal.2.square.on.square")})
+                    }, label: { Label("Filter lists", systemImage: "slider.horizontal.2.square.on.square")})
                         .sheet(isPresented: $isSheetPresented, content: {
-                            Form {
-                                Section("Filters") {
-                                    Toggle(isOn: $bookmarks, label: { Label("Bookmarks only", systemImage: "bookmark")})
-                                    Toggle(isOn: $future, label: { Label("Future events only", systemImage: "clock")})
-                                }
-                                Section("Settings") {
-                                    Toggle(isOn: $localTime, label: { Label("button.timezone.local", systemImage: "globe")})
-                                }
-                            }.presentationDetents([.fraction(0.3)])
+                            SettingsView().presentationDetents([.medium])
                         })
                 }
-            }.navigationTitle("Fosdem \(YearHelper().year)")
+            }.navigationTitle("Fosdem \(year)")
+            .task {
+                if personEvents.isEmpty && trackEvents.isEmpty {
+                    await RoomStatusFetcher.fetchRoomStatus()
+                    await RemoteScheduleFetcher.fetchSchedule()
+                }
+            }
         }
     }
 }

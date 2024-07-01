@@ -11,8 +11,8 @@ import AVKit
 
 struct VideoPlayer: View {
     private var player: AVPlayer
-    init(_ url: URL) {
-        let player = AVPlayer(url: url)
+    init(_ link: Link) {
+        let player = AVPlayer(url: link.url)
         player.audiovisualBackgroundPlaybackPolicy = .continuesIfPossible
         player.allowsExternalPlayback = true
 
@@ -37,6 +37,7 @@ struct VideoPlayer: View {
 
 struct VideoPlayer_Previews: PreviewProvider {
     static var previews: some View {
-        VideoPlayer(URL(string: "https://github.com")!)
+        let link = Link(name: "A", url: URL(string: "https://github.com")!, type: nil)
+        VideoPlayer(link)
     }
 }

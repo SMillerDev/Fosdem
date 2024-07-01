@@ -1,0 +1,299 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@" : {
+
+    },
+    "🇺🇦" : {
+
+    },
+    "🍺" : {
+
+    },
+    "🔨" : {
+
+    },
+    "🧑‍💻" : {
+
+    },
+    "About" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Over"
+          }
+        }
+      }
+    },
+    "Bookmarks only" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alleen favorieten"
+          }
+        }
+      }
+    },
+    "Chat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        }
+      }
+    },
+    "Description" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omschrijving"
+          }
+        }
+      }
+    },
+    "Details" : {
+
+    },
+    "Favorite" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriet"
+          }
+        }
+      }
+    },
+    "Filter lists" : {
+
+    },
+    "Filters" : {
+
+    },
+    "FOSDEM" : {
+
+    },
+    "Fosdem %@" : {
+      "extractionState" : "manual"
+    },
+    "Future events only" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alleen toekomstige presentaties"
+          }
+        }
+      }
+    },
+    "Hi, SMillerDev here.\nAs a Homebrew maintainer and Nextcloud/news developer I love going to FOSDEM,\nbut as an Apple user the apps are not as plentyful as for Android.\nThat's why I made this!\nIf you find this app useful, consider donating to the folowing causes:" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi, SMillerDev hier.\nAls een Homebrew maintainer en Nextcloud/news developer vind ik het leuk om naar FOSDEM te gaan. Maar als Apple gebruiker zijn er niet zo veel apps als op Android. Daarom heb ik deze gemaakt!\n\nAls je deze app handig vind, overweeg dan te doneren aan de volgende doelen: "
+          }
+        }
+      }
+    },
+    "Homebrew" : {
+
+    },
+    "If you have improvements you can suggest them at:" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als je verbeteringen hebt, kan je ze melden op:"
+          }
+        }
+      }
+    },
+    "Links" : {
+
+    },
+    "Live Video" : {
+
+    },
+    "Local timezone" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokale tijdzone"
+          }
+        }
+      }
+    },
+    "My events" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My bookmarks"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mijn keuzes"
+          }
+        }
+      }
+    },
+    "No Bookmarks yet" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nog geen favorieten"
+          }
+        }
+      }
+    },
+    "No description" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen omschrijving beschikbaar"
+          }
+        }
+      }
+    },
+    "No links" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen links beschikbaar"
+          }
+        }
+      }
+    },
+    "No video available 😔" : {
+
+    },
+    "People" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprekers"
+          }
+        }
+      }
+    },
+    "Room available" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plekken beschikbaar"
+          }
+        }
+      }
+    },
+    "Room full" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kamer vol"
+          }
+        }
+      }
+    },
+    "Rooms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locaties"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen"
+          }
+        }
+      }
+    },
+    "Share web link" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deel web link"
+          }
+        }
+      }
+    },
+    "Still loading events" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presentaties laden nog"
+          }
+        }
+      }
+    },
+    "The issue tracker" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De issue tracker"
+          }
+        }
+      }
+    },
+    "Tracks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onderwerpen"
+          }
+        }
+      }
+    },
+    "Ukraine" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oekraïne"
+          }
+        }
+      }
+    },
+    "Year" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaar"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

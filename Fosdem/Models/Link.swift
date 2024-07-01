@@ -7,55 +7,58 @@
 //
 
 import Foundation
-import CoreData
-import SwiftyXMLParser
+import SwiftData
+import PentabarfKit
 
-@objc(Link)
-public class Link: NSManagedObject, Identifiable {
-    static let elementName = "link"
-    static var context: NSManagedObjectContext!
+@Model
+public class Link {
+    public var name: String
+    @Attribute(originalName: "href") public var url: URL
+    public var type: String
 
-    @NSManaged public var icon: String
-    @NSManaged public var name: String
-    @NSManaged public var href: String
-    @NSManaged public var event: Event
+    @Relationship(deleteRule: .nullify, inverse: \Event.links)
+    public var event: Event!
 
-    public func url() -> URL? {
-        guard let url = URL(string: href) else {
-            return nil
-        }
-
-        return url
+    @Transient
+    public var isVideo: Bool {
+        return type.contains(/video/) || name.lowercased().contains(/video recording/)
     }
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Link> {
-        return NSFetchRequest<Link>(entityName: "Link")
-    }
-
-    static func build(name: String, href: String, icon: String? = nil) -> NSManagedObject? {
-        let req: NSFetchRequest<Link> = Link.fetchRequest()
-        req.predicate = NSComparisonPredicate(format: "name==%@", name)
-        let item: Link
-        if let link = try? req.execute().first {
-            item = link
+    @Transient
+    public var icon: String {
+        if isVideo {
+            return "video"
+        } else if type.contains(/slides/) {
+                return "rectangle.inset.filled.and.person.filled"
         } else {
-            item = Link(context: DataImporter.context)
+            return "link"
         }
-
-        item.name = name
-        item.href = href
-        if let icon = icon {
-            item.icon = icon
-        }
-        return item
     }
 
-    static func build(_ element: XML.Element) -> NSManagedObject? {
-        guard let name = element.text,
-              let url = element.attributes["href"] else {
-            return nil
-        }
+    init(name: String, url: URL, type: String?) {
+        self.name = name
+        self.url = url
+        self.type = type ?? "text/url"
+    }
 
-        return Link.build(name: name, href: url)
+    convenience init(_ base: PentabarfKit.Link) {
+        self.init(name: base.title, url: base.url, type: nil)
+    }
+
+    convenience init(_ base: PentabarfKit.Attachment) {
+        self.init(name: base.title, url: base.url, type: base.type)
+    }
+}
+
+extension Link {
+    static func fetchWith(url: URL, _ context: ModelContext) -> Link? {
+        var descriptor = FetchDescriptor<Link>(predicate: #Predicate<Link> { link in
+            link.url == url
+        })
+        descriptor.fetchLimit = 1
+
+        let items = try? context.fetch(descriptor)
+
+        return items?.first
     }
 }

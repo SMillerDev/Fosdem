@@ -9,20 +9,16 @@
 import Foundation
 
 class RoomStatusFetcher {
-    static func fetchRoomStatus() {
+    static func fetchRoomStatus() async {
         let url = URL(string: BaseURL.roomStatus.rawValue)!
         print("📲 Getting FOSDEM room data")
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+        do {
+            let (data, _): (Data, URLResponse) = try await URLSession.shared.data(from: url)
             print("📲 Got FOSDEM room data")
-
-            guard let data = data, error == nil else {
-                print("❌ Failed to fetch room data, \(error?.localizedDescription ?? "")")
-                return
-            }
-
             RoomStatusFetcher.processRoomData(data)
+        } catch {
+            print("❌ Failed to fetch room data")
         }
-        task.resume()
     }
 
     static func processRoomData(_ value: Data) {

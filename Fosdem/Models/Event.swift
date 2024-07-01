@@ -7,54 +7,129 @@
 //
 
 import Foundation
-import CoreData
-import SwiftyXMLParser
+import SwiftData
+import PentabarfKit
 
-@objc(Event)
-public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
-    static let elementName = "event"
+@Model
+public class Event {
 
-    @NSManaged public var id: String
-    @NSManaged public var title: String
-    @NSManaged public var slug: String
-    @NSManaged public var subtitle: String?
-    @NSManaged public var desc: String?
-    @NSManaged public var date: Date
-    @NSManaged public var start: Date
-    @NSManaged public var duration: TimeInterval
-    @NSManaged public var lastUpdated: Date
+    @Attribute(.unique) public var id: Int
+    public var title: String
+    public var slug: String
+    public var subtitle: String?
+    public var desc: String?
+    public var start: Date
+    public var duration: TimeInterval
+    public var lastUpdated: Date = Date()
 
-    @NSManaged public var room: Room
-    @NSManaged public var conference: Conference
-    @NSManaged public var track: Track
-    @NSManaged public var type: EventType
-    @NSManaged public var userInfo: EventUserInfo
-    @NSManaged public var authors: Set<Person>
-    @NSManaged public var links: Set<Link>
+    public var room: Room
+    public var track: Track?
+    public var type: EventType?
 
-    @objc public var authorName: String {
+    public var userInfo: EventUserInfo?
+
+    public var authors: [Person] = []
+    public var links: [Link] = []
+
+    @Transient
+    public var authorName: String {
         return authors.first!.name
     }
 
+    @Transient
     var year: String {
         return startInFormat("yyyy")
     }
 
-    @objc public var day: Int {
+    @Transient
+    public var day: Int {
         return Int(startInFormat("dd")) ?? 0
     }
 
+    @Transient
     public var end: Date {
         return start.addingTimeInterval(duration)
     }
 
+    @Transient
     public var isOngoing: Bool {
         let date = Date()
         return date > start && date < end
     }
 
+    @Transient
     public var isEnded: Bool {
         return end < Date()
+    }
+
+    @Transient
+    public var isFavourite: Bool {
+        get { return userInfo?.favorite ?? false }
+        set { userInfo?.favorite = newValue }
+    }
+
+    @Transient
+    public var hasHTMLDescription: Bool {
+        return  (try? desc?.firstMatch(of: Regex("(<(.*)>(.*)</([^br][A-Za-z0-9]+)>)"))) != nil
+    }
+
+    internal init(id: Int,
+                  title: String,
+                  slug: String,
+                  subtitle: String? = nil,
+                  desc: String? = nil,
+                  start: Date,
+                  duration: TimeInterval,
+                  lastUpdated: Date,
+                  room: Room
+    ) {
+        self.id = id
+        self.title = title
+        self.slug = slug
+        self.subtitle = subtitle
+        self.desc = desc
+        self.start = start
+        self.duration = duration
+        self.lastUpdated = lastUpdated
+        self.room = room
+    }
+
+    convenience init(_ base: PentabarfKit.Event, room: Room, _ context: ModelContext) {
+        self.init(id: base.id,
+                  title: base.title,
+                  slug: base.slug,
+                  subtitle: base.subtitle,
+                  desc: base.description,
+                  start: base.start,
+                  duration: base.duration,
+                  lastUpdated: Date(),
+                  room: room)
+        self.userInfo = EventUserInfo(event: self)
+
+        self.track = Track.fetchWith(name: base.track.name, context) ?? Track(name: base.track.name)
+        modelContext?.insert(self.track!)
+
+        self.type = EventType.fetchWith(name: base.type, context) ?? EventType(name: base.type)
+        modelContext?.insert(self.type!)
+
+        self.authors = base.authors.map { authorBase in
+            let person = Person.fetchWith(id: authorBase.id, context) ?? Person(authorBase)
+            modelContext?.insert(person)
+
+            return person
+        }
+
+        self.links = base.links.map { linkBase in
+            let link = Link.fetchWith(url: linkBase.url, context) ?? Link(linkBase)
+            modelContext?.insert(link)
+
+            return link
+        } + base.attachments.map { linkBase in
+            let link = Link.fetchWith(url: linkBase.url, context) ?? Link(linkBase)
+            modelContext?.insert(link)
+
+            return link
+        }
     }
 
     func startInFormat(_ format: String) -> String {
@@ -75,96 +150,14 @@ public class Event: NSManagedObject, ManagedObjectProtocol, Identifiable {
 }
 
 extension Event {
-    class func build(_ element: SwiftyXMLParser.XML.Element) -> NSManagedObject? {
-        return nil
-    }
+    static func fetchWith(id: Int, _ context: ModelContext) -> Event? {
+        var descriptor = FetchDescriptor<Event>(predicate: #Predicate<Event> { event in
+            event.id == id
+        })
+        descriptor.fetchLimit = 1
 
-    class func build(_ element: XML.Element, date: Date) -> NSManagedObject? {
-        guard let id = element.attributes["id"] else {
-            return Event(context: DataImporter.context)
-        }
+        let items = try? context.fetch(descriptor)
 
-        let req: NSFetchRequest<Event> = NSFetchRequest<Event>(entityName: "Event")
-        req.predicate = NSComparisonPredicate(format: "id==%@", id)
-        let item: Event
-        if let event = try? req.execute().first {
-            item = event
-        } else {
-            item = Event(context: DataImporter.context)
-            item.userInfo = EventUserInfo(context: DataImporter.context)
-            item.userInfo.notificationUUID = UUID()
-        }
-
-        item.id = id
-        item.lastUpdated = Date()
-        item.title = XmlFinder.getChildString(element, element: "title")!
-                              .trimmingCharacters(in: .whitespacesAndNewlines)
-        item.slug = XmlFinder.getChildString(element, element: "slug")!
-                             .trimmingCharacters(in: .whitespacesAndNewlines)
-        item.subtitle = XmlFinder.getChildString(element, element: "subtitle")?
-                                 .trimmingCharacters(in: .whitespacesAndNewlines)
-        if let desc = XmlFinder.getChildString(element, element: "description") { item.desc = desc }
-        if let abstract = XmlFinder.getChildString(element, element: "abstract") { item.desc = abstract }
-
-        if let room = XmlFinder.getChildElement(element, element: "room"),
-           let roomObj = Room.build(room) as? Room {
-            item.room = roomObj
-        }
-
-        if let trackElement = XmlFinder.getChildElement(element, element: "track"),
-           let track = Track.build(trackElement) as? Track {
-            item.track = track
-        }
-
-        if let typeObj = XmlFinder.getChildElement(element, element: "type"),
-           let type = EventType.build(typeObj) as? EventType {
-            item.type = type
-        }
-
-        if let startString = XmlFinder.getChildString(element, element: "start"),
-           let start = XmlFinder.parseTimeString(startString) {
-            item.date = date
-            item.start = date.addingTimeInterval(start)
-        }
-
-        if let durationString = XmlFinder.getChildString(element, element: "duration"),
-            let duration = XmlFinder.parseTimeString(durationString) {
-            item.duration = duration
-        }
-
-        item.authors = parsePeopleElement(element)
-        item.links = parseLinksElement(element)
-
-        return item
-    }
-
-    class func parsePeopleElement(_ element: XML.Element) -> Set<Person> {
-        var returnVal = Set<Person>()
-        guard let people = XmlFinder.getChildElement(element, element: "persons") else {
-            return returnVal
-        }
-
-        people.childElements.forEach { element in
-            if let person = Person.build(element) as? Person {
-                returnVal.insert(person)
-            }
-        }
-
-        return returnVal
-    }
-
-    class func parseLinksElement(_ element: XML.Element) -> Set<Link> {
-        var returnVal = Set<Link>()
-        guard let links = XmlFinder.getChildElement(element, element: "links") else {
-            return returnVal
-        }
-
-        links.childElements.forEach { element in
-            if let link = Link.build(element) as? Link {
-                returnVal.insert(link)
-            }
-        }
-
-        return returnVal
+        return items?.first
     }
 }

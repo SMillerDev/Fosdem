@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -9,10 +9,10 @@ let package = Package(
     products: [
     ],
     dependencies: [
-        .package(url: "https://github.com/yahoojapan/SwiftyXMLParser.git", from: "5.0.0"),
+        .package(url: "https://github.com/SMillerDev/PentabarfKit", .branch("main"))
     ],
     targets: [
-        .target(name: "Fosdem", dependencies: ["SwiftyXMLParser"], path: "Fosdem"),
+        .target(name: "Fosdem", dependencies: ["PentabarfKit"], path: "Fosdem"),
         .testTarget(
             name: "FosdemTests",
             dependencies: ["Fosdem"],

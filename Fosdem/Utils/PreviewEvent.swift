@@ -4,43 +4,53 @@
 //
 //  Created by Sean Molenaar on 14/11/2022.
 //  Copyright © 2022 Sean Molenaar. All rights reserved.
-// swiftlint:disable line_length
 
 import Foundation
 
+extension Event {
+    convenience init(id: Int,
+                     title: String,
+                     slug: String,
+                     subtitle: String? = nil,
+                     desc: String? = nil,
+                     start: Date,
+                     duration: TimeInterval,
+                     lastUpdated: Date,
+                     track: Track,
+                     eventType: EventType,
+                     room: Room,
+                     authors: [Person],
+                     links: [Link]) {
+        self.init(id: id,
+                  title: title,
+                  slug: slug,
+                  subtitle: subtitle,
+                  desc: desc,
+                  start: start,
+                  duration: duration,
+                  lastUpdated: lastUpdated,
+                  room: room)
+        self.authors = authors
+        self.links = links
+    }
+}
+
 struct PreviewEvent {
     static func getEvent(_ subtitle: Bool) -> Event {
-        let event = Event(context: DataImporter.context)
-        let person = Person(context: DataImporter.context)
-        person.name = "John Doe"
-        person.id = "1010"
-        let person2 = Person(context: DataImporter.context)
-        person2.name = "Jane Doei"
-        person2.id = "1011"
-        event.authors = Set([person, person2])
+        let authors = [Person(id: 1010, name: "John Doe"), Person(id: 1011, name: "Jane Doe")]
 
-        event.track = Track(context: DataImporter.context)
-        event.track.name = "Mozilla Devroom"
-        event.track.color = "#0057B8"
+        let track = Track(name: "Mozilla Devroom")
+        let type = EventType(name: "keynote")
 
-        event.type = EventType(context: DataImporter.context)
-        event.type.name = "keynote"
-        event.type.color = "#0057B8"
+        let room = Room(name: "UD2.120 (Chavanne)")
 
-        event.room = Room(context: DataImporter.context)
-        event.room.name = "UD2.120 (Chavanne)"
+        let links = [Link(name: "Some Link", url: URL(string: "https://fosdem.org")!, type: nil)]
 
-        let link = Link(context: DataImporter.context)
-        link.name = "Some Link"
-        link.icon = "link.circle"
-        link.href = "https://fosdem.org"
-        event.links = Set([link])
-
-        event.start = Date()
-        event.duration = TimeInterval(150)
-        event.title = "Welcome to the Free Software Radio Devroom"
-        event.subtitle = subtitle ? "This presentation will give you an overview what to expect in the Free Software Radio devroom at FOSDEM 2022." : nil
-        event.desc = """
+        let start = Date()
+        let duration = TimeInterval(150)
+        // swiftlint:disable line_length
+        let subtitle = subtitle ? "This presentation will give you an overview what to expect in the Free Software Radio devroom at FOSDEM 2022." : nil
+        let desc = """
         The FOSS community suffers deeply from a fundamental paradox: every day, there are more lines of freely licensed code than ever in history, but, every day, it also becomes slightly more difficult to operate productively using only Open Source and Free Software.
 
         In one sense, we live in the paramount of success of FOSS: developers can easily find jobs writing mostly freely licensed software. Companies, charities, trade associations, and individual actors collaborate together on the same code bases in (relative) harmony. The entire Internet would cease to function without FOSS. Yet, the "last mile" of the most critical software that we rely on in our daily lives is usually proprietary.
@@ -55,6 +65,18 @@ struct PreviewEvent {
 
         """
 
-        return event
+        return Event(id: 10,
+                     title: "Welcome to the Free Software Radio Devroom",
+                     slug: "welcome",
+                     subtitle: subtitle,
+                     desc: desc,
+                     start: start, duration: duration,
+                     lastUpdated: Date(),
+                     track: track,
+                     eventType: type,
+                     room: room,
+                     authors: authors,
+                     links: links)
+        // swiftlint:enable line_length
     }
 }
