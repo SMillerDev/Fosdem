@@ -41,23 +41,51 @@ class ListSettings: ObservableObject {
                 predicate = basePredicate
             }
         }
+
         if onlyFuture {
-            let now = Date()
-            let basePredicate = #Predicate<Event> { $0.end > now }
+            let basePredicate = ListSettings.futurePredicate()
             if predicate != nil {
                 predicate = #Predicate<Event> { predicate!.evaluate($0) && basePredicate.evaluate($0) }
             } else {
                 predicate = basePredicate
             }
         }
+
         if let query = query, !query.isEmpty {
-            let basePredicate = #Predicate<Event> {
-                $0.title.localizedStandardContains(query) || $0.trackName.localizedStandardContains(query)
-            }
+            let basePredicate = ListSettings.searchPredicate(query, type: type)
             if predicate != nil {
                 predicate = #Predicate<Event> { predicate!.evaluate($0) && basePredicate.evaluate($0) }
             } else {
                 predicate = basePredicate
+            }
+        }
+
+        return predicate
+    }
+
+    private static func futurePredicate() -> Predicate<Event> {
+        let now = Date()
+        return #Predicate<Event> { $0.end > now }
+    }
+
+    private static func searchPredicate(_ searchText: String, type: ListPredicateType) -> Predicate<Event> {
+        var predicate = #Predicate<Event> { $0.title.localizedStandardContains(searchText) }
+        switch type {
+        case .track:
+            predicate = #Predicate<Event> {
+                $0.title.localizedStandardContains(searchText)
+             }
+        case .person:
+            predicate = #Predicate<Event> {
+                $0.title.localizedStandardContains(searchText) ||
+                !$0.authors.filter { author in
+                    author.name.localizedStandardContains(searchText)
+                }.isEmpty
+             }
+        case .room:
+            predicate = #Predicate<Event> {
+                $0.title.localizedStandardContains(searchText) ||
+                $0.room.name.localizedStandardContains(searchText)
             }
         }
 
@@ -69,4 +97,30 @@ enum ListPredicateType {
     case person
     case room
     case track
+
+    static var all: [ListPredicateType] {
+        return [.track, .person, .room]
+    }
+
+    static func getName(_ type: ListPredicateType) -> String {
+        switch type {
+        case .person:
+            return "People"
+        case .room:
+            return "Rooms"
+        case .track:
+            return "Tracks"
+        }
+    }
+
+    static func getIcon(_ type: ListPredicateType) -> String {
+        switch type {
+        case .person:
+            return "person"
+        case .room:
+            return "door.left.hand.open"
+        case .track:
+            return "road.lanes"
+        }
+    }
 }

@@ -15,6 +15,7 @@ enum EventTypeIcon: String {
     case maintrack = "road.lanes"
     case certification = "checkmark.seal"
     case bof = "bird"
+    case junior = "figure.and.child.holdinghands"
     case none = "questionmark.circle"
 
     static func getIconFor(_ string: String) -> EventTypeIcon {
@@ -33,6 +34,8 @@ enum EventTypeIcon: String {
             return .bof
         case "certification":
             return .certification
+        case "junior":
+            return .junior
         default:
             return .none
         }

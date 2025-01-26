@@ -114,12 +114,11 @@ struct EventDetailView: View {
                 ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
             }
             ToolbarItem(placement: .primaryAction) {
-                Toggle(isOn: $event.isFavourite, label: {
-                    Label("Favorite",
-                          systemImage: event.userInfo!.favorite ? "bookmark.fill" : "bookmark")
-                        .backgroundStyle(.clear)
-                }).onTapGesture(count: 1, perform: {
-                    debugPrint(event.userInfo!.favorite)
+                Button(action: {
+                    event.isFavourite.toggle()
+                    if !event.isFavourite {
+                        return
+                    }
                     if event.start.timeIntervalSinceNow <= 0 {
                         return
                     }
@@ -133,6 +132,10 @@ struct EventDetailView: View {
                     UNUserNotificationCenter.current()
                         .removePendingNotificationRequests(withIdentifiers:
                                                             [event.userInfo!.notificationUUID!.uuidString])
+                }, label: {
+                    Label("Favorite",
+                          systemImage: event.userInfo!.favorite ? "bookmark.fill" : "bookmark")
+                        .backgroundStyle(.clear)
                 })
             }
         }

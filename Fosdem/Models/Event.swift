@@ -24,7 +24,7 @@ public class Event {
     public var lastUpdated: Date = Date()
 
     public var room: Room
-    public var track: Track?
+    public var track: Track!
     public var type: EventType?
 
     public var userInfo: EventUserInfo?

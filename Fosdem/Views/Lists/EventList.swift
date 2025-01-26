@@ -10,25 +10,33 @@ import SwiftData
 import SwiftUI
 import SectionedQuery
 
-struct TrackEventList: View {
+struct EventList: View {
     @SectionedQuery private var events: SectionedResults<String, Event>
 
     let terms: ListSettings
 
-    init(terms: ListSettings) {
+    init(_ type: ListPredicateType, terms: ListSettings) {
+        let key = switch type {
+        case .room:
+            \Event.roomName
+        case .person:
+            \Event.authorName
+        case .track:
+            \Event.trackName
+        }
         self.terms = terms
-        _events = SectionedQuery(\.trackName,
-                                  filter: terms.predicate(.track),
+        _events = SectionedQuery(key,
+                                  filter: terms.predicate(type),
                                   sort: [SortDescriptor(\.start, order: .forward)])
     }
 
     var body: some View {
-        List(events) { section in
+        List(events, id: \.id) { section in
             Section(header: Text("\(section.id)")) {
-                ForEach(section) { event in
+                ForEach(section, id: \.id) { event in
                     NavigationLink(value: event,
                                    label: {
-                        ListItem(event, bookmarkEmphasis: !terms.onlyBookmarks)
+                        ListItem(event, bookmarkEmphasis: !terms.onlyBookmarks).id(event.id)
                     })
                 }
             }

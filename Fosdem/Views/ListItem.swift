@@ -61,9 +61,11 @@ struct ListItem: View {
             }
             ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
         }.swipeActions {
-            Button(action: { event.userInfo?.favorite.toggle() }, label: {
-                Label("Favorite", systemImage: event.userInfo?.favorite ?? false ? "star.fill" : "star")
-            }).tint(.orange)
+            Button(action: {
+                event.userInfo?.favorite.toggle()
+            }, label: {
+                Label("Favorite", systemImage: (event.userInfo?.favorite ?? false) ? "star.slash" : "star")
+            }).tint((event.userInfo?.favorite ?? false) ? .blue : .orange)
         }
         .onAppear {
             event.userInfo?.lastSeen = Date()

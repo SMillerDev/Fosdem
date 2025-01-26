@@ -32,12 +32,10 @@
 		925B0263298EB2A400AFA83D /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B0262298EB2A400AFA83D /* VideoPlayer.swift */; };
 		925F4A7D2B2863D8007E9D1D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 925F4A7C2B285A70007E9D1D /* Localizable.xcstrings */; };
 		926414702D4650CA001378EF /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9264146F2D4650C8001378EF /* Array.swift */; };
+		926414722D46BEE9001378EF /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926414712D46BEE9001378EF /* EventList.swift */; };
 		9268D79A298F251E0067A6B1 /* ListSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268D799298F251E0067A6B1 /* ListSettings.swift */; };
 		92775AC22CFF7FEB00D44236 /* SectionedQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 92775AC12CFF7FEB00D44236 /* SectionedQuery */; };
 		92775AC52CFF880500D44236 /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775AC42CFF87FD00D44236 /* BookmarkList.swift */; };
-		92775AC72CFF88BF00D44236 /* AuthorEventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775AC62CFF88BF00D44236 /* AuthorEventList.swift */; };
-		92775AC92CFF88F800D44236 /* TrackEventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775AC82CFF88F800D44236 /* TrackEventList.swift */; };
-		92775ACB2CFF8A9A00D44236 /* RoomEventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775ACA2CFF8A9A00D44236 /* RoomEventList.swift */; };
 		9290384C2C9613FD002201FC /* ScheduleFetchingActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290384B2C9613F6002201FC /* ScheduleFetchingActor.swift */; };
 		92B987FC2981CD10007574EB /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B987FB2981CD10007574EB /* AboutView.swift */; };
 		92BB58562B5FB84400C54292 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB58552B5FB84400C54292 /* SettingsView.swift */; };
@@ -101,11 +99,9 @@
 		925B0262298EB2A400AFA83D /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		925F4A7C2B285A70007E9D1D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9264146F2D4650C8001378EF /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		926414712D46BEE9001378EF /* EventList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		9268D799298F251E0067A6B1 /* ListSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSettings.swift; sourceTree = "<group>"; };
 		92775AC42CFF87FD00D44236 /* BookmarkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkList.swift; sourceTree = "<group>"; };
-		92775AC62CFF88BF00D44236 /* AuthorEventList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorEventList.swift; sourceTree = "<group>"; };
-		92775AC82CFF88F800D44236 /* TrackEventList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackEventList.swift; sourceTree = "<group>"; };
-		92775ACA2CFF8A9A00D44236 /* RoomEventList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomEventList.swift; sourceTree = "<group>"; };
 		9290384B2C9613F6002201FC /* ScheduleFetchingActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleFetchingActor.swift; sourceTree = "<group>"; };
 		92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = FosdemTests.xctestplan; path = Fosdem.xcodeproj/FosdemTests.xctestplan; sourceTree = "<group>"; };
 		92A57B392988FD1C00C0BB78 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -181,7 +177,6 @@
 			children = (
 				92775AC32CFF87F500D44236 /* Lists */,
 				92BB58552B5FB84400C54292 /* SettingsView.swift */,
-				92CE31B028FC4A940073813E /* EventListView.swift */,
 				92077D5028FF01C600BF8A03 /* EventDetailView.swift */,
 				92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */,
 				924E15C229238AA5005A8EA2 /* ListItem.swift */,
@@ -255,11 +250,10 @@
 		92775AC32CFF87F500D44236 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				92CE31B028FC4A940073813E /* EventListView.swift */,
 				92775AC42CFF87FD00D44236 /* BookmarkList.swift */,
-				92775AC62CFF88BF00D44236 /* AuthorEventList.swift */,
-				92775AC82CFF88F800D44236 /* TrackEventList.swift */,
+				926414712D46BEE9001378EF /* EventList.swift */,
 				920085652D42F2D70082719F /* ListStatusOverlay.swift */,
-				92775ACA2CFF8A9A00D44236 /* RoomEventList.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -451,8 +445,8 @@
 				14D277192205D07200740042 /* AppDelegate.swift in Sources */,
 				146A86792206ED84008A61AD /* Track.swift in Sources */,
 				92775AC52CFF880500D44236 /* BookmarkList.swift in Sources */,
+				926414722D46BEE9001378EF /* EventList.swift in Sources */,
 				925321602925716A004C7E5C /* EventUserInfo.swift in Sources */,
-				92775ACB2CFF8A9A00D44236 /* RoomEventList.swift in Sources */,
 				920085662D42F2D70082719F /* ListStatusOverlay.swift in Sources */,
 				142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */,
 				92CE31AF28FC49DC0073813E /* SettingsHelper.swift in Sources */,
@@ -468,12 +462,10 @@
 				142A873D2224651F0034F6D7 /* Hash.swift in Sources */,
 				926414702D4650CA001378EF /* Array.swift in Sources */,
 				924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */,
-				92775AC92CFF88F800D44236 /* TrackEventList.swift in Sources */,
 				146A866F2205EFE9008A61AD /* Room.swift in Sources */,
 				146A86742205EFE9008A61AD /* Event.swift in Sources */,
 				146A86702205EFE9008A61AD /* Person.swift in Sources */,
 				92BD1D302B5C34F100DB8FC1 /* EventTypeColor.swift in Sources */,
-				92775AC72CFF88BF00D44236 /* AuthorEventList.swift in Sources */,
 				14D2774C2205D19D00740042 /* RemoteScheduleFetcher.swift in Sources */,
 				925B0261298EAE0E00AFA83D /* LiveIcon.swift in Sources */,
 				92BB58562B5FB84400C54292 /* SettingsView.swift in Sources */,
@@ -671,7 +663,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -701,7 +693,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
