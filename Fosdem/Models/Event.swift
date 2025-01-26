@@ -17,8 +17,9 @@ public class Event {
     public var title: String
     public var slug: String
     public var subtitle: String?
-    public var desc: String?
+    public var desc: String
     public var start: Date
+    public var end: Date
     public var duration: TimeInterval
     public var lastUpdated: Date = Date()
 
@@ -29,27 +30,22 @@ public class Event {
     public var userInfo: EventUserInfo?
 
     public var authors: [Person] = []
-    public var links: [Link] = []
+    @Relationship(deleteRule: .cascade, inverse: \Link.event) public var links: [Link] = []
 
     @Transient
-    public var authorName: String {
-        return authors.first!.name
-    }
+    public var authorName: String { return authors.first!.name}
 
     @Transient
-    var year: String {
-        return startInFormat("yyyy")
-    }
+    public var trackName: String { return track!.name }
 
     @Transient
-    public var day: Int {
-        return Int(startInFormat("dd")) ?? 0
-    }
+    public var roomName: String { return room.name }
 
     @Transient
-    public var end: Date {
-        return start.addingTimeInterval(duration)
-    }
+    var year: String { return startInFormat("yyyy") }
+
+    @Transient
+    public var day: Int { return Int(startInFormat("dd")) ?? 0 }
 
     @Transient
     public var isOngoing: Bool {
@@ -58,9 +54,7 @@ public class Event {
     }
 
     @Transient
-    public var isEnded: Bool {
-        return end < Date()
-    }
+    public var isEnded: Bool { return end < Date() }
 
     @Transient
     public var isFavourite: Bool {
@@ -70,14 +64,15 @@ public class Event {
 
     @Transient
     public var hasHTMLDescription: Bool {
-        return  (try? desc?.firstMatch(of: Regex("(<(.*)>(.*)</([^br][A-Za-z0-9]+)>)"))) != nil
+        let matches = try? desc.matches(of: Regex("(<(.*)>(.*)</([^br]|[A-Za-z0-9]+)>)"))
+        return matches != nil && !matches!.isEmpty
     }
 
     internal init(id: Int,
                   title: String,
                   slug: String,
                   subtitle: String? = nil,
-                  desc: String? = nil,
+                  desc: String,
                   start: Date,
                   duration: TimeInterval,
                   lastUpdated: Date,
@@ -90,6 +85,7 @@ public class Event {
         self.desc = desc
         self.start = start
         self.duration = duration
+        self.end = start.addingTimeInterval(duration)
         self.lastUpdated = lastUpdated
         self.room = room
     }
@@ -99,7 +95,7 @@ public class Event {
                   title: base.title,
                   slug: base.slug,
                   subtitle: base.subtitle,
-                  desc: base.description,
+                  desc: base.description.isEmpty ? base.abstract : base.description,
                   start: base.start,
                   duration: base.duration,
                   lastUpdated: Date(),

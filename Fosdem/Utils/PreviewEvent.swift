@@ -12,7 +12,7 @@ extension Event {
                      title: String,
                      slug: String,
                      subtitle: String? = nil,
-                     desc: String? = nil,
+                     desc: String,
                      start: Date,
                      duration: TimeInterval,
                      lastUpdated: Date,

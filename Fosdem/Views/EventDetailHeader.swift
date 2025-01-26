@@ -19,8 +19,10 @@ struct EventDetailHeader: View {
         VStack(alignment: .leading, spacing: 0) {
             GroupBox(event.track?.name ?? "UNKNOWN_TRACK") {
                 VStack(alignment: .leading) {
-                    Text(event.type?.name.capitalized ?? "UNKNOWN_TYPE")
+                    Label(event.type?.name.capitalized ?? "UNKNOWN_TYPE",
+                          systemImage: event.type?.icon ?? "questionmark.circle.dashed")
                         .foregroundColor(event.type?.colorObject ?? .gray)
+
                     if let subtitle = event.subtitle {
                         Text(subtitle)
                             .foregroundColor(.secondary)
@@ -51,8 +53,9 @@ struct EventDetailHeader: View {
                         }
                     }
                     Divider()
-                    ForEach(Array(event.authors)) { author in
-                        Label(author.name, systemImage: "person")
+                    ForEach(Array(event.authors.sorted { $0.name < $1.name })) { author in
+                        Label(author.name,
+                              systemImage: author.isStaff ? "person.3" : "person")
                             .padding([.top, .bottom], 5)
                     }
                 }

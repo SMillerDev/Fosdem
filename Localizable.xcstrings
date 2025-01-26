@@ -26,6 +26,9 @@
         }
       }
     },
+    "All events filtered out" : {
+
+    },
     "Bookmarks only" : {
       "localizations" : {
         "nl" : {
@@ -168,6 +171,9 @@
         }
       }
     },
+    "No events" : {
+
+    },
     "No links" : {
       "localizations" : {
         "nl" : {
@@ -178,7 +184,7 @@
         }
       }
     },
-    "No video available 😔" : {
+    "No results" : {
 
     },
     "People" : {
@@ -239,16 +245,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deel web link"
-          }
-        }
-      }
-    },
-    "Still loading events" : {
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Presentaties laden nog"
           }
         }
       }

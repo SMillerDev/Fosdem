@@ -9,29 +9,50 @@
 import SwiftUI
 import AVKit
 
-struct VideoPlayer: View {
-    private var player: AVPlayer
-    init(_ link: Link) {
-        let player = AVPlayer(url: link.url)
+struct AVVideoPlayer: UIViewControllerRepresentable {
+    let link: Link
+
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let playerViewController = AVPlayerViewController()
+
+        let asset = AVURLAsset(url: link.url)
+        let playerItem = AVPlayerItem(
+            asset: asset,
+            automaticallyLoadedAssetKeys: [.tracks, .duration, .commonMetadata]
+        )
+
+        let player = AVPlayer(playerItem: playerItem)
+
+        playerViewController.player = player
+        playerViewController.canStartPictureInPictureAutomaticallyFromInline = true
+        playerViewController.allowsPictureInPicturePlayback = true
+
         player.audiovisualBackgroundPlaybackPolicy = .continuesIfPossible
         player.allowsExternalPlayback = true
 
-        self.player = player
+        playerViewController.player?.play()
 
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(.playback)
-        } catch {
-            print("Setting category to AVAudioSessionCategoryPlayback failed.")
-        }
+        return playerViewController
+    }
+
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) { }
+}
+
+struct VideoPlayer: View {
+
+    private let link: Link
+
+    init(_ link: Link) {
+        self.link = link
     }
 
     var body: some View {
-        AVKit.VideoPlayer(player: player)
-            .frame(height: 300)
-            .onAppear {
-                player.play()
-            }
+        VStack {
+            AVVideoPlayer(link: link)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+
+            Spacer()
+        }.ignoresSafeArea()
     }
 }
 

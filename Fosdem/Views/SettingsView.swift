@@ -11,19 +11,18 @@ import SwiftUI
 import SwiftData
 
 struct SettingsView: View {
-    @State private var bookmarks: Bool = SettingsHelper().bookmarks
-    @State private var future: Bool = SettingsHelper().future
-    @State private var localTime: Bool = SettingsHelper().localTime
-    @State private var year: String = SettingsHelper().year
+    @State private var localTime: Bool
+    @State private var year: String
 
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) var modelContext
+
+    init(localTime: Bool, year: String) {
+        self.localTime = localTime
+        self.year = year
+    }
 
     var body: some View {
         Form {
-            Section("Filters") {
-                Toggle(isOn: $bookmarks, label: { Label("Bookmarks only", systemImage: "bookmark")})
-                Toggle(isOn: $future, label: { Label("Future events only", systemImage: "clock")})
-            }
             Section("Settings") {
                 Toggle(isOn: $localTime,
                        label: {
@@ -38,15 +37,29 @@ struct SettingsView: View {
                     Label("Year", systemImage: "calendar")
                 }
             }
-        }.presentationDetents([.fraction(0.3)])
-            .onChange(of: year) { _, value in
-                SettingsHelper().year = value
-                do {
-                    try modelContext.delete(model: Conference.self)
-                } catch {
-                    debugPrint("Failed to clear")
-                }
+            Section("About") {
+                AboutView()
             }
+        }.presentationDetents([.fraction(0.3)])
+            .onChange(of: localTime) { localTime, _ in
+                UserDefaults.standard.set(localTime, forKey: "localTime")
+            }
+        .onChange(of: year) { year, _ in
+            UserDefaults.standard.set(year, forKey: "year")
+            do {
+                if #available(iOS 18, *) {
+                    try modelContext.container.erase()
+                } else {
+                    modelContext.container.deleteAllData()
+                }
+            } catch {
+
+            }
+            Task {
+                await RoomStatusFetcher.fetchRoomStatus()
+                await RemoteScheduleFetcher.fetchSchedule()
+            }
+        }
     }
 
     private func getYears() -> [String] {
@@ -69,6 +82,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(localTime: true, year: "2025")
     }
 }

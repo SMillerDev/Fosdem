@@ -11,7 +11,7 @@ import SwiftUI
 
 class ListSettings: ObservableObject {
     @AppStorage(wrappedValue: false, "onlyBookmarks") var onlyBookmarks: Bool
-    @AppStorage(wrappedValue: false, "futureOnly") var onlyFuture: Bool
+    @AppStorage(wrappedValue: false, "onlyFuture") var onlyFuture: Bool
     @AppStorage(wrappedValue: false, "localTime") var localTime: Bool
     @AppStorage(wrappedValue: SettingsHelper.DEFAULTYEAR, "year") var year: String
 

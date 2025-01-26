@@ -8,123 +8,85 @@
 
 import SwiftUI
 import SwiftData
+import SectionedQuery
 
 struct EventListView: View {
     @State private var query = ""
-    private var listPredicate: ListPredicate = ListPredicate()
     @State private var isSheetPresented: Bool = false
-    @State private var bookmarks: Bool = SettingsHelper().bookmarks
-    @State private var future: Bool = SettingsHelper().future
-    @State private var localTime: Bool = SettingsHelper().localTime
-    @State private var year: String = SettingsHelper().year
-    @State private var visibility: NavigationSplitViewVisibility = .doubleColumn
+    @State private var isSearchPresented: Bool = false
 
+    @State private var onlyBookmarks: Bool
+    @State private var onlyFuture: Bool
+
+    @StateObject private var predicate = ListSettings()
+
+    @ModelActor public actor ScheduleFetchingActor {}
     @Environment(\.modelContext) var modelContext
 
-    @Query(sort: \Person.name) var personEvents: [Person]
-    @Query(filter: #Predicate<Event> { event in
-        event.userInfo?.favorite == true
-    }, sort: \Event.start, order: .forward) var myEvents: [Event]
-    @Query(sort: [SortDescriptor(\Track.name)]) var trackEvents: [Track]
-    @Query(sort: \Room.name) var roomEvents: [Room]
-
-    var trackList: some View {
-        List(trackEvents) { track in
-            Section(header: Text("\(track.name)")) {
-                ForEach(track.events.sorted { $0.start >= $1.start }) { event in
-                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
-                }
-            }
-        }.overlay(Group {
-            if trackEvents.isEmpty && query.isEmpty {
-                ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
-            }
-        }).listStyle(.plain)
-    }
-
-    var roomList: some View {
-        List(roomEvents) { _ in
-//            Section(header: Text("\(room.name)")) {
-//                ForEach(room.events.sorted { $0.start >= $1.start }) { event in
-//                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
-//                }
-//            }
-        }.overlay(Group {
-            if trackEvents.isEmpty && query.isEmpty {
-                ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
-            }
-        }).listStyle(.plain)
-    }
-
-    var personList: some View {
-        List(personEvents) { person in
-            Section(person.name) {
-                ForEach(Array(person.events.sorted { $0.start >= $1.start })) { event in
-                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: bookmarks) })
-                }
-            }
-        }.overlay(Group {
-            if personEvents.isEmpty && query.isEmpty {
-                ProgressView("Still loading events").progressViewStyle(CircularProgressViewStyle())
-            }
-        }).listStyle(.plain)
+    init() {
+        self.onlyBookmarks = UserDefaults.standard.bool(forKey: "onlyBookmarks")
+        self.onlyFuture = UserDefaults.standard.bool(forKey: "onlyFuture")
     }
 
     var body: some View {
         NavigationStack {
             TabView {
-                trackList.tabItem { Label("Tracks", systemImage: "road.lanes") }
-
-                personList.tabItem { Label("People", systemImage: "person.3") }
-
-                roomList.tabItem { Label("Rooms", systemImage: "door.left.hand.open") }
-
-                List(myEvents) { event in
-                    NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: false) })
-                }.listStyle(.plain).tabItem {
-                    Label("My events", systemImage: "person.circle")
-                }.overlay(Group {
-                    if myEvents.isEmpty {
-                        Label("No Bookmarks yet", systemImage: "bookmark.slash")
-                    }
-                })
-            }.onChange(of: year) {
-                Task {
-                    await RoomStatusFetcher.fetchRoomStatus()
-                    await RemoteScheduleFetcher.fetchSchedule()
+                TrackEventList(terms: predicate).tabItem {
+                    Label("Tracks", systemImage: "road.lanes")
                 }
+                AuthorEventList(terms: predicate).tabItem {
+                    Label("People", systemImage: "person.3")
+                }
+                RoomEventList(terms: predicate).tabItem {
+                    Label("Rooms", systemImage: "door.left.hand.open")
+                }
+                BookmarkList(terms: predicate).tabItem {
+                    Label("My events", systemImage: "person.circle")
+                }
+            }.onChange(of: onlyFuture) { value, _ in
+                self.predicate.onlyFuture = value
             }.searchable(
                 text: $query,
-                placement: .navigationBarDrawer
-            ).refreshable {
-                Task {
-                    await RoomStatusFetcher.fetchRoomStatus()
-                    await RemoteScheduleFetcher.fetchSchedule()
-                }
-            }.navigationDestination(for: Event.self, destination: { event in
+                isPresented: $isSearchPresented
+            ).navigationDestination(for: Event.self, destination: { event in
                 EventDetailView(event)
             })
             .toolbar {
-                ToolbarItem(placement: .secondaryAction) {
-                    NavigationLink { AboutView() } label: {
-                        Label("About", systemImage: "questionmark.bubble.fill")
-                    }
+                ToolbarItemGroup {
+                    Button(action: {
+                        onlyBookmarks.toggle()
+                        predicate.onlyBookmarks = onlyBookmarks
+                    }, label: {
+                        Label("Bookmarks only", systemImage: onlyBookmarks ? "bookmark.fill" : "bookmark")
+                    })
+                    Button(action: {
+                        onlyFuture.toggle()
+                        predicate.onlyFuture = onlyFuture
+                    }, label: {
+                        Label("Future events only", systemImage: onlyFuture ? "clock.fill" : "clock")
+                    })
+                } label: {
+                    Label("Filters", systemImage: "line.3.horizontal.decrease.circle")
                 }
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem {
                     Button(action: {
                         isSheetPresented.toggle()
-                    }, label: { Label("Filter lists", systemImage: "slider.horizontal.2.square.on.square")})
-                        .sheet(isPresented: $isSheetPresented, content: {
-                            SettingsView().presentationDetents([.medium])
-                        })
-                }
-            }.navigationTitle("Fosdem \(year)")
-            .task {
-                if personEvents.isEmpty && trackEvents.isEmpty {
-                    await RoomStatusFetcher.fetchRoomStatus()
-                    await RemoteScheduleFetcher.fetchSchedule()
+                    }, label: {
+                        Label("Filter lists", systemImage: "slider.horizontal.2.square.on.square")
+                    })
                 }
             }
+            .sheet(isPresented: $isSheetPresented, content: {
+                SettingsView(localTime: predicate.localTime, year: predicate.year)
+                    .presentationDetents([.medium])
+            })
+            .navigationTitle("Fosdem \(predicate.year)")
+             .refreshable {
+            Task {
+                await RoomStatusFetcher.fetchRoomStatus()
+                await RemoteScheduleFetcher.fetchSchedule()
+            }
+        }
         }
     }
 }

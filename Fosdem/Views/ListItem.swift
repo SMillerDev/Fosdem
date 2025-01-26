@@ -41,7 +41,7 @@ struct ListItem: View {
             if event.isOngoing { LiveIcon() }
 
             Text(event.title)
-                .bold(event.userInfo?.favorite ?? false && bookmarkEmphasis)
+                .bold((event.userInfo?.favorite ?? false) && bookmarkEmphasis)
                 .foregroundColor(!event.isEnded ? .primary : .gray)
 
         }.contextMenu {

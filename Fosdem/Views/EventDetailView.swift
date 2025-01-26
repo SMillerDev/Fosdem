@@ -13,8 +13,6 @@ struct EventDetailView: View {
 
     @State private var selectedTabIndex = 0
     @State private var permissionGranted = false
-    @State private var shouldPresentSheet = false
-    @State private var urlPlaying: Link?
 
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) var context
@@ -65,37 +63,38 @@ struct EventDetailView: View {
 
                 ZStack {
                     if selectedTabIndex == 0 {
-                        if event.hasHTMLDescription {
-                            HTMLFormattedText(event.desc ?? "", colorScheme: colorScheme)
+                        if event.desc.isEmpty {
+                            Text("No description").foregroundColor(.gray)
+                                                  .font(.title2)
+                                                  .padding()
+                        } else if event.hasHTMLDescription {
+                            HTMLFormattedText(event.desc, colorScheme: colorScheme).padding()
                         } else {
-                            if let desc = event.desc {
-                                Text(LocalizedStringKey(desc)).padding()
-                            } else {
-                                Text("No description").foregroundColor(.gray)
-                                                      .font(.title2)
-                                                      .padding()
-                            }
+                            Text(LocalizedStringKey(event.desc)).padding()
                         }
                     }
                     if selectedTabIndex == 1 {
-                        VStack(alignment: .leading) {
-                            if event.links.isEmpty {
-                                Text("No links").foregroundColor(.gray)
-                                                .font(.title2)
-                                                .padding()
-                            } else {
-                                ForEach(event.links) { link in
-                                    if link.isVideo {
-                                        Button(action: {
-                                            urlPlaying = link
-                                            shouldPresentSheet.toggle()
-                                        }, label: {
-                                            Label(link.name, systemImage: link.icon)
-                                        })
+                        if event.links.isEmpty {
+                            Text("No links").foregroundColor(.gray)
+                                            .font(.title2)
+                                            .padding()
+                        } else {
+                            VStack(alignment: .leading) {
+                                ForEach(event.links.sorted { $0.name < $1.name }) { link in
+                                    let label = Label(link.name, systemImage: link.icon).padding()
+                                                                                        .frame(
+                                                                                            maxWidth: .infinity,
+                                                                                            alignment: .leading
+                                                                                        )
+                                    if link.isVideo && link.isStreamableVideo {
+                                        NavigationLink(destination: {
+                                            VStack {
+                                                Text(link.name).font(.title)
+                                                VideoPlayer(link)
+                                            }
+                                        }, label: { label })
                                     } else {
-                                        SwiftUI.Link(destination: link.url) {
-                                            Label(link.name, systemImage: link.icon)
-                                        }.padding()
+                                        SwiftUI.Link(destination: link.url) { label }
                                     }
                                 }
                             }
@@ -110,15 +109,6 @@ struct EventDetailView: View {
             }
         }.navigationTitle(Text(event.title))
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $shouldPresentSheet) {
-            print("Sheet dismissed!")
-        } content: {
-            if let url = urlPlaying {
-                VideoPlayer(url)
-            } else {
-                Text("No video available 😔")
-            }
-        }
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))

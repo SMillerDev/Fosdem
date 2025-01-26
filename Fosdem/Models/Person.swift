@@ -20,6 +20,11 @@ public class Person {
     public var events: [Event]
 
     @Transient
+    var isStaff: Bool {
+        return name.lowercased().contains("staff")
+    }
+
+    @Transient
     var slug: String {
         return name.folding(options: .diacriticInsensitive, locale: .current)
             .lowercased()

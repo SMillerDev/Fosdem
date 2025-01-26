@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import AVKit
 
 @main
 struct Fosdem: App {
@@ -39,12 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    static let year = SettingsHelper().year
-
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         debugPrint(paths[0])
+
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(.playback, mode: .moviePlayback)
+            try session.setActive(true, options: [])
+        } catch let error {
+            print(error.localizedDescription)
+        }
 
         return true
     }

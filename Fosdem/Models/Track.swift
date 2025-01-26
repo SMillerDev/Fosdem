@@ -13,7 +13,7 @@ import SwiftData
 public class Track {
     @Attribute(.unique) public var name: String
 
-    @Relationship(deleteRule: .cascade, inverse: \Event.track)
+    @Relationship(deleteRule: .nullify, inverse: \Event.track)
     public var events: [Event] = []
 
     @Transient

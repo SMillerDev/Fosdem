@@ -15,13 +15,14 @@ public class Link {
     public var name: String
     @Attribute(originalName: "href") public var url: URL
     public var type: String
-
-    @Relationship(deleteRule: .nullify, inverse: \Event.links)
     public var event: Event!
 
     @Transient
     public var isVideo: Bool {
         return type.contains(/video/) || name.lowercased().contains(/video recording/)
+    }
+    public var isStreamableVideo: Bool {
+        return url.absoluteString.contains(/\.mp4$/)
     }
 
     @Transient

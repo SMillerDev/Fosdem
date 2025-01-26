@@ -24,7 +24,7 @@ public class Conference {
     @Relationship(deleteRule: .cascade)
     public var rooms: [Room] = []
 
-    static var roomStates: [RoomState] = []
+    nonisolated(unsafe) static var roomStates: [RoomState] = []
 
     init(name: String, venue: String, start: Date, end: Date, events: [Event] = [], rooms: [Room] = []) {
         self.name = name
@@ -37,18 +37,5 @@ public class Conference {
 
     convenience init(_ base: PentabarfKit.Conference, rooms: [Room], events: [Event] = []) {
         self.init(name: base.title, venue: base.venue, start: base.start, end: base.end, events: events, rooms: rooms)
-    }
-}
-
-extension Conference {
-    static func fetchWith(name: String, _ context: ModelContext) -> Conference? {
-        var descriptor = FetchDescriptor<Conference>(predicate: #Predicate<Conference> { base in
-            base.name == name
-        })
-        descriptor.fetchLimit = 1
-
-        let items = try? context.fetch(descriptor)
-
-        return items?.first
     }
 }

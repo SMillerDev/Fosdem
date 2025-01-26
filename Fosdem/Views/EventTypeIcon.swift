@@ -23,6 +23,8 @@ enum EventTypeIcon: String {
             return .devroom
         case "keynotes":
             return .keynotes
+        case "keynote":
+            return .keynotes
         case "lightningtalk":
             return .lightningtalk
         case "maintrack":

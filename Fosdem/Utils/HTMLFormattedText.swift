@@ -20,7 +20,7 @@ struct HTMLFormattedText: UIViewRepresentable {
     }
 
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UITextView {
-        textView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+        textView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40).isActive = true
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ struct HTMLFormattedText: UIViewRepresentable {
                 font-size: 18px;
                 text-align: justify;
                 font-family: sans-serif;
-                padding: 10pc;
+                line-height: 1.6;
             }
         </style>
         """
