@@ -1,20 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-
-    },
     "🇺🇦" : {
-
+      "shouldTranslate" : false
     },
     "🍺" : {
-
+      "shouldTranslate" : false
     },
     "🔨" : {
-
+      "shouldTranslate" : false
     },
     "🧑‍💻" : {
-
+      "shouldTranslate" : false
     },
     "About" : {
       "localizations" : {
@@ -23,11 +20,24 @@
             "state" : "translated",
             "value" : "Over"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Про"
+          }
         }
       }
     },
     "All events filtered out" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle evenementen worden gefilterd"
+          }
+        }
+      }
     },
     "Bookmarks only" : {
       "localizations" : {
@@ -47,6 +57,18 @@
             "state" : "translated",
             "value" : "Chat"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "чат"
+          }
         }
       }
     },
@@ -57,11 +79,30 @@
             "state" : "translated",
             "value" : "Omschrijving"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Опис"
+          }
         }
       }
     },
     "Details" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Деталі"
+          }
+        }
+      }
     },
     "Favorite" : {
       "localizations" : {
@@ -70,17 +111,31 @@
             "state" : "translated",
             "value" : "Favoriet"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Улюблений"
+          }
         }
       }
     },
     "Filters" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filters"
+          }
+        }
+      }
     },
     "FOSDEM" : {
-
+      "shouldTranslate" : false
     },
     "Fosdem %@" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "shouldTranslate" : false
     },
     "Future events only" : {
       "localizations" : {
@@ -103,7 +158,7 @@
       }
     },
     "Homebrew" : {
-
+      "shouldTranslate" : false
     },
     "If you have improvements you can suggest them at:" : {
       "localizations" : {
@@ -116,10 +171,34 @@
       }
     },
     "Links" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links"
+          }
+        }
+      }
+    },
+    "List grouping" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groepering van de lijst"
+          }
+        }
+      }
     },
     "Live Video" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live video"
+          }
+        }
+      }
     },
     "Local timezone" : {
       "localizations" : {
@@ -127,23 +206,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lokale tijdzone"
-          }
-        }
-      }
-    },
-    "My events" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "My bookmarks"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mijn keuzes"
           }
         }
       }
@@ -169,7 +231,14 @@
       }
     },
     "No events" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen evenementen"
+          }
+        }
+      }
     },
     "No links" : {
       "localizations" : {
@@ -182,7 +251,14 @@
       }
     },
     "No results" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen resultaten"
+          }
+        }
+      }
     },
     "People" : {
       "extractionState" : "manual",
@@ -191,6 +267,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sprekers"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Люде"
           }
         }
       }
@@ -274,6 +356,12 @@
             "state" : "translated",
             "value" : "Oekraïne"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Україна"
+          }
         }
       }
     },
@@ -283,6 +371,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jaar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рік"
           }
         }
       }

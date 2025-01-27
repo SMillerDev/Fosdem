@@ -32,7 +32,7 @@ struct EventList: View {
 
     var body: some View {
         List(events, id: \.id) { section in
-            Section(header: Text("\(section.id)")) {
+            Section(header: Text(section.id)) {
                 ForEach(section, id: \.id) { event in
                     NavigationLink(value: event,
                                    label: {
