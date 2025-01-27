@@ -42,17 +42,13 @@ struct EventListView: View {
                 EventDetailView(event)
             }).toolbar {
                 ToolbarTitleMenu {
-                    ForEach(ListPredicateType.all, id: \.self) { type in
-                        Button {
-                            self.list = type
-                        } label: {
+                    Picker("List grouping", selection: $list) {
+                        ForEach(ListPredicateType.all, id: \.self) { type in
                             Label(ListPredicateType.getName(type), systemImage: ListPredicateType.getIcon(type))
-                                .foregroundStyle(self.list == type ? .primary : .secondary)
                         }
                     }
+
                 }
-            }
-            .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         Button(action: {
