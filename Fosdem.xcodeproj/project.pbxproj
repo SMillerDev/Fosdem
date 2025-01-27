@@ -34,7 +34,6 @@
 		926414702D4650CA001378EF /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9264146F2D4650C8001378EF /* Array.swift */; };
 		926414722D46BEE9001378EF /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926414712D46BEE9001378EF /* EventList.swift */; };
 		9268D79A298F251E0067A6B1 /* ListSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268D799298F251E0067A6B1 /* ListSettings.swift */; };
-		92775AC22CFF7FEB00D44236 /* SectionedQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 92775AC12CFF7FEB00D44236 /* SectionedQuery */; };
 		92775AC52CFF880500D44236 /* BookmarkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775AC42CFF87FD00D44236 /* BookmarkList.swift */; };
 		9290384C2C9613FD002201FC /* ScheduleFetchingActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290384B2C9613F6002201FC /* ScheduleFetchingActor.swift */; };
 		92B987FC2981CD10007574EB /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B987FB2981CD10007574EB /* AboutView.swift */; };
@@ -48,6 +47,7 @@
 		92CE31B128FC4A940073813E /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31B028FC4A940073813E /* EventListView.swift */; };
 		92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */; };
 		92D9E7BA291D95E1007D203D /* EventDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */; };
+		92EF5F422D47D8B50050C67D /* SectionedQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 92EF5F412D47D8B50050C67D /* SectionedQuery */; };
 		92F70AA02922B49A000BE6CB /* UrlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F70A9F2922B49A000BE6CB /* UrlHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92775AC22CFF7FEB00D44236 /* SectionedQuery in Frameworks */,
+				92EF5F422D47D8B50050C67D /* SectionedQuery in Frameworks */,
 				9203845F2B5B0A2100B793AA /* PentabarfKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,12 +287,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				92E5C1112D4817250017CEE0 /* PBXTargetDependency */,
 				92FC930A2B5C2DA100C2D13D /* PBXTargetDependency */,
 			);
 			name = Fosdem;
 			packageProductDependencies = (
 				9203845E2B5B0A2100B793AA /* PentabarfKit */,
-				92775AC12CFF7FEB00D44236 /* SectionedQuery */,
+				92EF5F412D47D8B50050C67D /* SectionedQuery */,
 			);
 			productName = Fosdem;
 			productReference = 14D277152205D07200740042 /* Fosdem.app */;
@@ -373,7 +374,7 @@
 			mainGroup = 14D2770C2205D07200740042;
 			packageReferences = (
 				9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */,
-				92775AC02CFF7F1F00D44236 /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */,
+				92EF5F402D47D8B50050C67D /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14D277162205D07200740042 /* Products */;
@@ -507,6 +508,10 @@
 			isa = PBXTargetDependency;
 			target = 14D277142205D07200740042 /* Fosdem */;
 			targetProxy = 14D2773A2205D07500740042 /* PBXContainerItemProxy */;
+		};
+		92E5C1112D4817250017CEE0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 92E5C1102D4817250017CEE0 /* SectionedQuery */;
 		};
 		92FC930A2B5C2DA100C2D13D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -844,12 +849,12 @@
 				kind = branch;
 			};
 		};
-		92775AC02CFF7F1F00D44236 /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */ = {
+		92EF5F402D47D8B50050C67D /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/beechtom/swiftdata-sectionedquery";
+			repositoryURL = "https://github.com/Whiffer/swiftdata-sectionedquery";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 1.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -860,9 +865,14 @@
 			package = 9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */;
 			productName = PentabarfKit;
 		};
-		92775AC12CFF7FEB00D44236 /* SectionedQuery */ = {
+		92E5C1102D4817250017CEE0 /* SectionedQuery */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 92775AC02CFF7F1F00D44236 /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */;
+			package = 92EF5F402D47D8B50050C67D /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */;
+			productName = SectionedQuery;
+		};
+		92EF5F412D47D8B50050C67D /* SectionedQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92EF5F402D47D8B50050C67D /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */;
 			productName = SectionedQuery;
 		};
 		92FC93092B5C2DA100C2D13D /* PentabarfKit */ = {

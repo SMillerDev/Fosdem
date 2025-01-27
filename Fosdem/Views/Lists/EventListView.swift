@@ -14,10 +14,11 @@ struct EventListView: View {
     @State private var query = ""
     @State private var isSheetPresented: Bool = false
     @State private var isSearchPresented: Bool = false
+    @State private var selectedEvent: Event?
 
     @State private var onlyBookmarks: Bool
     @State private var onlyFuture: Bool
-    @State private var list: ListPredicateType = .track
+    @State private var listType: ListPredicateType = .track
 
     @StateObject private var predicate = ListSettings()
 
@@ -29,25 +30,27 @@ struct EventListView: View {
         self.onlyFuture = UserDefaults.standard.bool(forKey: "onlyFuture")
     }
 
+    var eventList: EventList {
+        EventList(listType, terms: predicate)
+    }
+
     var body: some View {
         NavigationStack {
-            EventList(self.list, terms: predicate)
+            self.eventList
             .onChange(of: query) { value, _ in
                 predicate.query = value
             }.onChange(of: isSearchPresented) { _, value in
                 if value { return }
                 predicate.query = nil
-            }.searchable(text: $query, isPresented: $isSearchPresented)
+            }
+            .searchable(text: $query, isPresented: $isSearchPresented)
             .navigationDestination(for: Event.self, destination: { event in
                 EventDetailView(event)
             }).toolbar {
                 ToolbarTitleMenu {
-                    ForEach(ListPredicateType.all, id: \.self) { type in
-                        Button {
-                            self.list = type
-                        } label: {
+                    Picker("List grouping", selection: $listType) {
+                        ForEach(ListPredicateType.all, id: \.self) { type in
                             Label(ListPredicateType.getName(type), systemImage: ListPredicateType.getIcon(type))
-                                .foregroundStyle(self.list == type ? .primary : .secondary)
                         }
                     }
                 }
@@ -85,9 +88,9 @@ struct EventListView: View {
                 SettingsView(localTime: predicate.localTime, year: predicate.year)
                     .presentationDetents([.medium])
             })
-            .navigationTitle(ListPredicateType.getName(list))
+            .navigationTitle(ListPredicateType.getName(listType))
             .toolbarTitleDisplayMode(.inline)
-             .refreshable {
+            .refreshable {
                 Task {
                     await RoomStatusFetcher.fetchRoomStatus()
                     await RemoteScheduleFetcher.fetchSchedule()

@@ -11,36 +11,44 @@ import SwiftUI
 import SectionedQuery
 
 struct EventList: View {
-    @SectionedQuery private var events: SectionedResults<String, Event>
+    @SectionedQuery private var sections: SectionedResults<String, Event>
 
-    let terms: ListSettings
+    private let terms: ListSettings
 
     init(_ type: ListPredicateType, terms: ListSettings) {
+        self.terms = terms
+
         let key = switch type {
         case .room:
-            \Event.roomName
+            \Event.room.name
         case .person:
-            \Event.authorName
+            \Event.authors.first!.name
         case .track:
-            \Event.trackName
+            \Event.track!.name
         }
-        self.terms = terms
-        _events = SectionedQuery(key,
-                                  filter: terms.predicate(type),
-                                  sort: [SortDescriptor(\.start, order: .forward)])
+
+        _sections = SectionedQuery(sectionIdentifier: key,
+                                 sortDescriptors: [
+                                    SortDescriptor(key, order: .forward),
+                                    SortDescriptor(\Event.start, order: .forward)
+                                 ],
+                                 predicate: terms.predicate(type))
     }
 
     var body: some View {
-        List(events, id: \.id) { section in
-            Section(header: Text("\(section.id)")) {
-                ForEach(section, id: \.id) { event in
-                    NavigationLink(value: event,
-                                   label: {
-                        ListItem(event, bookmarkEmphasis: !terms.onlyBookmarks).id(event.id)
-                    })
+        List {
+            ForEach(sections) { section in
+                Section(header: Text(section.id)) {
+                    ForEach(section, id: \.id) { event in
+                        NavigationLink(value: event,
+                                       label: {
+                            ListItem(event, bookmarkEmphasis: !terms.onlyBookmarks)
+                                .id(event.id)
+                        })
+                    }
                 }
             }
-        }.overlay(ListStatusOverlay(empty: events.isEmpty, terms: terms))
-        .listStyle(.plain)
+        }.overlay(ListStatusOverlay(empty: sections.isEmpty, terms: terms))
+            .listStyle(.plain)
     }
 }
