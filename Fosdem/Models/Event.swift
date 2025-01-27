@@ -25,7 +25,7 @@ public class Event {
 
     public var room: Room
     public var track: Track!
-    public var type: EventType?
+    public var type: EventType!
 
     public var userInfo: EventUserInfo?
 

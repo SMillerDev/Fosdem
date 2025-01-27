@@ -5,4 +5,3 @@ Store: https://apps.apple.com/nl/app/fosdem-helper/id1667646664
 
 ## TODO:
 - People links
-- Livestream view

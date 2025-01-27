@@ -48,6 +48,7 @@
 		92CE31B128FC4A940073813E /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE31B028FC4A940073813E /* EventListView.swift */; };
 		92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */; };
 		92D9E7BA291D95E1007D203D /* EventDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */; };
+		92E5C1152D4820A60017CEE0 /* ListPredicateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5C1142D4820A60017CEE0 /* ListPredicateType.swift */; };
 		92F70AA02922B49A000BE6CB /* UrlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F70A9F2922B49A000BE6CB /* UrlHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,8 @@
 		92CE31B028FC4A940073813E /* EventListView.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFormattedText.swift; sourceTree = "<group>"; };
 		92D9E7B9291D95E1007D203D /* EventDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailHeader.swift; sourceTree = "<group>"; };
+		92E5C1142D4820A60017CEE0 /* ListPredicateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPredicateType.swift; sourceTree = "<group>"; };
+		92E5C1162D4822DF0017CEE0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		92F70A9F2922B49A000BE6CB /* UrlHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,9 +187,6 @@
 				925B0260298EAE0E00AFA83D /* LiveIcon.swift */,
 				925B0262298EB2A400AFA83D /* VideoPlayer.swift */,
 				9268D799298F251E0067A6B1 /* ListSettings.swift */,
-				92BD1D2D2B5C345700DB8FC1 /* EventTypeIcon.swift */,
-				92BD1D2F2B5C34F100DB8FC1 /* EventTypeColor.swift */,
-				92BD1D312B5C374A00DB8FC1 /* TrackColor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +194,7 @@
 		14D2770C2205D07200740042 = {
 			isa = PBXGroup;
 			children = (
+				92E5C1162D4822DF0017CEE0 /* README.md */,
 				925F4A7C2B285A70007E9D1D /* Localizable.xcstrings */,
 				92A57B392988FD1C00C0BB78 /* Package.swift */,
 				92A2BDF92948CC5E0034864F /* FosdemTests.xctestplan */,
@@ -225,6 +226,10 @@
 				14D277242205D07500740042 /* Assets.xcassets */,
 				14D277292205D07500740042 /* Info.plist */,
 				92C22E6129806F61006D7B5C /* privacy.md */,
+				92E5C1142D4820A60017CEE0 /* ListPredicateType.swift */,
+				92BD1D2D2B5C345700DB8FC1 /* EventTypeIcon.swift */,
+				92BD1D2F2B5C34F100DB8FC1 /* EventTypeColor.swift */,
+				92BD1D312B5C374A00DB8FC1 /* TrackColor.swift */,
 			);
 			path = Fosdem;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				92F70AA02922B49A000BE6CB /* UrlHelper.swift in Sources */,
 				9290384C2C9613FD002201FC /* ScheduleFetchingActor.swift in Sources */,
 				92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */,
+				92E5C1152D4820A60017CEE0 /* ListPredicateType.swift in Sources */,
 				142A87442224752E0034F6D7 /* EventType.swift in Sources */,
 				92BD1D322B5C374A00DB8FC1 /* TrackColor.swift in Sources */,
 			);

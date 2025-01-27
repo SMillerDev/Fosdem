@@ -21,6 +21,8 @@ public class Link {
     public var isVideo: Bool {
         return type.contains(/video/) || name.lowercased().contains(/video recording/)
     }
+
+    @Transient
     public var isStreamableVideo: Bool {
         return url.absoluteString.contains(/\.mp4$/)
     }
