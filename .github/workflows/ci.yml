@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: [macos-latest]
     env:
-      XC_VERSION: ${{ '14.1' }}
+      XC_VERSION: ${{ '16.2' }}
       XC_SCHEME: ${{ 'Fosdem' }}
     steps:
     - name: Select latest Xcode
       run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
     - uses: actions/checkout@v3
     - name: Run Unit and UI Tests
-      run: /usr/bin/xcodebuild test -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 14'
+      run: /usr/bin/xcodebuild test -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 16'
