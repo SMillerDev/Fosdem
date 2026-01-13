@@ -14,7 +14,6 @@ struct EventDetailView: View {
     @State private var selectedTabIndex = 0
     @State private var permissionGranted = false
 
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) var context
 
     init(_ event: Event) {
@@ -48,59 +47,25 @@ struct EventDetailView: View {
     var body: some View {
         ViewThatFits {
             ScrollView {
-                EventDetailHeader(event).frame(maxWidth: .infinity)
+                EventDetailHeader(event)
 
                 Picker("Details", selection: $selectedTabIndex, content: {
                     Text("Description").tag(0)
-                    Text("Links").disabled(event.links.isEmpty).tag(1)
+                    Text("Links").tag(1)
                     if event.isOngoing {
                         HStack {
                             LiveIcon()
-                            Text("Live Video").tag(2)
-                        }
+                            Text("Live Video")
+                        }.tag(2)
                     }
                 }).pickerStyle(.segmented)
 
                 ZStack {
                     if selectedTabIndex == 0 {
-                        if event.desc.isEmpty {
-                            Text("No description").foregroundColor(.gray)
-                                                  .font(.title2)
-                                                  .padding()
-                        } else if event.hasHTMLDescription {
-                            HTMLFormattedText(event.desc, colorScheme: colorScheme).padding()
-                        } else {
-                            Text(LocalizedStringKey(event.desc)).padding()
-                        }
-                    }
-                    if selectedTabIndex == 1 {
-                        if event.links.isEmpty {
-                            Text("No links").foregroundColor(.gray)
-                                            .font(.title2)
-                                            .padding()
-                        } else {
-                            VStack(alignment: .leading) {
-                                ForEach(event.links.sorted { $0.name < $1.name }) { link in
-                                    let label = Label(link.name, systemImage: link.icon).padding()
-                                                                                        .frame(
-                                                                                            maxWidth: .infinity,
-                                                                                            alignment: .leading
-                                                                                        )
-                                    if link.isVideo && link.isStreamableVideo {
-                                        NavigationLink(destination: {
-                                            VStack {
-                                                Text(link.name).font(.title)
-                                                VideoPlayer(link)
-                                            }
-                                        }, label: { label })
-                                    } else {
-                                        SwiftUI.Link(destination: link.url) { label }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if selectedTabIndex == 2 {
+                        DescriptionView(event: event).scaledToFit()
+                    } else if selectedTabIndex == 1 {
+                        LinksList(event: event)
+                    } else if selectedTabIndex == 2 {
                         VStack {
                             VideoPlayer(Link(name: "Livestream", url: event.room.liveStreamLink(), type: "video"))
                         }
@@ -111,7 +76,7 @@ struct EventDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                ShareLink("Share web link", item: event.getPublicLink(), message: Text(event.title))
+                ShareLink("Share web link", item: event.getPublicLink(), subject: Text(event.title))
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {

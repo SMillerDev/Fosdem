@@ -1,100 +1,63 @@
 //
-//  EventListView.swift
+//  TrackEventList.swift
 //  Fosdem
 //
-//  Created by Sean Molenaar on 16/10/2022.
-//  Copyright © 2022 Sean Molenaar. All rights reserved.
+//  Created by Sean Molenaar on 03/12/2024.
+//  Copyright © 2024 Sean Molenaar. All rights reserved.
 //
-
-import SwiftUI
+import Foundation
 import SwiftData
+import SwiftUI
 import SectionedQuery
 
 struct EventListView: View {
-    @State private var query = ""
-    @State private var isSheetPresented: Bool = false
-    @State private var isSearchPresented: Bool = false
+    @SectionedQuery private var events: SectionedResults<String, Event>
 
-    @State private var onlyBookmarks: Bool
-    @State private var onlyFuture: Bool
-    @State private var list: ListPredicateType = .track
+    private let type: ListPredicateType
+    @ObservedObject private var terms: ListSettings
 
-    @StateObject private var predicate = ListSettings()
+    private var key: KeyPath<Event, String> {
+        return switch type {
+        case .room:
+            \Event.room.name
+        case .person:
+            \Event.authors.first!.name
+        case .track:
+            \Event.track!.name
+        }
+    }
 
-    @ModelActor public actor ScheduleFetchingActor {}
-    @Environment(\.modelContext) var modelContext
-
-    init() {
-        self.onlyBookmarks = UserDefaults.standard.bool(forKey: "onlyBookmarks")
-        self.onlyFuture = UserDefaults.standard.bool(forKey: "onlyFuture")
+    init(_ type: ListPredicateType, terms: ListSettings) {
+        let key = switch type {
+        case .room:
+            \Event.room.name
+        case .person:
+            \Event.authors.first!.name
+        case .track:
+            \Event.track!.name
+        }
+        self.terms = terms
+        self.type = type
+        _events = SectionedQuery(
+            sectionIdentifier: key,
+            sortDescriptors: [SortDescriptor(key, order: .forward), SortDescriptor(\.start, order: .forward)],
+            predicate: terms.predicate(type),
+            animation: .default
+        )
     }
 
     var body: some View {
-        NavigationStack {
-            EventList(self.list, terms: predicate)
-            .onChange(of: query) { value, _ in
-                predicate.query = value
-            }.onChange(of: isSearchPresented) { _, value in
-                if value { return }
-                predicate.query = nil
-            }.searchable(text: $query, isPresented: $isSearchPresented)
-            .navigationDestination(for: Event.self, destination: { event in
-                EventDetailView(event)
-            }).toolbar {
-                ToolbarTitleMenu {
-                    Picker("List grouping", selection: $list) {
-                        ForEach(ListPredicateType.all, id: \.self) { type in
-                            Label(ListPredicateType.getName(type), systemImage: ListPredicateType.getIcon(type))
-                        }
-                    }
-
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Button(action: {
-                            onlyBookmarks.toggle()
-                            predicate.onlyBookmarks = onlyBookmarks
-                        }, label: {
-                            Label("Bookmarks only", systemImage: onlyBookmarks ? "bookmark.fill" : "bookmark")
-                        })
-                        Button(action: {
-                            onlyFuture.toggle()
-                            predicate.onlyFuture = onlyFuture
-                        }, label: {
-                            Label("Future events only", systemImage: onlyFuture ? "clock.fill" : "clock")
-                        })
-                    } label: {
-                        Label("Filters",
-                              systemImage: predicate.isFiltering ?
-                              "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        isSheetPresented.toggle()
-                    }, label: {
-                        Label("Settings", systemImage: "gear")
+        List(events, id: \.id) { section in
+            Section(header: Text(section.id)) {
+                ForEach(section, id: \.id) { event in
+                    NavigationLink(value: event,
+                                   label: {
+                        EventListItem(event, bookmarkEmphasis: true).id(event.id)
                     })
                 }
             }
-            .sheet(isPresented: $isSheetPresented, content: {
-                SettingsView(localTime: predicate.localTime, year: predicate.year)
-                    .presentationDetents([.medium])
-            })
-            .navigationTitle(ListPredicateType.getName(list))
-            .toolbarTitleDisplayMode(.inline)
-             .refreshable {
-                Task {
-                    await RoomStatusFetcher.fetchRoomStatus()
-                    await RemoteScheduleFetcher.fetchSchedule()
-                }
-            }
-        }
-    }
-}
-
-struct EventListView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventListView()
+        }.overlay(ListStatusOverlay(empty: events.isEmpty, terms: terms))
+        .listStyle(.plain)
+        .navigationTitle(ListPredicateType.getName(type))
     }
 }

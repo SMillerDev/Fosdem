@@ -11,16 +11,9 @@ import SwiftUI
 import SwiftData
 
 struct SettingsView: View {
-    @State private var localTime: Bool
-    @State private var year: String
-
     @Environment(\.modelContext) var modelContext
-
-    init(localTime: Bool, year: String) {
-        self.localTime = localTime
-        self.year = year
-    }
-
+    @AppStorage("year") var year: String?
+    @AppStorage("localTime") var localTime: Bool = false
     var body: some View {
         Form {
             Section("Settings") {
@@ -41,11 +34,7 @@ struct SettingsView: View {
                 AboutView()
             }
         }.presentationDetents([.fraction(0.3)])
-            .onChange(of: localTime) { localTime, _ in
-                UserDefaults.standard.set(localTime, forKey: "localTime")
-            }
-        .onChange(of: year) { year, _ in
-            UserDefaults.standard.set(year, forKey: "year")
+        .onChange(of: year) { _, _ in
             do {
                 if #available(iOS 18, *) {
                     try modelContext.container.erase()
@@ -53,7 +42,7 @@ struct SettingsView: View {
                     modelContext.container.deleteAllData()
                 }
             } catch {
-
+                // NO-OP
             }
             Task {
                 await RoomStatusFetcher.fetchRoomStatus()
@@ -82,6 +71,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(localTime: true, year: "2025")
+        SettingsView()
     }
 }

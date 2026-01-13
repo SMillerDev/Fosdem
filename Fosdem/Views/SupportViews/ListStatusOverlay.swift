@@ -16,10 +16,7 @@ struct ListStatusOverlay: View {
     var body: some View {
         Group {
             if empty {
-                if terms.query != nil, !terms.query!.isEmpty {
-                    Label("No results", systemImage: "magnifyingglass.circle")
-                        .foregroundStyle(.gray)
-                } else if terms.isFiltering {
+                if terms.isFiltering {
                     Label("All events filtered out", systemImage: "line.3.horizontal.decrease.circle")
                         .foregroundStyle(.gray)
                 } else if !terms.isFiltering {

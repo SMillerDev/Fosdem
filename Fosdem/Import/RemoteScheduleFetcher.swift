@@ -14,17 +14,19 @@ import SwiftData
     fileprivate func updateOrStore(events: [PentabarfKit.Event], with rooms: [Room]) -> [Event] {
         print("💾 Saving events")
         var eventResults: [Event] = []
-        events.splitInSubArrays(into: 100).forEach { eventChunk in
+        events.splitInSubArrays(into: 250).forEach { eventChunk in
             let events: [Event] = eventChunk.map { eventBase in
                 var event: Event? = Event.fetchWith(id: eventBase.id, modelContext)
+                let room = rooms.first { room in
+                    room.name == eventBase.room
+                }
                 if event == nil {
-                    let room = rooms.first { room in
-                        room.name == eventBase.room
-                    }
                     event = Event(eventBase, room: room!, modelContext)
+                } else {
+                    event!.updateData(eventBase, room: room!, modelContext)
                 }
 
-                print("Saving \(event!.title) with \(event!.authors.count) authors")
+                print("Saving \(event!.title) with \(event!.authors.count) authors, \(event!.links.count) links")
                 modelContext.insert(event!)
                 return event!
             }
@@ -76,7 +78,8 @@ extension DataHandler: SwiftData.ModelActor {}
 
 class RemoteScheduleFetcher {
 
-    static var context: ModelContext!
+    nonisolated(unsafe) static var context: ModelContext!
+    nonisolated(unsafe) private static var conference: PentabarfKit.Conference?
 
     static func fetchSchedule() async {
         await RemoteScheduleFetcher.fetchScheduleForYear(SettingsHelper().year)
@@ -84,20 +87,21 @@ class RemoteScheduleFetcher {
 
     static func fetchScheduleForYear(_ year: String) async {
         let url = URL(string: "https://fosdem.org/\(year)/schedule/xml")!
-        guard var conference = try? await PentabarfLoader.fetchConference(url) else {
+        guard let conference = try? await PentabarfLoader.fetchConference(url) else {
             return
         }
+        self.conference = conference
 
         print("💾 Starting import")
         Task.detached {
             // create handler in non-main thread
-            let handler = DataHandler(modelContainer: context.container)
+            let handler = DataHandler(modelContainer: self.context.container)
 
-            let rooms = await handler.updateOrStore(rooms: conference.rooms)
-            let events = await handler.updateOrStore(events: conference.events, with: rooms)
+            let rooms = await handler.updateOrStore(rooms: self.conference?.rooms ?? [])
+            let events = await handler.updateOrStore(events: self.conference?.events ?? [], with: rooms)
 
             print("💾 Saving conference")
-            if let conf = await handler.fetchConferenceWith(name: conference.title) {
+            if let conf = await handler.fetchConferenceWith(name: self.conference!.title) {
                 conf.events = events
                 conf.rooms = rooms
             }

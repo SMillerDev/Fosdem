@@ -48,9 +48,10 @@ struct VideoPlayer: View {
 
     var body: some View {
         VStack {
-            AVVideoPlayer(link: link)
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-
+            if let windowSize = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                AVVideoPlayer(link: link)
+                    .frame(width: windowSize.screen.bounds.width, height: windowSize.screen.bounds.width)
+            }
             Spacer()
         }.ignoresSafeArea()
     }

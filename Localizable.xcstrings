@@ -39,7 +39,11 @@
         }
       }
     },
+    "Bookmarks" : {
+
+    },
     "Bookmarks only" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -48,6 +52,12 @@
           }
         }
       }
+    },
+    "By: %@" : {
+
+    },
+    "By: %@ and others" : {
+
     },
     "Chat" : {
       "extractionState" : "manual",
@@ -121,6 +131,7 @@
       }
     },
     "Filters" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -137,7 +148,11 @@
       "extractionState" : "manual",
       "shouldTranslate" : false
     },
+    "Future events" : {
+
+    },
     "Future events only" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -170,6 +185,9 @@
         }
       }
     },
+    "In: %@" : {
+
+    },
     "Links" : {
       "localizations" : {
         "nl" : {
@@ -181,6 +199,7 @@
       }
     },
     "List grouping" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -251,6 +270,7 @@
       }
     },
     "No results" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -308,6 +328,15 @@
         }
       }
     },
+    "Search" : {
+
+    },
+    "Search events" : {
+
+    },
+    "Select an event" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "nl" : {
@@ -348,6 +377,9 @@
           }
         }
       }
+    },
+    "Types" : {
+
     },
     "Ukraine" : {
       "localizations" : {

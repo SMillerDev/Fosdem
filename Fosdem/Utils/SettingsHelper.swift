@@ -11,7 +11,7 @@ import SwiftUI
 
 class SettingsHelper: ObservableObject {
 
-    public static let DEFAULTYEAR: String = "2025"
+    public static let DEFAULTYEAR: String = "2026"
 
     @AppStorage("year") var year: String = SettingsHelper.DEFAULTYEAR
 }

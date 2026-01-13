@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct BookmarkList: View {
+struct BookmarkListView: View {
     @Query private var events: [Event]
 
     init(terms: ListSettings) {
@@ -22,28 +22,18 @@ struct BookmarkList: View {
                 predicate = basePredicate
             }
         }
-        if let query = terms.query, !query.isEmpty {
-            let basePredicate = #Predicate<Event> {
-                $0.title.localizedStandardContains(query) || $0.trackName.localizedStandardContains(query)
-            }
-            if predicate != nil {
-                predicate = #Predicate<Event> { predicate!.evaluate($0) && basePredicate.evaluate($0) }
-            } else {
-                predicate = basePredicate
-            }
-        }
 
         _events = Query(filter: predicate, sort: [SortDescriptor(\.start, order: .forward)])
     }
 
     var body: some View {
         List(events) { event in
-            NavigationLink(value: event, label: { ListItem(event, bookmarkEmphasis: false) })
+            NavigationLink(value: event, label: { BaseListItem(event, bookmarkEmphasis: false) })
         }.listStyle(.plain)
         .overlay(Group {
             if events.isEmpty {
                 Label("No Bookmarks yet", systemImage: "bookmark.slash").foregroundStyle(.gray)
             }
-        })
+        }).navigationTitle("Bookmarks")
     }
 }

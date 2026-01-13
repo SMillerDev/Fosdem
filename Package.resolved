@@ -6,7 +6,34 @@
       "location" : "https://github.com/SMillerDev/PentabarfKit",
       "state" : {
         "branch" : "main",
-        "revision" : "845f413bd7bb48c4bed1650153a33bbaf184c941"
+        "revision" : "1b418ad6c833264eaf6a9218a855a27827365228"
+      }
+    },
+    {
+      "identity" : "swift-algorithms",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-algorithms",
+      "state" : {
+        "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
+        "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "swiftdata-sectionedquery",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Whiffer/swiftdata-sectionedquery",
+      "state" : {
+        "branch" : "main",
+        "revision" : "958835024bffa9ee8a995b34ba1821e6358c041f"
       }
     },
     {

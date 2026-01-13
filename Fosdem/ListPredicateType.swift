@@ -14,7 +14,7 @@ enum ListPredicateType {
     case track
 
     static var all: [ListPredicateType] {
-        return [.track, .person, .room]
+        return [.track, .room]
     }
 
     static func getName(_ type: ListPredicateType) -> String {

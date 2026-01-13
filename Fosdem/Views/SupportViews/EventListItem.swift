@@ -8,43 +8,19 @@
 
 import SwiftUI
 
-struct ListItem: View {
+struct EventListItem: View {
     private var event: Event
     private var bookmarkEmphasis: Bool
 
     @Environment(\.managedObjectContext) var context
 
-    init(_ event: Event, bookmarkEmphasis: Bool = true) {
+    init(_ event: Event, bookmarkEmphasis: Bool = true, query: String? = nil) {
         self.event = event
         self.bookmarkEmphasis = bookmarkEmphasis
     }
 
     var body: some View {
-        HStack {
-            ZStack(alignment: .topLeading) {
-                if let lastSeen = event.userInfo?.lastSeen,
-                    event.lastUpdated > lastSeen && !event.isEnded {
-                    Circle()
-                        .foregroundColor(.accentColor)
-                        .frame(width: 10, height: 10)
-                }
-                VStack(alignment: .trailing) {
-                    Text(event.startInFormat("EE").capitalized)
-                        .foregroundColor(.secondary)
-                        .italic()
-                    Text(DateFormatter.localizedString(from: event.start, dateStyle: .none, timeStyle: .short) )
-                        .foregroundColor(.secondary)
-                        .italic()
-                }
-            }
-
-            if event.isOngoing { LiveIcon() }
-
-            Text(event.title)
-                .bold((event.userInfo?.favorite ?? false) && bookmarkEmphasis)
-                .foregroundColor(!event.isEnded ? .primary : .gray)
-
-        }.contextMenu {
+        BaseListItem(event, bookmarkEmphasis: bookmarkEmphasis).contextMenu {
             Label(event.track?.name.capitalized ?? "TRACK", systemImage: event.type?.icon ?? "questionmark.app")
             Label(event.formatTime(), systemImage: "calendar.badge.clock")
             let room = event.room
@@ -74,8 +50,8 @@ struct ListItem: View {
     }
 }
 
-struct ListItem_Previews: PreviewProvider {
+struct EventListItem_Previews: PreviewProvider {
     static var previews: some View {
-        ListItem(PreviewEvent.getEvent(false))
+        EventListItem(PreviewEvent.getEvent(false))
     }
 }

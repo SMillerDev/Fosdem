@@ -17,7 +17,7 @@ struct Fosdem: App {
 
     var body: some Scene {
         WindowGroup {
-            EventListView()
+            MainTabView()
         }.modelContainer(container)
     }
 

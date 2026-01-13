@@ -42,6 +42,9 @@ public class Event {
     public var roomName: String { return room.name }
 
     @Transient
+    public var typeName: String { return type.name }
+
+    @Transient
     var year: String { return startInFormat("yyyy") }
 
     @Transient
@@ -101,7 +104,10 @@ public class Event {
                   lastUpdated: Date(),
                   room: room)
         self.userInfo = EventUserInfo(event: self)
+        self.updateData(base, room: room, context)
+    }
 
+    func updateData(_ base: PentabarfKit.Event, room: Room, _ context: ModelContext) {
         self.track = Track.fetchWith(name: base.track.name, context) ?? Track(name: base.track.name)
         modelContext?.insert(self.track!)
 

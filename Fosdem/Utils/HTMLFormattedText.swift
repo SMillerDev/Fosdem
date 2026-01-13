@@ -6,59 +6,54 @@
 //  Copyright © 2022 Sean Molenaar. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
-struct HTMLFormattedText: UIViewRepresentable {
-    let text: String
-    let colorScheme: ColorScheme
-    private  let textView = UITextView()
+struct HTMLFormattedText {
+    static func get(body: String) -> String {
+        let bundle = Bundle.main
+        let lang = bundle.preferredLocalizations.first
+            ?? bundle.developmentLocalization
+            ?? "en"
 
-    init(_ content: String, colorScheme: ColorScheme) {
-        self.text = content
-        self.colorScheme = colorScheme
-    }
+        return """
+        <!doctype html>
+        <html lang="\(lang)">
+        <head>
+            <meta charset="utf-8">
+            <style type="text/css">
+                /*
+                  Custom CSS styling of HTML formatted text.
+                  Note, only a limited number of CSS features are supported by NSAttributedString/UITextView.
+                */
 
-    func makeUIView(context: UIViewRepresentableContext<Self>) -> UITextView {
-        textView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40).isActive = true
-        textView.isSelectable = false
-        textView.isUserInteractionEnabled = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isScrollEnabled = false
+                body {
+                    font: -apple-system-body;
+                    font-size: 20px;
+                    color: \(UIColor.secondaryLabel.hex);
+                    max-width: 100%;
+                    padding: 0.1em;
+                    background-color: \(UIColor.systemBackground.hex);
+                }
+                p {
+                    font-size: 20px;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    color: \(UIColor.label.hex);
+                }
 
-        return textView
-    }
+                a {
+                    color: \(UIColor.link.hex);
+                }
 
-    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<Self>) {
-        DispatchQueue.main.async {
-            if let attributeText = self.converHTML(text: text) {
-                textView.attributedText = attributeText
-            } else {
-                textView.text = ""
-            }
-        }
-    }
-
-    private func converHTML(text: String) -> NSAttributedString? {
-        let color = colorScheme == .light ? "#212529" : "#f8f9fa"
-        let css = """
-        <style>
-            body {
-                color: \(color);
-                font-size: 18px;
-                text-align: justify;
-                font-family: sans-serif;
-                line-height: 1.6;
-            }
-        </style>
+                li:last-child {
+                    margin-bottom: 1em;
+                }
+            </style>
+        </head>
+        <body>
+            \(body)
+        </body>
+        </html>
         """
-
-        if let string = try? NSAttributedString(data: Data("\(css)\n \(text)".utf8),
-                                                options: [.documentType: NSAttributedString.DocumentType.html],
-                                                documentAttributes: nil) {
-            return string
-        } else {
-            return nil
-        }
     }
 }
