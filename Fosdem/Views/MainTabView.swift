@@ -16,47 +16,42 @@ struct MainTabView: View {
     @State private var showFilter: Bool = true
 
     @StateObject private var predicate: ListSettings = ListSettings()
-    @Environment(\.modelContext) var modelContext
-
-    @Query(sort: \EventType.name) var types: [EventType]
+    @Environment(\.horizontalSizeClass) var sizeClass
 
     var body: some View {
         TabView {
             ForEach(ListPredicateType.all, id: \.self) { type in
                 Tab(ListPredicateType.getName(type), systemImage: ListPredicateType.getIcon(type)) {
                     NavigationSplitView {
-                        EventListView(type, terms: predicate)
-                        .navigationDestination(for: Event.self, destination: { event in
-                            EventDetailView(event)
-                                .onAppear {
-                                    showFilter = false
-                                }.onDisappear {
-                                    showFilter = true
+                        switch type {
+                        case .room:
+                            RoomEventListView(terms: predicate)
+                                .navigationDestination(for: Event.self) { event in
+                                    EventDetailView(event)
                                 }
-                        })
-                        .refreshable {
-                            Task.detached {
-                                await RoomStatusFetcher.fetchRoomStatus()
-                                await RemoteScheduleFetcher.fetchSchedule()
-                            }
+                        case .track:
+                            TrackEventListView(terms: predicate)
+                                .navigationDestination(for: Event.self) { event in
+                                    EventDetailView(event)
+                                }
+                        default:
+                            EmptyView()
                         }
+
                     } detail: {
                         Text("Select an event")
                     }
                 }
-
             }
             Tab("Bookmarks", systemImage: "bookmark") {
                 NavigationSplitView {
                     BookmarkListView(terms: predicate)
-                        .navigationDestination(for: Event.self, destination: { event in
+                        .refreshable {
+                            await RoomStatusFetcher.fetchRoomStatus()
+                        }
+                        .navigationDestination(for: Event.self) { event in
                             EventDetailView(event)
-                                .onAppear {
-                                    showFilter = false
-                                }.onDisappear {
-                                    showFilter = true
-                                }
-                        })
+                        }
                 } detail: {
                     Text("Select an event")
                 }
@@ -64,63 +59,15 @@ struct MainTabView: View {
             Tab(role: .search) {
                 NavigationStack {
                     SearchResultListView(query: query)
-                    .navigationDestination(for: Event.self, destination: { event in
-                        EventDetailView(event)
-                    })
-                    .onAppear {
-                        showFilter = false
-                    }.onDisappear {
-                        showFilter = true
-                    }
-                }.searchable(text: $query, prompt: "Search events")
-            } label: {
-                Label("Search", systemImage: "magnifyingglass")
-            }
-        }.tabViewBottomAccessory(isEnabled: showFilter) {
-            HStack {
-                Button(action: {
-                    predicate.onlyFuture.toggle()
-                }, label: {
-                    Label("Future events", systemImage: predicate.onlyFuture ? "clock.fill" : "clock")
-                }).padding()
-
-                Menu {
-                    ForEach(types) { type in
-                        Button(action: {
-                            if predicate.deniedTypes.contains(type.name) {
-                                predicate.deniedTypes.removeAll { $0 == type.name }
-                            } else {
-                                predicate.deniedTypes.append(type.name)
-                            }
-                        }, label: {
-                            let icon = "checkmark.circle"
-                            Label(type.name.capitalized,
-                                  systemImage: !predicate.deniedTypes.contains {
-                                $0 == type.name
-                            } ? "\(icon).fill" : icon)
-                        })
-                    }
-                } label: {
-                    Label("Types",
-                          systemImage: !predicate.deniedTypes.isEmpty ?
-                          "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle").padding()
+                        .searchable(text: $query, placement: .toolbar, prompt: "Search events")
+                        .onAppear {
+                            showFilter = false
+                        }.onDisappear {
+                            showFilter = true
+                        }
                 }
             }
         }
-        .tabBarMinimizeBehavior(.onScrollDown)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    isSheetPresented.toggle()
-                }, label: {
-                    Label("Settings", systemImage: "gear")
-                })
-            }
-        }
-        .sheet(isPresented: $isSheetPresented, content: {
-            SettingsView()
-                .presentationDetents([.medium])
-        })
         .environmentObject(predicate)
     }
 }

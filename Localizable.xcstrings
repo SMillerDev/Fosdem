@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld events" : {
+
+    },
     "🇺🇦" : {
       "shouldTranslate" : false
     },
@@ -40,24 +43,34 @@
       }
     },
     "Bookmarks" : {
-
-    },
-    "Bookmarks only" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alleen favorieten"
+            "value" : "Bookmarks"
           }
         }
       }
     },
     "By: %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Door: %@"
+          }
+        }
+      }
     },
     "By: %@ and others" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In: %@ en anderen"
+          }
+        }
+      }
     },
     "Chat" : {
       "extractionState" : "manual",
@@ -130,17 +143,6 @@
         }
       }
     },
-    "Filters" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filters"
-          }
-        }
-      }
-    },
     "FOSDEM" : {
       "shouldTranslate" : false
     },
@@ -149,15 +151,11 @@
       "shouldTranslate" : false
     },
     "Future events" : {
-
-    },
-    "Future events only" : {
-      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alleen toekomstige presentaties"
+            "value" : "Opkomende evenementen"
           }
         }
       }
@@ -186,7 +184,14 @@
       }
     },
     "In: %@" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In: %@"
+          }
+        }
+      }
     },
     "Links" : {
       "localizations" : {
@@ -194,17 +199,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Links"
-          }
-        }
-      }
-    },
-    "List grouping" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Groepering van de lijst"
           }
         }
       }
@@ -269,17 +263,6 @@
         }
       }
     },
-    "No results" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geen resultaten"
-          }
-        }
-      }
-    },
     "People" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -328,14 +311,25 @@
         }
       }
     },
-    "Search" : {
-
-    },
     "Search events" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoek evenementen"
+          }
+        }
+      }
     },
     "Select an event" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecteer een evenenment"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -379,7 +373,15 @@
       }
     },
     "Types" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Types"
+          }
+        }
+      }
     },
     "Ukraine" : {
       "localizations" : {

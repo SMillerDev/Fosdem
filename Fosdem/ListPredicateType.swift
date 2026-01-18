@@ -17,6 +17,30 @@ enum ListPredicateType {
         return [.track, .room]
     }
 
+    static func fromType(_ type: any EventContainingModel.Type) -> ListPredicateType? {
+        switch type {
+        case is Room.Type:
+            return .room
+        case is Track.Type:
+            return .track
+        case is Person.Type:
+            return .person
+        default:
+            return nil
+        }
+    }
+
+    public func asType(_ type: ListPredicateType) -> any EventContainingModel.Type {
+        switch type {
+        case .person:
+            return Person.self
+        case .room:
+            return Room.self
+        case .track:
+            return Track.self
+        }
+    }
+
     static func getName(_ type: ListPredicateType) -> String {
         switch type {
         case .person:

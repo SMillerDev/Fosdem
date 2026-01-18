@@ -24,6 +24,7 @@
 		920085662D42F2D70082719F /* ListStatusOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920085652D42F2D70082719F /* ListStatusOverlay.swift */; };
 		9203845F2B5B0A2100B793AA /* PentabarfKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9203845E2B5B0A2100B793AA /* PentabarfKit */; };
 		9221BD832D60CFDD00E0046E /* SectionedQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 9221BD822D60CFDD00E0046E /* SectionedQuery */; };
+		923E22542F1D131D0094B2DC /* EventContainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E22532F1D13180094B2DC /* EventContainingModel.swift */; };
 		924E15BC2922C637005A8EA2 /* RoomStatusImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */; };
 		924E15BE2922CCA9005A8EA2 /* RoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15BD2922CCA9005A8EA2 /* RoomState.swift */; };
 		924E15C329238AA5005A8EA2 /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924E15C229238AA5005A8EA2 /* EventListItem.swift */; };
@@ -51,6 +52,7 @@
 		92D9E7B8291D7B9B007D203D /* HTMLFormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9E7B7291D7B9B007D203D /* HTMLFormattedText.swift */; };
 		92E5C1152D4820A60017CEE0 /* ListPredicateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5C1142D4820A60017CEE0 /* ListPredicateType.swift */; };
 		92F70AA02922B49A000BE6CB /* UrlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F70A9F2922B49A000BE6CB /* UrlHelper.swift */; };
+		92FB7C582F16D890008352FB /* TimelineUI in Frameworks */ = {isa = PBXBuildFile; productRef = 92FB7C572F16D890008352FB /* TimelineUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,7 @@
 		14D2773F2205D07500740042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14D2774B2205D19D00740042 /* RemoteScheduleFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteScheduleFetcher.swift; sourceTree = "<group>"; };
 		920085652D42F2D70082719F /* ListStatusOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStatusOverlay.swift; sourceTree = "<group>"; };
+		923E22532F1D13180094B2DC /* EventContainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventContainingModel.swift; sourceTree = "<group>"; };
 		924E15BB2922C637005A8EA2 /* RoomStatusImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStatusImporter.swift; sourceTree = "<group>"; };
 		924E15BD2922CCA9005A8EA2 /* RoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomState.swift; sourceTree = "<group>"; };
 		924E15C229238AA5005A8EA2 /* EventListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListItem.swift; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92FB7C582F16D890008352FB /* TimelineUI in Frameworks */,
 				9221BD832D60CFDD00E0046E /* SectionedQuery in Frameworks */,
 				9203845F2B5B0A2100B793AA /* PentabarfKit in Frameworks */,
 			);
@@ -172,6 +176,7 @@
 		146A86632205E159008A61AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				923E22532F1D13180094B2DC /* EventContainingModel.swift */,
 				146A86782206ED84008A61AD /* Track.swift */,
 				142A87432224752E0034F6D7 /* EventType.swift */,
 				146A867D22089497008A61AD /* Link.swift */,
@@ -208,6 +213,7 @@
 				14D277172205D07200740042 /* Fosdem */,
 				14D277312205D07500740042 /* FosdemTests */,
 				14D2773C2205D07500740042 /* FosdemUITests */,
+				92FB7C562F16D890008352FB /* Frameworks */,
 				14D277162205D07200740042 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -297,6 +303,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		92FB7C562F16D890008352FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -321,6 +334,7 @@
 			packageProductDependencies = (
 				9203845E2B5B0A2100B793AA /* PentabarfKit */,
 				9221BD822D60CFDD00E0046E /* SectionedQuery */,
+				92FB7C572F16D890008352FB /* TimelineUI */,
 			);
 			productName = Fosdem;
 			productReference = 14D277152205D07200740042 /* Fosdem.app */;
@@ -402,6 +416,7 @@
 			packageReferences = (
 				9203845D2B5B0A2100B793AA /* XCRemoteSwiftPackageReference "PentabarfKit" */,
 				9221BD812D60CFDD00E0046E /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */,
+				92FB7C552F16D7EB008352FB /* XCRemoteSwiftPackageReference "timeline-ui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14D277162205D07200740042 /* Products */;
@@ -480,6 +495,7 @@
 				142A8742222473A40034F6D7 /* UIColor+hexstring.swift in Sources */,
 				92CE31AF28FC49DC0073813E /* SettingsHelper.swift in Sources */,
 				9268D79A298F251E0067A6B1 /* ListSettings.swift in Sources */,
+				923E22542F1D131D0094B2DC /* EventContainingModel.swift in Sources */,
 				92C271D02922292500E8C25D /* PreviewEvent.swift in Sources */,
 				925B0263298EB2A400AFA83D /* VideoPlayer.swift in Sources */,
 				146A867E22089497008A61AD /* Link.swift in Sources */,
@@ -696,7 +712,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -725,7 +741,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = eu.seanmolenaar.Fosdem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -880,6 +896,14 @@
 				minimumVersion = 1.0.3;
 			};
 		};
+		92FB7C552F16D7EB008352FB /* XCRemoteSwiftPackageReference "timeline-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://codeberg.org/ctietze/timeline-ui.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -892,6 +916,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9221BD812D60CFDD00E0046E /* XCRemoteSwiftPackageReference "swiftdata-sectionedquery" */;
 			productName = SectionedQuery;
+		};
+		92FB7C572F16D890008352FB /* TimelineUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92FB7C552F16D7EB008352FB /* XCRemoteSwiftPackageReference "timeline-ui" */;
+			productName = TimelineUI;
 		};
 		92FC93092B5C2DA100C2D13D /* PentabarfKit */ = {
 			isa = XCSwiftPackageProductDependency;

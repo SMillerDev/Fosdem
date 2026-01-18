@@ -42,7 +42,7 @@ public class Event {
     public var roomName: String { return room.name }
 
     @Transient
-    public var typeName: String { return type.name }
+    public var typeName: String { return type!.name }
 
     @Transient
     var year: String { return startInFormat("yyyy") }
